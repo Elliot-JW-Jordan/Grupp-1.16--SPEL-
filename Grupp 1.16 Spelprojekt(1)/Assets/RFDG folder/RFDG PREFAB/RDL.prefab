@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OppeningDirection: 3
+  spawned: 0
 --- !u!61 &7478250802193829924
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OppeningDirection: 1
+  spawned: 0
 --- !u!61 &2750419855932650695
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -247,6 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2915178048876273792}
+  - component: {fileID: -7244764165282339877}
   m_Layer: 0
   m_Name: RDL
   m_TagString: Untagged
@@ -273,6 +276,18 @@ Transform:
   - {fileID: 8650226747849390578}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7244764165282339877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605113619288985981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4180274b1930e844296f185e5834460d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5492219031652199311
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OppeningDirection: 4
+  spawned: 0
 --- !u!61 &7428947308800045760
 BoxCollider2D:
   m_ObjectHideFlags: 0

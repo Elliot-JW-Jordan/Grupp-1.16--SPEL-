@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OppeningDirection: 3
+  spawned: 0
 --- !u!61 &9152943180046669233
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -250,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OppeningDirection: 1
+  spawned: 0
 --- !u!61 &6622852252828919663
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -331,6 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7629843290445763572}
+  - component: {fileID: 279648913284606372}
   m_Layer: 0
   m_Name: RD
   m_TagString: Untagged
@@ -356,3 +359,15 @@ Transform:
   - {fileID: 5384295502897510231}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &279648913284606372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790852941677454404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4180274b1930e844296f185e5834460d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

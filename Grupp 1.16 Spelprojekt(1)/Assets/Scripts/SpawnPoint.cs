@@ -13,7 +13,7 @@ public class SpawnPoint : MonoBehaviour
 
     private RoomTemplates templates;
     private int rand;
-    private bool spawned = false;
+    public bool spawned = false;
     private int MaxRooms = 10;
     private int CurentRooms = 0;
 
