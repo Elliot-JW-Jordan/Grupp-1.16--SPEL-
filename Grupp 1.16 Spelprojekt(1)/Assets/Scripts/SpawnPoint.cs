@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
@@ -62,9 +63,14 @@ public class SpawnPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D Other)
     {
-        if(Other.CompareTag("SpawnPoint") && Other.GetComponent<SpawnPoint>().spawned == true)
+        if(Other.CompareTag("SpawnPoint"))
         {
-            Destroy(gameObject);
+            if(Other.GetComponent<SpawnPoint>().spawned == false && spawned == false)
+            {
+                Instantiate(templates.closedRooms, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+            spawned = true;
         }
     }
 
