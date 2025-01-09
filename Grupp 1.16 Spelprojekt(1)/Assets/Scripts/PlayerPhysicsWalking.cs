@@ -21,9 +21,11 @@ public class PlayerPhysicsWalking : MonoBehaviour
     public float currentStamina;
 
     [Header("Physics Values")]
-    public float angularDrag = 5f;
+    public float angularDrag = 5f;   
     public float linearjarDrag = 5f;
 
+    
+    
     //Sedan en 2d Rigidbody som ska hantera en input och velocitetn av spelaren.
 
     private Rigidbody2D rigid2d;
