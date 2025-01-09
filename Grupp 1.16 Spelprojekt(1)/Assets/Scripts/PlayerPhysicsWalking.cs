@@ -40,6 +40,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
 
     private Vector2 inputOfMoving;
     private Vector2 CurrentVelocity;
+    private Vector2 lastMoveDirection;
 
 
     private bool isRunning;
@@ -64,20 +65,30 @@ public class PlayerPhysicsWalking : MonoBehaviour
     {
         inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
+        if(inputOfMoving != Vector2.zero )
+        {
+            lastMoveDirection = inputOfMoving;
+        }
+
+
 
         isRunning = Input.GetKey(KeyCode.LeftShift) && canRun;
-        HandleStamina();
-        if (Input.GetKeyDown(KeyCode.Space))
+      
+        if (Input.GetKeyDown(KeyCode.Space) && canDodge)
         {
-            StartCorountine(Dodge());
+            StartCoroutine(Dodge());  
         }
+        HandleStamina();
     }
 
 
     private void FixedUpdate()
     {
-        ApplyMovement();
-        ApplyDynamicTurning();
+        if (!isDoging) {
+            ApplyMovement();
+            ApplyDynamicTurning();
+        }
+       
     }
 
     void ApplyMovement()
@@ -122,7 +133,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
         //Så man alltid rullar åt höger ifall spelaren inte färdas i en definerad riktning
        
         
-          Vector2 directionOfDodge = inputOfMoving != Vector2.zero ? inputOfMoving : Vector2.right;
+          Vector2 directionOfDodge = inputOfMoving != Vector2.zero ? inputOfMoving : lastMoveDirection;
         Vector2 velocityOfDodge = directionOfDodge * dodgeSpeed;
 
         float endOfDodge = Time.time + dogeTimer;
@@ -132,6 +143,9 @@ public class PlayerPhysicsWalking : MonoBehaviour
             rigid2d.velocity = velocityOfDodge;
             yield return null;
         }
+
+        rigid2d.velocity = Vector2.zero;
+        
         isDoging = false;
         yield return new WaitForSeconds(dodgeDownTime);
         canDodge = true;
