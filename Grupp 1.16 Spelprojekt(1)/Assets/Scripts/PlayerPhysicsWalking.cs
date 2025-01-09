@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,13 @@ public class PlayerPhysicsWalking : MonoBehaviour
     public float staminaDeductionRate = 10f;
     public float staminaRegen = 5f;
     public float currentStamina;
+
+    [Header("Dodge Values")]
+    public float dodgeSpeed = 15f;
+    public float dogeTimer = 0.25f;
+    public float dodgeDownTime = 1.5f;
+    private bool isDoging = false;
+    private bool canDodge = true;
 
     [Header("Physics Values")]
     public float angularDrag = 5f;   
@@ -59,6 +67,10 @@ public class PlayerPhysicsWalking : MonoBehaviour
 
         isRunning = Input.GetKey(KeyCode.LeftShift) && canRun;
         HandleStamina();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //StartCourontine
+        }
     }
 
 
@@ -102,6 +114,29 @@ public class PlayerPhysicsWalking : MonoBehaviour
             rigid2d.rotation = smoothAngle;
         }
     }
+
+    IEnumerator Dodge()
+    {
+        isDoging = true;
+        canDodge = false;
+        //Så man alltid rullar åt höger ifall spelaren inte färdas i en definerad riktning
+       
+        
+          Vector2 directionOfDodge = inputOfMoving != Vector2.zero ? inputOfMoving : Vector2.right;
+        Vector2 velocityOfDodge = directionOfDodge * dodgeSpeed;
+
+        float endOfDodge = Time.time + dogeTimer;
+
+        while ( Time.time < endOfDodge)
+        {
+            rigid2d.velocity = velocityOfDodge;
+            yield return null;
+        }
+        isDoging = false;
+        yield return new WaitForSeconds(dodgeDownTime);
+        canDodge = true;
+    }
+
 
     public void HandleStamina()
     {
