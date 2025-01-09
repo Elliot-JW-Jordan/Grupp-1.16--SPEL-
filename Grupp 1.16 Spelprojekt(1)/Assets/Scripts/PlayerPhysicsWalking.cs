@@ -7,7 +7,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
     //Jag börjar med att definera värden av olika slag
 
     [Header("Values of Walking and Sprinting")]
-    public float maxWalkSpeed = 3f;
+    public float maxWalkSpeed = 4f;
     public float sprintSpeed = 8f;
     public float accelerationofWalk = 5f;
     public float decelerationofWalk = 10f;
@@ -22,7 +22,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
 
     [Header("Physics Values")]
     public float angularDrag = 5f;   
-    public float linearjarDrag = 5f;
+    public float linearjarDrag = 10f;
 
     
     
