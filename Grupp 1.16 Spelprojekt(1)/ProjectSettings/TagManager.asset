@@ -8,6 +8,8 @@ TagManager:
   - StartRoom
   - SpawnPoint
   - Rooms
+  - closedroom
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -42,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Doors
+    uniqueID: 3381123151
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
