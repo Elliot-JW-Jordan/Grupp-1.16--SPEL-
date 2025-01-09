@@ -117,12 +117,14 @@ public class PlayerPhysicsWalking : MonoBehaviour
     {
         if (inputOfMoving.magnitude > 0)
         {
+            Vector2 directionsPredict = inputOfMoving;
             //räknar vinkeln
-            float targAngle = Mathf.Atan2(inputOfMoving.y, inputOfMoving.x) * Mathf.Rad2Deg;
+            float targAngle = Mathf.Atan2(directionsPredict.y, directionsPredict.x) * Mathf.Rad2Deg;
+            Quaternion targetRotate = Quaternion.Euler(0, 0, targAngle);
 
-            float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, targAngle, turn * Time.fixedDeltaTime);
-
-            rigid2d.rotation = smoothAngle;
+            //float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, targAngle, turn * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotate, turn * Time.fixedDeltaTime);
+           // rigid2d.rotation = smoothAngle;
         }
     }
 
