@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OppeningDirection: 3
   spawned: 0
+  waitTimeOptemizing: 4
 --- !u!61 &7478250802193829924
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,6 +121,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1274181585610314531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 101040317430476057}
+  - component: {fileID: 4885720668041653982}
+  m_Layer: 0
+  m_Name: Door-SP
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &101040317430476057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274181585610314531}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.8, y: -0.2, z: 0.3054695}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2915178048876273792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4885720668041653982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274181585610314531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca50ef7194eba04694e258c1fe06a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoorDirection: 4
 --- !u!1 &3550509854930935292
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OppeningDirection: 1
   spawned: 0
+  waitTimeOptemizing: 4
 --- !u!61 &2750419855932650695
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -274,6 +321,9 @@ Transform:
   - {fileID: 3183244993979722409}
   - {fileID: 4099518245685639989}
   - {fileID: 8650226747849390578}
+  - {fileID: 101040317430476057}
+  - {fileID: 1887514463774707489}
+  - {fileID: 351062420476160272}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7244764165282339877
@@ -288,6 +338,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4180274b1930e844296f185e5834460d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4609726858862647294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 351062420476160272}
+  - component: {fileID: 2713411397093257255}
+  m_Layer: 0
+  m_Name: Door-SP
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &351062420476160272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609726858862647294}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -4.6, z: 0.3054695}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2915178048876273792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2713411397093257255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609726858862647294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca50ef7194eba04694e258c1fe06a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoorDirection: 2
 --- !u!1 &5492219031652199311
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +467,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7783638346602604074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1887514463774707489}
+  - component: {fileID: 5024870909639371219}
+  m_Layer: 0
+  m_Name: Door-SP
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1887514463774707489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7783638346602604074}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.8, y: -0.2, z: 0.3054695}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2915178048876273792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5024870909639371219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7783638346602604074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca50ef7194eba04694e258c1fe06a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoorDirection: 3
 --- !u!1 &8159988961970307737
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OppeningDirection: 4
   spawned: 0
+  waitTimeOptemizing: 4
 --- !u!61 &7428947308800045760
 BoxCollider2D:
   m_ObjectHideFlags: 0
