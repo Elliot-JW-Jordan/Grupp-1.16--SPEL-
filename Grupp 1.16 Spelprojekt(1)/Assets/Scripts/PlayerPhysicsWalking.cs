@@ -20,6 +20,14 @@ public class PlayerPhysicsWalking : MonoBehaviour
     public float staminaDeductionRate = 10f;
     public float staminaRegen = 5f;
     public float currentStamina;
+    public float fatigueTreshhold = 8f;
+    public float staminaFatiguerate = 0.5f;
+    public float exhuastionPenalty = 0.5f;
+    private bool isfatigued = false;
+    private bool isExhausted = false;
+    private float fatigueTime = 0f;
+
+
 
     [Header("Dodge Values")]
     public float dodgeSpeed = 15f;
@@ -29,17 +37,21 @@ public class PlayerPhysicsWalking : MonoBehaviour
     private bool canDodge = true;
 
     [Header("Physics Values")]
-    public float angularDrag = 5f;   
+    public float angularDrag = 5f;
     public float linearjarDrag = 10f;
 
-    
+
     [Header("Camera Setrtings")]
-   public Camera camera;
-   public  CameraSShake cameraSShake;
+    public Camera camera;
+    public CameraSShake cameraSShake;
     public float shakeMagnitude = 0.3f;
     public float shakeLe = 0.2f;
 
 
+    [Header("Sprite Scaling")]
+    public Transform playerSpr;
+    public float minimumSprite = 0.8f;
+    public float maxScale = 1.2f;
 
     //Sedan en 2d Rigidbody som ska hantera en input och velocitetn av spelaren.
 
@@ -64,7 +76,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
         rigid2d.drag = linearjarDrag;
         rigid2d.angularDrag = angularDrag;
 
-
+       // playerSpr = transform.GetChild(0);
     }
 
     // Update is called once per frame
@@ -72,7 +84,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
     {
         inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        if(inputOfMoving != Vector2.zero )
+        if (inputOfMoving != Vector2.zero)
         {
             lastMoveDirection = inputOfMoving;
         }
@@ -80,22 +92,24 @@ public class PlayerPhysicsWalking : MonoBehaviour
 
 
         isRunning = Input.GetKey(KeyCode.LeftShift) && canRun;
-      
+
         if (Input.GetKeyDown(KeyCode.Space) && canDodge)
         {
-            StartCoroutine(Dodge());  
+            StartCoroutine(Dodge());
         }
         HandleStamina();
+        ChangeSpriteScale();
     }
 
 
     private void FixedUpdate()
     {
-        if (!isDoging) {
+        if (!isDoging)
+        {
             ApplyMovement();
             ApplyDynamicTurning();
         }
-       
+
     }
 
     void ApplyMovement()
@@ -131,38 +145,38 @@ public class PlayerPhysicsWalking : MonoBehaviour
 
             //float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, targAngle, turn * Time.fixedDeltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotate, turn * Time.fixedDeltaTime);
-           // rigid2d.rotation = smoothAngle;
+            // rigid2d.rotation = smoothAngle;
         }
     }
 
     IEnumerator Dodge()
     {
-       
+
         isDoging = true;
         canDodge = false;
 
 
-        if(cameraSShake != null )
+        if (cameraSShake != null)
         {
             cameraSShake.BeginShake(shakeLe, shakeMagnitude);
         }
-        
+
         //Så man alltid rullar åt höger ifall spelaren inte färdas i en definerad riktning
-       
-        
-          Vector2 directionOfDodge = inputOfMoving != Vector2.zero ? inputOfMoving : lastMoveDirection;
+
+
+        Vector2 directionOfDodge = inputOfMoving != Vector2.zero ? inputOfMoving : lastMoveDirection;
         Vector2 velocityOfDodge = directionOfDodge * dodgeSpeed;
 
         float endOfDodge = Time.time + dogeTimer;
 
-        while ( Time.time < endOfDodge)
+        while (Time.time < endOfDodge)
         {
             rigid2d.velocity = velocityOfDodge;
             yield return null;
         }
 
         rigid2d.velocity = Vector2.zero;
-        
+
         isDoging = false;
         yield return new WaitForSeconds(dodgeDownTime);
         canDodge = true;
@@ -178,17 +192,27 @@ public class PlayerPhysicsWalking : MonoBehaviour
             currentStamina -= staminaDeductionRate * Time.deltaTime;
 
 
+            if (fatigueTime >= fatigueTreshhold && !isfatigued)
+            {
+                isfatigued = true;
+            }
+
             if (currentStamina <= 0)
             {
                 currentStamina = 0;
                 // Jag stänger av spring funktionen
                 canRun = false;
+                isExhausted = true;
+                maxWalkSpeed *= exhuastionPenalty;
+                sprintSpeed *= exhuastionPenalty;
             }
         }
         else
         {
             //När man inte springer
-            currentStamina += staminaRegen * Time.deltaTime;
+            float regenRate = isfatigued ? staminaFatiguerate : staminaRegen;
+            //oj o oj stamina regen
+            currentStamina += regenRate * Time.deltaTime;
             if (currentStamina >= maxStamnina)
             {
                 currentStamina = maxStamnina;
@@ -197,7 +221,26 @@ public class PlayerPhysicsWalking : MonoBehaviour
             if (currentStamina > 10f)
             {
                 canRun = true;
+                if (isExhausted)
+                {
+                    maxWalkSpeed = 4;
+                    sprintSpeed = 8f;
+                    isExhausted = false;
+                }
             }
+            fatigueTime = 0f;
         }
     }
+    void ChangeSpriteScale()
+    {
+        float speedF = Mathf.Clamp(rigid2d.velocity.magnitude / sprintSpeed, 0f, 1f);
+        float newScale = Mathf.Lerp(minimumSprite, maxScale, 1f - speedF);
+
+        if (playerSpr != null)
+        {
+            playerSpr.localScale = new Vector3(newScale, newScale, 1f);
+        }
+
+    }
 }
+
