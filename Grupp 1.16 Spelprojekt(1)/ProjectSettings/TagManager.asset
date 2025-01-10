@@ -8,16 +8,17 @@ TagManager:
   - StartRoom
   - SpawnPoint
   - Rooms
+  - bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - e bullet
   - Water
   - UI
-  - 
-  - 
-  - 
+  - p bullet
+  - 'player '
+  - enemy
   - 
   - 
   - 
