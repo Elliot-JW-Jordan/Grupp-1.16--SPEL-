@@ -478,10 +478,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1317005104648149776, guid: 8098e10ab41d1b946ab6cfe610229955, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 519420028}
     - target: {fileID: 6883320633725456033, guid: 8098e10ab41d1b946ab6cfe610229955, type: 3}
       propertyPath: m_Name
       value: DLUR
