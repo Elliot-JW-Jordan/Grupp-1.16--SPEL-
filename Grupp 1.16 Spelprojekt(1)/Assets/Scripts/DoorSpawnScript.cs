@@ -23,25 +23,25 @@ public class DoorSpawnScript : MonoBehaviour
 
         if (DoorDirection == 1)
         {
-            Instantiate(Doors.DoorU, spawnPosition, spawnRotation);
+            Instantiate(Doors.DoorU, spawnPosition, spawnRotation, transform.parent);
             Destroy(gameObject, waitTimeOptemizing);
         }
 
         if (DoorDirection == 2)
         {
-            Instantiate(Doors.DoorD, spawnPosition, spawnRotation);
+            Instantiate(Doors.DoorD, spawnPosition, spawnRotation, transform.parent);
             Destroy(gameObject, waitTimeOptemizing);
         }
 
         if (DoorDirection == 3)
         {
-            Instantiate(Doors.DoorR, spawnPosition, spawnRotation);
+            Instantiate(Doors.DoorR, spawnPosition, spawnRotation, transform.parent);
             Destroy(gameObject, waitTimeOptemizing);
         }
 
         if (DoorDirection == 4)
         {
-            Instantiate(Doors.DoorL, spawnPosition, spawnRotation);
+            Instantiate(Doors.DoorL, spawnPosition, spawnRotation, transform.parent);
             Destroy(gameObject, waitTimeOptemizing);
         }
 
