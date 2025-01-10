@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 4482761140245979780}
   - component: {fileID: 1317005104648149776}
   - component: {fileID: 5145494445824107696}
+  - component: {fileID: 7385265367327045513}
   m_Layer: 0
   m_Name: DLUR
   m_TagString: Untagged
@@ -498,6 +499,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16, y: 8}
   m_EdgeRadius: 0
+--- !u!114 &7385265367327045513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883320633725456033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 779a0ea2e9b563648a926da60b035938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8127285366102189349
 GameObject:
   m_ObjectHideFlags: 0

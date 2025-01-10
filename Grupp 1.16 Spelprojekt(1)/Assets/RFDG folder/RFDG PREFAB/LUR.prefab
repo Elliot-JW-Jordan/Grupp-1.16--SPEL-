@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: -4107006996359540809}
   - component: {fileID: -8190539082477967670}
   - component: {fileID: -2123096274153947029}
+  - component: {fileID: 5208240987248965953}
   m_Layer: 0
   m_Name: LUR
   m_TagString: Untagged
@@ -397,6 +398,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16, y: 8}
   m_EdgeRadius: 0
+--- !u!114 &5208240987248965953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063298036439637143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 779a0ea2e9b563648a926da60b035938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6520045617691627341
 GameObject:
   m_ObjectHideFlags: 0

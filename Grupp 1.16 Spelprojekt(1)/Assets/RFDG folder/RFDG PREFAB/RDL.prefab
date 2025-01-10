@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: -7244764165282339877}
   - component: {fileID: -6043671312312493278}
   - component: {fileID: 7866777420582561747}
+  - component: {fileID: -8722865201207676231}
   m_Layer: 0
   m_Name: RDL
   m_TagString: Untagged
@@ -397,6 +398,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16, y: 8}
   m_EdgeRadius: 0
+--- !u!114 &-8722865201207676231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605113619288985981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 779a0ea2e9b563648a926da60b035938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4609726858862647294
 GameObject:
   m_ObjectHideFlags: 0
