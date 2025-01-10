@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,31 +8,46 @@ public class PlayerPhysicsWalking : MonoBehaviour
     //Jag börjar med att definera värden av olika slag
 
     [Header("Values of Walking and Sprinting")]
-    public float maxWalkSpeed = 4f;
-    public float sprintSpeed = 8f;
-    public float accelerationofWalk = 5f;
-    public float decelerationofWalk = 10f;
-    public float turn = 5f;
+    public float maxWalkSpeed = 4f; //Spelarens max hastighet
+    public float sprintSpeed = 8f;  //Hastigheten som splearen springer i
+    public float accelerationofWalk = 5f; // Accerleration
+    public float decelerationofWalk = 10f; // decelaration
+    public float turn = 5f;  //hastigheten av "vändningen"
 
 
     [Header("Stamina Values")]
-    public float maxStamnina = 100f;
+    public float maxStamnina = 100f;  //
     public float staminaDeductionRate = 10f;
     public float staminaRegen = 5f;
     public float currentStamina;
+
+    [Header("Dodge Values")]
+    public float dodgeSpeed = 15f;
+    public float dogeTimer = 0.25f;
+    public float dodgeDownTime = 1.5f;
+    private bool isDoging = false;
+    private bool canDodge = true;
 
     [Header("Physics Values")]
     public float angularDrag = 5f;   
     public float linearjarDrag = 10f;
 
     
-    
+    [Header("Camera Setrtings")]
+   public Camera camera;
+   public  CameraSShake cameraSShake;
+    public float shakeMagnitude = 0.3f;
+    public float shakeLe = 0.2f;
+
+
+
     //Sedan en 2d Rigidbody som ska hantera en input och velocitetn av spelaren.
 
     private Rigidbody2D rigid2d;
 
     private Vector2 inputOfMoving;
     private Vector2 CurrentVelocity;
+    private Vector2 lastMoveDirection;
 
 
     private bool isRunning;
@@ -56,16 +72,30 @@ public class PlayerPhysicsWalking : MonoBehaviour
     {
         inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
+        if(inputOfMoving != Vector2.zero )
+        {
+            lastMoveDirection = inputOfMoving;
+        }
+
+
 
         isRunning = Input.GetKey(KeyCode.LeftShift) && canRun;
+      
+        if (Input.GetKeyDown(KeyCode.Space) && canDodge)
+        {
+            StartCoroutine(Dodge());  
+        }
         HandleStamina();
     }
 
 
     private void FixedUpdate()
     {
-        ApplyMovement();
-        ApplyDynamicTurning();
+        if (!isDoging) {
+            ApplyMovement();
+            ApplyDynamicTurning();
+        }
+       
     }
 
     void ApplyMovement()
@@ -94,14 +124,50 @@ public class PlayerPhysicsWalking : MonoBehaviour
     {
         if (inputOfMoving.magnitude > 0)
         {
+            Vector2 directionsPredict = inputOfMoving;
             //räknar vinkeln
-            float targAngle = Mathf.Atan2(inputOfMoving.y, inputOfMoving.x) * Mathf.Rad2Deg;
+            float targAngle = Mathf.Atan2(directionsPredict.y, directionsPredict.x) * Mathf.Rad2Deg;
+            Quaternion targetRotate = Quaternion.Euler(0, 0, targAngle);
 
-            float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, targAngle, turn * Time.fixedDeltaTime);
-
-            rigid2d.rotation = smoothAngle;
+            //float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, targAngle, turn * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotate, turn * Time.fixedDeltaTime);
+           // rigid2d.rotation = smoothAngle;
         }
     }
+
+    IEnumerator Dodge()
+    {
+       
+        isDoging = true;
+        canDodge = false;
+
+
+        if(cameraSShake != null )
+        {
+            cameraSShake.BeginShake(shakeLe, shakeMagnitude);
+        }
+        
+        //Så man alltid rullar åt höger ifall spelaren inte färdas i en definerad riktning
+       
+        
+          Vector2 directionOfDodge = inputOfMoving != Vector2.zero ? inputOfMoving : lastMoveDirection;
+        Vector2 velocityOfDodge = directionOfDodge * dodgeSpeed;
+
+        float endOfDodge = Time.time + dogeTimer;
+
+        while ( Time.time < endOfDodge)
+        {
+            rigid2d.velocity = velocityOfDodge;
+            yield return null;
+        }
+
+        rigid2d.velocity = Vector2.zero;
+        
+        isDoging = false;
+        yield return new WaitForSeconds(dodgeDownTime);
+        canDodge = true;
+    }
+
 
     public void HandleStamina()
     {

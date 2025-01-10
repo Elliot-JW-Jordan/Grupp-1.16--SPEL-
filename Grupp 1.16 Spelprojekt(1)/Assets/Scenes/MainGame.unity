@@ -183,7 +183,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.36895
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -207,12 +207,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalScale: {x: 1, y: 1.607125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1284530589}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1284530586
 GameObject:
@@ -285,8 +285,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -308030239
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
   m_Color: {r: 0.15408784, g: 1, b: 0.33499625, a: 1}
@@ -311,8 +311,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 519420032}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!50 &1284530590
@@ -341,7 +340,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1284530591
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -449,6 +448,10 @@ MonoBehaviour:
   - {fileID: 1651978316923730631, guid: 6e49f50f190675b40a1d47a4f0be3178, type: 3}
   - {fileID: 2461080183669216249, guid: 3be10383dcd6dda40a39dd1c9cf31a56, type: 3}
   closedRooms: {fileID: 4154307359304516985, guid: 4b3893b9621f74f4295003422aa7eee5, type: 3}
+  DoorU: {fileID: 6906143149289732236, guid: cdbddcbc9bd3a5841b7bf15ad2dce9f0, type: 3}
+  DoorD: {fileID: 8271019233929212442, guid: 0ea4cb0a67a06ae48b705eb4d78ae8a0, type: 3}
+  DoorR: {fileID: 3039250386938537054, guid: 21df461d2fa5eb948a841e7427bc5015, type: 3}
+  DoorL: {fileID: 2609226954368091820, guid: 5cdd3eb0d2ecf104496f7eda8523a3e6, type: 3}
   rooms: []
   waitTime: 10
   boss: {fileID: 6474000456917596281, guid: 014b339e1c9185948b88ed1487eff1fe, type: 3}
@@ -489,7 +492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8609311458369851889, guid: 8098e10ab41d1b946ab6cfe610229955, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.7581143
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8609311458369851889, guid: 8098e10ab41d1b946ab6cfe610229955, type: 3}
       propertyPath: m_LocalRotation.w
@@ -528,6 +531,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 519420032}
   - {fileID: 1667920750}
   - {fileID: 921943308083451934}
   - {fileID: 1284530589}
