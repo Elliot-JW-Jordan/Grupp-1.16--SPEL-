@@ -8,15 +8,15 @@ public class PlayerPhysicsWalking : MonoBehaviour
     //Jag börjar med att definera värden av olika slag
 
     [Header("Values of Walking and Sprinting")]
-    public float maxWalkSpeed = 4f;
-    public float sprintSpeed = 8f;
-    public float accelerationofWalk = 5f;
-    public float decelerationofWalk = 10f;
-    public float turn = 5f;
+    public float maxWalkSpeed = 4f; //Spelarens max hastighet
+    public float sprintSpeed = 8f;  //Hastigheten som splearen springer i
+    public float accelerationofWalk = 5f; // Accerleration
+    public float decelerationofWalk = 10f; // decelaration
+    public float turn = 5f;  //hastigheten av "vändningen"
 
 
     [Header("Stamina Values")]
-    public float maxStamnina = 100f;
+    public float maxStamnina = 100f;  //
     public float staminaDeductionRate = 10f;
     public float staminaRegen = 5f;
     public float currentStamina;
@@ -33,7 +33,14 @@ public class PlayerPhysicsWalking : MonoBehaviour
     public float linearjarDrag = 10f;
 
     
-    
+    [Header("Camera Setrtings")]
+   public Camera camera;
+   public  CameraSShake cameraSShake;
+    public float shakeMagnitude = 0.3f;
+    public float shakeLe = 0.2f;
+
+
+
     //Sedan en 2d Rigidbody som ska hantera en input och velocitetn av spelaren.
 
     private Rigidbody2D rigid2d;
@@ -130,8 +137,16 @@ public class PlayerPhysicsWalking : MonoBehaviour
 
     IEnumerator Dodge()
     {
+       
         isDoging = true;
         canDodge = false;
+
+
+        if(cameraSShake != null )
+        {
+            cameraSShake.BeginShake(shakeLe, shakeMagnitude);
+        }
+        
         //Så man alltid rullar åt höger ifall spelaren inte färdas i en definerad riktning
        
         
