@@ -408,6 +408,9 @@ MonoBehaviour:
   staminaDeductionRate: 10
   staminaRegen: 5
   currentStamina: 0
+  fatigueTreshhold: 8
+  staminaFatiguerate: 0.5
+  exhuastionPenalty: 0.5
   dodgeSpeed: 15
   dogeTimer: 0.25
   dodgeDownTime: 1.5
@@ -417,6 +420,9 @@ MonoBehaviour:
   cameraSShake: {fileID: 734780101}
   shakeMagnitude: 0.3
   shakeLe: 0.2
+  playerSpr: {fileID: 1309407398}
+  minimumSprite: 0.8
+  maxScale: 1.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
