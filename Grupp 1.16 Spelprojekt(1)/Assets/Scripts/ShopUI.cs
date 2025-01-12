@@ -11,6 +11,7 @@ public class ShopUI : MonoBehaviour
     public Transform shopContent; // "Content" inom scrolable field
     public GameObject itemUIPrefab; // Prefaben för föremålet
     public Text currencyText;
+    public Sprite placeHolderSprite;
     public GameObject shopUIpanel;
 
    
@@ -59,27 +60,30 @@ public class ShopUI : MonoBehaviour
 
             //Hämtar alla UI komponenter
             //
-            Button itemBUYbutton = itemUI.transform.Find("ItemBuyButtonUI").GetComponent<Button>();
+            
             Image itemIconUI = itemUI.transform.Find("itemIconUI").GetComponent<Image>();
             Text titleTextUI = itemUI.transform.Find("ItemNameTextUI").GetComponent<Text>();
             Text descriptionTextUI = itemUI.transform.Find("ItemDescriptionUI").GetComponent<Text>();
+            Button itemBUYbutton = itemUI.transform.Find("ItemBuyButtonUI").GetComponent<Button>();
+            Text Price = itemUI.transform.Find("Price").GetComponent<Text>();
             Text itemPriceTextUI = itemUI.transform.Find("ItemPriceUI").GetComponent<Text>();
            Text itemTypeTextUI = itemUI.transform.Find("ItemTypeUI").GetComponent<Text>();
+            Text Stats = itemUI.transform.Find("Stats").GetComponent<Text>();
+            Text Statkinds = itemUI.transform.Find("Statkinds").GetComponent<Text>();
             Text itemDurationTextUI = itemUI.transform.Find("ItemDurationUI").GetComponent<Text>();
             Text itemHealAmountTextUI = itemUI.transform.Find("ItemHealAmountUI").GetComponent<Text>();
             Text itemBuffingFactorTextUI = itemUI.transform.Find("ItemBuffingFactorUI").GetComponent<Text>();
             Text itemDurabilityTextUI = itemUI.transform.Find("ItemDurabilityUI").GetComponent<Text>();
             Text itemDefensiveValueTextUI = itemUI.transform.Find("ItemDefensiveValueUI").GetComponent<Text>();
             Text itemWeightATextUI = itemUI.transform.Find("ItemWeightAUI").GetComponent<Text>();
-            Text Price = itemUI.transform.Find("Price").GetComponent<Text>();
-            Text Stats = itemUI.transform.Find("Stats").GetComponent<Text>();
-            Text Statkinds = itemUI.transform.Find("Statkinds").GetComponent<Text>();
-            
+
+
+
 
             // Fyller i med infromation om föremålen
             //handle null values.sprite
             //add to string where needed
-            itemIconUI.sprite = item.spriteIcon;
+            itemIconUI.sprite = item.spriteIcon ?? placeHolderSprite;
             titleTextUI.text = item.itemName;
             descriptionTextUI.text = item.description;
             itemPriceTextUI.text = item.price.ToString();
