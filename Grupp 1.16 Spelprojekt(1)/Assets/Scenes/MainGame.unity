@@ -455,6 +455,7 @@ MonoBehaviour:
   rooms: []
   waitTime: 10
   boss: {fileID: 6474000456917596281, guid: 014b339e1c9185948b88ed1487eff1fe, type: 3}
+  Shop: {fileID: 5180058504251575432, guid: 2ae56f07c76c7104e870852510156101, type: 3}
 --- !u!4 &1667920750
 Transform:
   m_ObjectHideFlags: 0
@@ -464,7 +465,7 @@ Transform:
   m_GameObject: {fileID: 1667920748}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6387976, y: -0.32005817, z: 0.025830979}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
