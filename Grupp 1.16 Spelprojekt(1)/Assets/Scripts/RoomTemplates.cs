@@ -61,7 +61,7 @@ public class RoomTemplates : MonoBehaviour
             int shopRoomIndex;
             do
             {
-                shopRoomIndex = Random.Range(0, rooms.Count);
+                shopRoomIndex = Random.Range(2, rooms.Count);
             } while (usedIndices.Contains(shopRoomIndex));
 
             usedIndices.Add(shopRoomIndex);
