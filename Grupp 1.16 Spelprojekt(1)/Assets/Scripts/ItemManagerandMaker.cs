@@ -8,17 +8,21 @@ public class ItemManagerandMaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GenerateItems();
+    }
+    public void GenerateItems()
+    {
         Consumable ssmallHealingPotion = ItemMaker.Create<Consumable>(
-            name: "Smaller Healing Potion",
-            description: " Heals 25 HP",
-            icon: null,
-           itemRarity: Rarity.Common,
-           price: 10,
-           stats: new Dictionary<string, float> { { "HealingPower", 25f } },
-           type: ConsumableType.HealingPotion,
-           duration: 0f,
-           healAmount: 25f,
-           buffingFactor: 0f  ) ;
+           name: "Smaller Healing Potion",
+           description: " Heals 25 HP",
+           icon: null,
+          itemRarity: Rarity.Common,
+          price: 10,
+          stats: new Dictionary<string, float> { { "HealingPower", 25f } },
+          type: ConsumableType.HealingPotion,
+          duration: 0f,
+          healAmount: 25f,
+          buffingFactor: 0f);
 
 
         Consumable HealingPotion = ItemMaker.Create<Consumable>(
@@ -45,17 +49,17 @@ public class ItemManagerandMaker : MonoBehaviour
           healAmount: 80f,
           buffingFactor: 0f);
 
-         Consumable DMGBuff = ItemMaker.Create<Consumable>(
-         name: "Damange Enhacning Potion",
-         description: " Increases Damage With 1.1",
-         icon: null,
-        itemRarity: Rarity.Common,
-        price: 30,
-        stats: new Dictionary<string, float> { { "Damage Enhacing", 0f } },
-        type: ConsumableType.HealingPotion,
-        duration: 0f,
-        healAmount: 0f,
-        buffingFactor: 1.1f);
+        Consumable DMGBuff = ItemMaker.Create<Consumable>(
+        name: "Damange Enhacning Potion",
+        description: " Increases Damage With 1.1",
+        icon: null,
+       itemRarity: Rarity.Common,
+       price: 30,
+       stats: new Dictionary<string, float> { { "Damage Enhacing", 0f } },
+       type: ConsumableType.HealingPotion,
+       duration: 0f,
+       healAmount: 0f,
+       buffingFactor: 1.1f);
 
 
         Armour LeatherHelmet = ItemMaker.Create<Armour>(
@@ -124,19 +128,13 @@ public class ItemManagerandMaker : MonoBehaviour
         listOfitems.Add(LeatherLeggings);
         listOfitems.Add(LeatherBoots);
 
-        foreach  (var item in listOfitems)
+        foreach (var item in listOfitems)
         {
             item.Use();
         }
 
 
-
-
-
-
-
     }
-
     // Update is called once per frame
     void Update()
     {

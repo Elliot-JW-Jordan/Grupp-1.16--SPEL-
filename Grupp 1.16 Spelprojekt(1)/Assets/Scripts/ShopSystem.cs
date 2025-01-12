@@ -6,8 +6,10 @@ using UnityEngine;
 public class ShopSystem : MonoBehaviour
 {
 
-    public List<ItemSystem> allitems; // Lista med alla föremål
-    public List<ItemSystem> shopitems; // Lista med alla föremål i  affären
+    public List<ItemSystem> allitems = new List<ItemSystem>(); // Lista med alla föremål
+    [SerializeField]
+    public List<ItemSystem> shopitems = new List<ItemSystem>(); // Lista med alla föremål i  affären
+    public int placeholderCurrency = 1000;
 
     //Procentuella sannolikheter för  föremål av olika sällsynthet att hamna i shoppen
     [Range(0, 1)] public float commonChance = 0.4f;
@@ -19,15 +21,43 @@ public class ShopSystem : MonoBehaviour
 
     public int maximumAmountOfItemsInShop = 10;
 
+
+    private void Awake()
+    {
+        if (shopitems == null)// för säkerhets skull.
+        {
+            Debug.LogError("Awake: Initalizing shopitems");
+            shopitems = new List<ItemSystem>();
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
+
+        if (shopitems == null)// för säkerhets skull.
+        {
+            Debug.LogError("Shopitems is null. Initializing it.");
+            shopitems = new List<ItemSystem>();
+        }
+
+
         LoadShop();
         SortingOfShopItems();
         UpdateUI();
     }
     public void LoadShop()
     {
+
+
+        if (shopitems == null)// fr säkerhets skull.
+        {
+            Debug.LogError("Shopitems is null. Initializing it.");
+            shopitems = new List<ItemSystem>();
+        }
+
+
+
+
         shopitems.Clear();//jag tömmer listan av föremål i affären
         List<ItemSystem> itemsThatAreAvailable = new List<ItemSystem>(allitems);
 
@@ -105,6 +135,11 @@ public class ShopSystem : MonoBehaviour
 
     public void UpdateUI()
     {
+        ShopUI shopUI = FindObjectOfType<ShopUI>();
+        if (shopUI != null)
+        {
+            shopUI.RefreshShopUI(shopitems);
+        }
         //placeholder för UI 
     }
 
