@@ -9,6 +9,11 @@ TagManager:
   - SpawnPoint
   - Rooms
   - bullet
+  - Door
+  - DoorExitPoint
+  - closedroom
+  - EnemyBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -43,6 +48,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgraound
+    uniqueID: 2940447253
+    locked: 0
+  - name: bullets
+    uniqueID: 3947302679
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: NPC+PC
+    uniqueID: 3441082847
     locked: 0
