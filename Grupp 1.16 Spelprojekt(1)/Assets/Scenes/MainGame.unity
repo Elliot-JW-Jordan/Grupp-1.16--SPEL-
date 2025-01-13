@@ -170,6 +170,7 @@ MonoBehaviour:
   shopContent: {fileID: 0}
   itemUIPrefab: {fileID: 0}
   currencyText: {fileID: 0}
+  placeHolderSprite: {fileID: 0}
   shopUIpanel: {fileID: 0}
   shopSystem: {fileID: 0}
 --- !u!114 &160425897
@@ -599,6 +600,10 @@ MonoBehaviour:
   DoorR: {fileID: 3039250386938537054, guid: 21df461d2fa5eb948a841e7427bc5015, type: 3}
   DoorL: {fileID: 2609226954368091820, guid: 5cdd3eb0d2ecf104496f7eda8523a3e6, type: 3}
   rooms: []
+  Enemys:
+  - {fileID: 6117148497450987960, guid: d1633ac4ef247e4419819064db83136a, type: 3}
+  - {fileID: 5507399138944477522, guid: 224cb5ca4d3edea499c8fd4fc53bace5, type: 3}
+  - {fileID: 453267103782530442, guid: 57ddcffabf2b5f1428fcf36577c8ea8f, type: 3}
   waitTime: 10
   boss: {fileID: 6474000456917596281, guid: 014b339e1c9185948b88ed1487eff1fe, type: 3}
   Shop: {fileID: 5180058504251575432, guid: 2ae56f07c76c7104e870852510156101, type: 3}

@@ -17,6 +17,8 @@ public class RoomTemplates : MonoBehaviour
 
     public List<GameObject> rooms;
 
+    public GameObject[] Enemys;
+
     public float waitTime;
     private bool spawnedBoss = false;
     public GameObject boss;
@@ -53,7 +55,7 @@ public class RoomTemplates : MonoBehaviour
     {
         if (rooms.Count < 5) return;
 
-        maxShops = Mathf.Max(1, rooms.Count / 5); // Ensure at least 1 shop.
+        maxShops = Mathf.Max(1, rooms.Count / 7); // Ensure at least 1 shop.
         HashSet<int> usedIndices = new HashSet<int>();
 
         for (int i = 0; i < maxShops; i++)
