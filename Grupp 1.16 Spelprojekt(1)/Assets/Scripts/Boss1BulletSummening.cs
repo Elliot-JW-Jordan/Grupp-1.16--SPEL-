@@ -9,10 +9,11 @@ public class Boss1BulletSummening : MonoBehaviour
     Rigidbody2D rb;
 
     //Bullet prefab
+    [Header("bullet prefab")]
     public GameObject boss1bullet;
 
     //Bullet settings
-    public float BulletDamege = 10f;
+    [Header("Bullet settings")]
     public float BulletSpeed = 0f;
     public float BulletAmount = 0f;
     public float Bulletspread = 0f;
@@ -20,11 +21,13 @@ public class Boss1BulletSummening : MonoBehaviour
     public float BulletLifeTime = 5f;
 
     //boss settings
+    [Header("boss settings")]
     public float MaxBossHealth = 1000f;
     public float BossHealt = 0f;
     public int CurentPhase = 0;
 
     //setting for logic
+    [Header("setting for logic")]
     private int bulletsFired = 0;
     private float nextFireTime = 0f;
     public float fireCooldown = 0.1f; 
@@ -33,6 +36,7 @@ public class Boss1BulletSummening : MonoBehaviour
     public float playerBulletCooldown = 0f;
 
     //player
+    [Header("player prefab")]
     public GameObject Player;
 
     private void Start()
@@ -152,6 +156,7 @@ public class Boss1BulletSummening : MonoBehaviour
     //code for when the bullet shots the player
     private void FireBulletTowardsPlayer()
     {
+
         GameObject bullet = Instantiate(boss1bullet, transform.position, Quaternion.identity);
         Vector2 direction = (Player.transform.position - transform.position).normalized;
 
