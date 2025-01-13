@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShopSystem : MonoBehaviour
 {
 
-    private ItemManagerandMaker itemManager; //refferens till ItemManagerandMaker
+    public ItemManagerandMaker itemManager; //refferens till ItemManagerandMaker
     public List<ItemSystem> allitems = new List<ItemSystem>(); // Lista med alla föremål
     [SerializeField]
     public List<ItemSystem> shopitems = new List<ItemSystem>(); // Lista med alla föremål i  affären
@@ -31,10 +31,12 @@ public class ShopSystem : MonoBehaviour
             shopitems = new List<ItemSystem>();
         }
     }
-    // Start is called before the first frame update
-    void Start()
+
+
+    IEnumerator InitializeShop()
     {
-        itemManager = FindObjectOfType<ItemManagerandMaker>();
+        //vänta tills ItemManager och Listan inte är null eller tomma för att påbörja
+        yield return new WaitUntil(() => itemManager != null && itemManager.listOfitems.Count > 0);
 
         if (itemManager == null || itemManager.listOfitems.Count == 0)// för säkerhets skull.
         {
@@ -42,14 +44,27 @@ public class ShopSystem : MonoBehaviour
 
 
             Debug.LogError("itemManager is empty and/or missing.");
-            //  shopitems = new List<ItemSystem>();
-            return;
-        }
+            yield break;
+
+            }
 
 
         LoadShop();
         SortingOfShopItems();
         UpdateUI();
+    }
+      
+// Start is called before the first frame update
+void Start()
+    {
+        itemManager = FindObjectOfType<ItemManagerandMaker>();
+        if ( itemManager == null)
+        {
+            Debug.LogError("itemManager is not found in the scene ");
+            return;
+        }
+        StartCoroutine(InitializeShop());
+        
     }
     public void LoadShop()
     {
@@ -133,7 +148,7 @@ public class ShopSystem : MonoBehaviour
         shopitems.Sort((a, b) =>
         {
 
-            if (a is Consumable && b is Armour) return -1;
+            if (a is Consumable && b is Armour) return -1; //  gör så att Consuable kommer före armour i sorting
             if (a is Armour && b is Consumable) return 1;
             return 0;
         });

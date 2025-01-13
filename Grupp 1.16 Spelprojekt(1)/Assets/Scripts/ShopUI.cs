@@ -45,6 +45,7 @@ public class ShopUI : MonoBehaviour
     }
     public void RefreshShopUI(List<ItemSystem> shopItems)
     {
+        Debug.Log(" RefreshingShopUI, Refreshing shop UI...");
         //Jag tömmer afären på alla föremål
         foreach (Transform child in shopContent)
         {
@@ -52,23 +53,27 @@ public class ShopUI : MonoBehaviour
 
         }
 
+        Debug.Log("shopContent cleared");
         //lägger til nya föremål
         foreach (ItemSystem item in shopItems)
         {
+            Debug.Log($"Processing item: {item.itemName}");
             //Skapar flera nya UI för föremålen
             GameObject itemUI = Instantiate(itemUIPrefab, shopContent);
+            Debug.Log($"Instantioated item prefab: {itemUI.name}");
+
 
 
             //Hämtar alla UI komponenter
             //
             
-            Image itemIconUI = itemUI.transform.Find("itemIconUI").GetComponent<Image>();
-            Text titleTextUI = itemUI.transform.Find("ItemNameTextUI").GetComponent<Text>();
-            Text descriptionTextUI = itemUI.transform.Find("ItemDescriptionUI").GetComponent<Text>();
-            Button itemBUYbutton = itemUI.transform.Find("ItemBuyButtonUI").GetComponent<Button>();
-            Text Price = itemUI.transform.Find("Price").GetComponent<Text>();
-            Text itemPriceTextUI = itemUI.transform.Find("ItemPriceUI").GetComponent<Text>();
-           Text itemTypeTextUI = itemUI.transform.Find("ItemTypeUI").GetComponent<Text>();
+            Image itemIconUI = itemUI.transform.Find("itemIconUI").GetComponent<Image>();//Hämtar föremåls bilden
+            Text titleTextUI = itemUI.transform.Find("ItemNameTextUI").GetComponent<Text>(); // Hämtar föremåls Titeln
+            Text descriptionTextUI = itemUI.transform.Find("ItemDescriptionUI").GetComponent<Text>(); // Hämtar föremåls förklarningen
+            Button itemBUYbutton = itemUI.transform.Find("ItemBuyButtonUI").GetComponent<Button>(); //Hämtar föremålets Köp-knapp
+            Text Price = itemUI.transform.Find("Price").GetComponent<Text>(); //Hämtar föremåls Pris titteln 
+            Text itemPriceTextUI = itemUI.transform.Find("ItemPriceUI").GetComponent<Text>(); //Hämtar föremåls
+            Text itemTypeTextUI = itemUI.transform.Find("ItemTypeUI").GetComponent<Text>();
             Text Stats = itemUI.transform.Find("Stats").GetComponent<Text>();
             Text Statkinds = itemUI.transform.Find("Statkinds").GetComponent<Text>();
             Text itemDurationTextUI = itemUI.transform.Find("ItemDurationUI").GetComponent<Text>();
@@ -93,6 +98,7 @@ public class ShopUI : MonoBehaviour
             } else
             {
                 Debug.LogError("ItemnameTextUI not found in the item prefab");
+                continue;
             }
             titleTextUI.text = item.itemName;
             descriptionTextUI.text = item.description;

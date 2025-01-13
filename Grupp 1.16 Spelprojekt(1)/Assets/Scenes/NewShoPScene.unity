@@ -764,6 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e792bf1974653e84798f1ebdcce96536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemManager: {fileID: 1558718077}
   placeholderCurrency: 1000
   commonChance: 0.4
   uncommonChance: 0.25
