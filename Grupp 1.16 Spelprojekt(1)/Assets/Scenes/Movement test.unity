@@ -148,10 +148,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 200111813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2c37eb6c2782745a4b6b15f0bd810f, type: 3}
+  m_Script: {fileID: 11500000, guid: bd34ef8b95f83c842aff4358cf94d12d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  magnitude: 0.3
+  timeofShake: 0.2
 --- !u!4 &200111815
 Transform:
   m_ObjectHideFlags: 0
@@ -420,6 +421,10 @@ MonoBehaviour:
   cameraSShake: {fileID: 734780101}
   shakeMagnitude: 0.3
   shakeLe: 0.2
+  zoomspeed: 0.15
+  fovReduction: 0
+  pulseFrequency: 1.5
+  pulseIntensity: 0.15
   playerSpr: {fileID: 1309407398}
   minimumSprite: 0.8
   maxScale: 1.2

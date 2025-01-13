@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ItemManagerandMaker : MonoBehaviour
 {
-    private List<ItemSystem> listOfitems = new List<ItemSystem>();
+    public  List<ItemSystem> listOfitems { get; private set; } = new List<ItemSystem>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,7 @@ public class ItemManagerandMaker : MonoBehaviour
     {
         Consumable ssmallHealingPotion = ItemMaker.Create<Consumable>(
            name: "Smaller Healing Potion",
-           description: " Heals 25 HP",
+           description: "Common: Heals 25 HP",
            icon: null,
           itemRarity: Rarity.Common,
           price: 10,
@@ -27,7 +28,7 @@ public class ItemManagerandMaker : MonoBehaviour
 
         Consumable HealingPotion = ItemMaker.Create<Consumable>(
            name: "Regular Healing Potion",
-           description: " Heals 40 HP",
+           description: "Uncommon: Heals 40 HP",
            icon: null,
           itemRarity: Rarity.Uncommon,
           price: 30,
@@ -39,7 +40,7 @@ public class ItemManagerandMaker : MonoBehaviour
 
         Consumable GreaterHealingPotion = ItemMaker.Create<Consumable>(
            name: "Greater Healing Potion",
-           description: " Heals 80 HP",
+           description: "Epic: Heals 80 HP",
            icon: null,
           itemRarity: Rarity.Epic,
           price: 50,
@@ -51,7 +52,7 @@ public class ItemManagerandMaker : MonoBehaviour
 
         Consumable DMGBuff = ItemMaker.Create<Consumable>(
         name: "Damange Enhacning Potion",
-        description: " Increases Damage With 1.1",
+        description: "Common: Increases Damage With 1.1",
         icon: null,
        itemRarity: Rarity.Common,
        price: 30,

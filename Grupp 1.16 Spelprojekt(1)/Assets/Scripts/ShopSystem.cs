@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShopSystem : MonoBehaviour
 {
 
+    private ItemManagerandMaker itemManager; //refferens till ItemManagerandMaker
     public List<ItemSystem> allitems = new List<ItemSystem>(); // Lista med alla föremål
     [SerializeField]
     public List<ItemSystem> shopitems = new List<ItemSystem>(); // Lista med alla föremål i  affären
@@ -33,11 +34,16 @@ public class ShopSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        itemManager = FindObjectOfType<ItemManagerandMaker>();
 
-        if (shopitems == null)// för säkerhets skull.
+        if (itemManager == null || itemManager.listOfitems.Count == 0)// för säkerhets skull.
         {
-            Debug.LogError("Shopitems is null. Initializing it.");
-            shopitems = new List<ItemSystem>();
+
+
+
+            Debug.LogError("itemManager is empty and/or missing.");
+            //  shopitems = new List<ItemSystem>();
+            return;
         }
 
 
@@ -59,7 +65,7 @@ public class ShopSystem : MonoBehaviour
 
 
         shopitems.Clear();//jag tömmer listan av föremål i affären
-        List<ItemSystem> itemsThatAreAvailable = new List<ItemSystem>(allitems);
+        List<ItemSystem> itemsThatAreAvailable = new List<ItemSystem>(itemManager.listOfitems);
 
         while (shopitems.Count < maximumAmountOfItemsInShop && itemsThatAreAvailable.Count > 0)
         {
@@ -78,7 +84,7 @@ public class ShopSystem : MonoBehaviour
     }
     ItemSystem GetByRarity(List<ItemSystem> itemsThatAreAvailable)
     {
-        float rndValue = UnityEngine.Random.value;
+        float rndValue = UnityEngine.Random.value; // Må vara felaktig
 
         foreach (var item in itemsThatAreAvailable)
         {

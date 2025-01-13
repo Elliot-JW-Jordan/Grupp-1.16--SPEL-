@@ -48,7 +48,8 @@ public class ShopUI : MonoBehaviour
         //Jag tömmer afären på alla föremål
         foreach (Transform child in shopContent)
         {
-            Destroy(child.gameObject); //Frstör alla gamla föremål
+            Destroy(child.gameObject); //Frstör alla gamla föremål //Kolla och se ifall detta behöver ändras efter som store manager är gameobject
+
         }
 
         //lägger til nya föremål
@@ -84,6 +85,15 @@ public class ShopUI : MonoBehaviour
             //handle null values.sprite
             //add to string where needed
             itemIconUI.sprite = item.spriteIcon ?? placeHolderSprite;
+            
+            if (titleTextUI != null)//Detta är ett testnings debug
+            {
+                titleTextUI.text = item.itemName; // namnger föremålet
+
+            } else
+            {
+                Debug.LogError("ItemnameTextUI not found in the item prefab");
+            }
             titleTextUI.text = item.itemName;
             descriptionTextUI.text = item.description;
             itemPriceTextUI.text = item.price.ToString();

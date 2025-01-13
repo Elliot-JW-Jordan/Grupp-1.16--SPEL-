@@ -1,6 +1,8 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerPhysicsWalking : MonoBehaviour
@@ -47,6 +49,15 @@ public class PlayerPhysicsWalking : MonoBehaviour
     public float shakeMagnitude = 0.3f;
     public float shakeLe = 0.2f;
 
+    [Header("Dynamic Camera effects")]
+    public float zoomspeed = 0.15f;
+    public float fovReduction; // the cameras minum FOV size
+    private float defaultFOV; // regular fov
+    private float minFov;
+    public float pulseFrequency = 1.5f;
+    public float pulseIntensity = 0.15f;
+   
+
 
     [Header("Sprite Scaling")]
     public Transform playerSpr;
@@ -76,6 +87,10 @@ public class PlayerPhysicsWalking : MonoBehaviour
         rigid2d.drag = linearjarDrag;
         rigid2d.angularDrag = angularDrag;
 
+        //Koden nedan calculerar minum värdet av camerans "FOV"
+        defaultFOV = camera.fieldOfView;
+        minFov = defaultFOV - fovReduction;
+
        // playerSpr = transform.GetChild(0);
     }
 
@@ -99,6 +114,8 @@ public class PlayerPhysicsWalking : MonoBehaviour
         }
         HandleStamina();
         ChangeSpriteScale();
+       // ApplyDynamicTurning(); //så att jag kommer ihåg att ta bort ifall det inte funkar
+        UpdateCameraEffects();
     }
 
 
@@ -131,23 +148,43 @@ public class PlayerPhysicsWalking : MonoBehaviour
             CurrentVelocity = Vector2.MoveTowards(CurrentVelocity, Vector2.zero, decelerationofWalk * Time.fixedDeltaTime);
         }
 
-        rigid2d.velocity = CurrentVelocity;
+        rigid2d.AddForce(CurrentVelocity * Time.fixedDeltaTime, ForceMode2D.Force);
+           // velocity = CurrentVelocity; fix senare
 
     }
     void ApplyDynamicTurning()
     {
-        if (inputOfMoving.magnitude > 0)
+        if (inputOfMoving.x != 0)
         {
-            Vector2 directionsPredict = inputOfMoving;
-            //räknar vinkeln
-            float targAngle = Mathf.Atan2(directionsPredict.y, directionsPredict.x) * Mathf.Rad2Deg;
-            Quaternion targetRotate = Quaternion.Euler(0, 0, targAngle);
+            ForASmoothHorizontalFlip(inputOfMoving.x > 0 ? 1f : -1f, turn);
 
-            //float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, targAngle, turn * Time.fixedDeltaTime);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotate, turn * Time.fixedDeltaTime);
-            // rigid2d.rotation = smoothAngle;
         }
     }
+    //vänder spelaren horizontelt på ett lent och fint sätt
+    //targetHorizontalScaleX -1 vänster och 1 = höger 
+    //smoothness är hastigheten som vändningen sker i
+    void ForASmoothHorizontalFlip(float targetScaleX, float smoothness)
+    {
+        //"Clampar" skalan av X
+        float currentScaleX = transform.localScale.x;
+        float newScaleX = Mathf.MoveTowards(currentScaleX, targetScaleX, Time.deltaTime * smoothness);
+
+        newScaleX = InOutEasing(currentScaleX, newScaleX, smoothness);
+        //jag tillämpar skala av x fast håller kvar vid de andra 
+        transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
+
+    }
+
+    float InOutEasing(float start, float end, float speed)
+    {
+        //noramlisering av tiden
+        float floatT = Mathf.Clamp01((Time.time * speed) % 1f);
+        return Mathf.Lerp(start, end, floatT * floatT * (3f - 2f * floatT)); //kubic funktion InOutEase en mer dynamisk rörelse
+    }
+           
+
+        
+    
 
     IEnumerator Dodge()
     {
@@ -191,6 +228,9 @@ public class PlayerPhysicsWalking : MonoBehaviour
         {
             currentStamina -= staminaDeductionRate * Time.deltaTime;
 
+            //"FatigueTime" under springande
+            fatigueTime += Time.deltaTime;
+
 
             if (fatigueTime >= fatigueTreshhold && !isfatigued)
             {
@@ -205,7 +245,33 @@ public class PlayerPhysicsWalking : MonoBehaviour
                 isExhausted = true;
                 maxWalkSpeed *= exhuastionPenalty;
                 sprintSpeed *= exhuastionPenalty;
+
+                //En mechanism för att sakta öka "stamina"
+                if (currentStamina <= 0 && !isfatigued)
+                {
+                    StartCoroutine(SecondWind());
+
+                }
             }
+
+              IEnumerator SecondWind()
+            {
+                //En långsam ökning under tidens gång
+                float recoveryTime = 2f;
+                float recoveryAmount =  maxStamnina * 0.3f; // fix later!! morning ahh time
+                float startRecoveryTime = Time.time;
+
+                while (Time.time < startRecoveryTime + recoveryTime)
+                {
+                    currentStamina += (recoveryAmount / recoveryTime) * Time.deltaTime;
+                    yield return null;
+                }
+                currentStamina = Mathf.Min(currentStamina, maxStamnina);
+                isExhausted = false;
+
+            }
+
+
         }
         else
         {
@@ -220,7 +286,9 @@ public class PlayerPhysicsWalking : MonoBehaviour
             //När man får springa igen.
             if (currentStamina > 10f)
             {
+                
                 canRun = true;
+
                 if (isExhausted)
                 {
                     maxWalkSpeed = 4;
@@ -228,7 +296,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
                     isExhausted = false;
                 }
             }
-            fatigueTime = 0f;
+            fatigueTime = 0f; //återställer timern
         }
     }
     void ChangeSpriteScale()
@@ -241,6 +309,23 @@ public class PlayerPhysicsWalking : MonoBehaviour
             playerSpr.localScale = new Vector3(newScale, newScale, 1f);
         }
 
+    }
+    void UpdateCameraEffects()
+    {
+        //FOV blir dynamiskt påverkat av spelarns hastighet
+        float currentSpeed = rigid2d.velocity.magnitude;
+        float targetFOV = Mathf.Lerp(minFov, defaultFOV, currentSpeed / sprintSpeed);
+        camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetFOV, zoomspeed * Time.deltaTime);
+        //En pulserande kamera när spelaren är trött och sånt.
+        if (isfatigued || isExhausted)
+        {
+            float pulseOffset = Mathf.Sin(Time.time * pulseFrequency) * pulseIntensity;
+            // för att försäkra att den pulserande cameran kommer igågn på ett bra sätt 
+
+            Vector3 currentPosition = camera.transform.localPosition;
+            camera.transform.localPosition = Vector3.Lerp(currentPosition, new Vector3(currentPosition.x, currentPosition.y + pulseOffset, currentPosition.z), 0.1f);// Kolla så att vector3 även stämmer för 2d
+        }
+        
     }
 }
 

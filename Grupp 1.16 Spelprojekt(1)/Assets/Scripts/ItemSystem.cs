@@ -16,7 +16,7 @@ public abstract class ItemSystem
     public int price;
 
 
-    public Dictionary<string, float> stats = new Dictionary<string, float>(); //Sk<par dynamisk statestic för föremål
+    public Dictionary<string, float> stats = new Dictionary<string, float>(); //Sk<par dynamisk statestik för föremål
     public event Action<ItemSystem> OnUsageOfItem; // Event som berättar när ett föremål används;
 
     public virtual void Use()
@@ -27,7 +27,7 @@ public abstract class ItemSystem
    
 }
 
-public enum Rarity
+public enum Rarity //skapar olika sällsynhets sorter
 {
     Common,
     Uncommon,
