@@ -1,23 +1,28 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
+using CodeMonkey.Utils;
 using UnityEngine;
+
+
 
 public class projectile : MonoBehaviour
 {
-    public float speed = 4.5f;
+    private Transform projectileTransform;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        transform.position += transform.right * Time.deltaTime * speed;
+        projectileTransform = transform.Find("Firepoint");
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void Update()
     {
-        if (!other.gameObject.CompareTag("bullet")) // Använd gameObject för att komma åt taggen
-        {
-            Destroy(gameObject); // Förstör detta GameObject
-        }
+        Vector3 mousePosition = UtilsClass.GetMouseWorldPosition();
+        Vector3 projectileDirection = mousePosition - (transform.position).normalized;
+        float angle = Mathf.Atan2(projectileDirection.x, projectileDirection.y) * Mathf.Rad2Deg;
     }
-
 }
+
+    
+
+
+
