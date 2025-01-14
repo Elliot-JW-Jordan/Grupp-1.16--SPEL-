@@ -1,11 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-
-
 
 public class Enemyhealth : MonoBehaviour
 {
@@ -17,6 +12,15 @@ public class Enemyhealth : MonoBehaviour
     {
         health = maxHealth;
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("bullet"))
+        {
+            TakeDamage(5);
+        }
+    }
+    
     public void TakeDamage(int amount)
     {
         health -= amount;
