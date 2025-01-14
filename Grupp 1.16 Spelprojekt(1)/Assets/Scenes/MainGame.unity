@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 1284530590}
   - component: {fileID: 1284530592}
   - component: {fileID: 1284530593}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Temp Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBullet: {fileID: 8628621600807952717, guid: cff1e1da59fe72b44be9e7e5f026899f, type: 3}
-  BulletSpeed: 3
+  BulletSpeed: 6
   shotCooldown: 0.5
 --- !u!1 &1667920748
 GameObject:

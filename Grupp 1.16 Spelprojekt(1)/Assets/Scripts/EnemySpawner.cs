@@ -37,9 +37,6 @@ public class EnemySpawner : MonoBehaviour
                 ShodSpawnEnemy = false;
             }
         }
-
-
-        
     }
 
 
