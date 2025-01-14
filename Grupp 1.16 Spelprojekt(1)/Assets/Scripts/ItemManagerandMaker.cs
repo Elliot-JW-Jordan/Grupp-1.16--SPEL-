@@ -155,8 +155,10 @@ public class ItemManagerandMaker : MonoBehaviour
         listOfitems.Add(LeatherLeggings);
         listOfitems.Add(LeatherBoots);
 
+
         foreach (var item in listOfitems)
         {
+            Debug.Log($"Geennerated Item : {item.itemName}, Rarity : {item.itemRarity}, Price: {item.price}");
             item.Use();
         }
 
