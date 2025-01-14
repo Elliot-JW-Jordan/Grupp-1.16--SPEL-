@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 1284530590}
   - component: {fileID: 1284530592}
   - component: {fileID: 1284530593}
+  - component: {fileID: 1284530594}
   m_Layer: 7
   m_Name: Temp Player
   m_TagString: Player
@@ -551,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 10
+  green: {fileID: 0}
 --- !u!114 &1284530593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +568,19 @@ MonoBehaviour:
   playerBullet: {fileID: 8628621600807952717, guid: cff1e1da59fe72b44be9e7e5f026899f, type: 3}
   BulletSpeed: 6
   shotCooldown: 0.5
+--- !u!114 &1284530594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284530586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00afa616d420a5c4ca5b9220006a6199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testStart: 
 --- !u!1 &1329045609
 GameObject:
   m_ObjectHideFlags: 0
