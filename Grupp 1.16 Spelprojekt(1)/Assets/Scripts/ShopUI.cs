@@ -168,15 +168,16 @@ public class ShopUI : MonoBehaviour
                 itemWeightATextUI.text = "N / A";
 
             }
-         
-
-
-                 
 
 
 
+
+          //if not work switch  item to item1
+            // planerar knappens onClick listner
+            itemBUYbutton.onClick.AddListener(() => BuyItem(item));
         }
-
+       
+       
     }
     // Start is called before the first frame update
    
@@ -200,6 +201,31 @@ public class ShopUI : MonoBehaviour
         shopUIpanel.SetActive(false);
     }
     // Update is called once per frame
+
+    public void BuyItem(ItemSystem item)
+    {
+        if (item1 == null)
+        {
+            Debug.LogError("Player tried to buy a null item.");
+            return;
+        }
+        //Se till så att spelaren har tillräkligt med pengar 
+        if (playerCurency >= item1.price)
+        {
+            //Subtrakthera priset från spelarens totalla pengar värde
+            playerCurency -= item1.price;
+            //Föremålet läggs till till spelarens "inventory"
+            FindObjectOfType<ManagerOfInventory>().AddItemToInventory(item1);
+
+            //Nu ska metoden för att updatera UI kallas
+            UpdateCurrencyUI();
+            Debug.Log($"Player payed for {item1.itemName} for {item1.price}. Players remainig currency : {playerCurency}");
+        } else
+        {
+            Debug.LogWarning($"The player does NOT have enough currency to buy {item1.itemName}. Required currency for purchase {item1.price}, Available : {playerCurency}");
+
+        }
+    }
     void Update()
     {
         //För att stänga ned UI

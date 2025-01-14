@@ -20,7 +20,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
     [Header("Stamina Values")]
     public float maxStamnina = 100f;  //
     public float staminaDeductionRate = 10f;
-    public float staminaRegen = 5f;
+    public float staminaRegen = 10f;
     public float currentStamina;
     public float fatigueTreshhold = 8f;
     public float staminaFatiguerate = 0.5f;

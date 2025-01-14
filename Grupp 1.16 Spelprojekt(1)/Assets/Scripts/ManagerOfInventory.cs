@@ -16,8 +16,13 @@ public class ManagerOfInventory : MonoBehaviour
     }
      public void AddItemToInventory(ItemSystem invAddedItem) // Lägger till en föremåls lista//kanske bya till Sting namn, 
     {
+        if (invAddedItem == null)
+        {
+            Debug.LogError("Attempted to add ann item that is null to the player inventory.");
+            return;
+        }
         inventoryList.Add(invAddedItem);
-        Debug.Log($"Added {invAddedItem.itemName} to players inventory");
+        Debug.Log($"Added {invAddedItem.itemName} to players inventory list");
     }
     public void GetItemsOnInventorylist() // place ment  public int iInventoryListplacement = -1;
     {
