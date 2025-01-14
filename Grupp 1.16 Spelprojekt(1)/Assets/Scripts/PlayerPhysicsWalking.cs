@@ -14,7 +14,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
     public float sprintSpeed = 8f;  //Hastigheten som splearen springer i
     public float accelerationofWalk = 5f; // Accerleration
     public float decelerationofWalk = 10f; // decelaration
-    public float turn = 5f;  //hastigheten av "vändningen"
+    public float turn = 20f;  //hastigheten av "vändningen"
 
 
     [Header("Stamina Values")]
@@ -112,6 +112,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
         {
             StartCoroutine(Dodge());
         }
+        ApplyMovement();
         HandleStamina();
         ChangeSpriteScale();
        // ApplyDynamicTurning(); //så att jag kommer ihåg att ta bort ifall det inte funkar
@@ -134,9 +135,9 @@ public class PlayerPhysicsWalking : MonoBehaviour
         float targetSpeed = isRunning ? sprintSpeed : maxWalkSpeed;
 
         //Jag får velositeten
-        Vector2 targVelocity = inputOfMoving * targetSpeed;
+        //Vector2 targVelocity = inputOfMoving * targetSpeed; // byt ut med undre
 
-        // Vector2 targVelocity = inputOfMoving * maxWalkSpeed;
+        Vector2 targVelocity = inputOfMoving * maxWalkSpeed;
 
         //Accerlation och minskning när spelare rör sig
         if (inputOfMoving.magnitude > 0)
@@ -148,10 +149,18 @@ public class PlayerPhysicsWalking : MonoBehaviour
             CurrentVelocity = Vector2.MoveTowards(CurrentVelocity, Vector2.zero, decelerationofWalk * Time.fixedDeltaTime);
         }
 
-        rigid2d.AddForce(CurrentVelocity * Time.fixedDeltaTime, ForceMode2D.Force);
-           // velocity = CurrentVelocity; fix senare
+        float friction = 1f - linearjarDrag * Time.fixedDeltaTime;
+        CurrentVelocity *= friction;
+        // velocity = CurrentVelocity; fix senare
+
+
+        // jag lägger till den calculerade velociteten till RigidBody2d
+        rigid2d.velocity = CurrentVelocity;
 
     }
+
+
+    
     void ApplyDynamicTurning()
     {
         if (inputOfMoving.x != 0)

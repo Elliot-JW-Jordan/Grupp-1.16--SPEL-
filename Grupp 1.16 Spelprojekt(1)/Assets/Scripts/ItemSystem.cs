@@ -6,22 +6,22 @@ using UnityEngine;
 
 // Grund "Item" klass
 [Serializable]
-public abstract class ItemSystem 
+public abstract class ItemSystem  //Skapar en mall för föremålet
 {
-    public string itemName;
-    public string description;
-    public Sprite spriteIcon;
-    public int id;
-    public Rarity itemRarity;
-    public int price;
+    public string itemName; //namnet
+    public string description; // förklarning
+    public Sprite spriteIcon; //  bild på föremålet
+    public int id; 
+    public Rarity itemRarity; // föremålets utsedda sälsynhet
+    public int price; // föremålets pris
 
 
     public Dictionary<string, float> stats = new Dictionary<string, float>(); //Sk<par dynamisk statestik för föremål
     public event Action<ItemSystem> OnUsageOfItem; // Event som berättar när ett föremål används;
 
-    public virtual void Use()
+    public virtual void Use() //en metod för när alla föremål används
     {
-        Debug.Log("Using " + itemName + " .");
+        Debug.Log("Using " + itemName + " ."); 
         OnUsageOfItem?.Invoke(this);
     }
    
@@ -37,34 +37,34 @@ public enum Rarity //skapar olika sällsynhets sorter
 
 }
 [Serializable]
-public class Consumable : ItemSystem
+public class Consumable : ItemSystem 
 {
     public ConsumableType consumableType1;
     public float duration; // Hu rlänge som effecten varar i sekunder
  
-    public float healAmount;
-    public float buffingFactor;
+    public float healAmount; // Hur mycket HP som återställs
+    public float buffingFactor; // faktorn något förbättras med
 
-    public override void Use()
+    public override void Use() // metod för anvädning
     {
         base.Use();
         Debug.Log("Consumable effect:"+ "Duration :" + duration + "Heal :" + healAmount + "Buffing factor: " + buffingFactor + " .");
     }
 }
-public enum ConsumableType
+public enum ConsumableType // sorter ConsumalbeType
 {
     HealingPotion,
     Buff
 }
 [Serializable]
-public class Armour : ItemSystem
+public class Armour : ItemSystem // variabler for Rustning
 {
     public ArmourType armourType;
     public float durability;
     public float defensiveValue;
     public float weightA; // VIKT FÖR RUSTNING
 
-    public override void Use()
+    public override void Use() 
     {
         base.Use();
         Debug.Log("Armour stats : " + " Durability :" + durability + " Defence : " + defensiveValue + "Weight :" + weightA);
@@ -74,7 +74,7 @@ public class Armour : ItemSystem
    
 }
 
-public enum ArmourType
+public enum ArmourType //Typ av rustning
 {
     Helmet,
     Chestplate,

@@ -51,16 +51,40 @@ public class ItemManagerandMaker : MonoBehaviour
           buffingFactor: 0f);
 
         Consumable DMGBuff = ItemMaker.Create<Consumable>(
-        name: "Damange Enhacning Potion",
+        name: "Damange Enhancing Potion",
         description: "Common: Increases Damage With 1.1",
         icon: null,
        itemRarity: Rarity.Common,
        price: 30,
        stats: new Dictionary<string, float> { { "Damage Enhacing", 0f } },
        type: ConsumableType.HealingPotion,
-       duration: 0f,
+       duration: 200f,
        healAmount: 0f,
        buffingFactor: 1.1f);
+
+        Consumable DMGBuffNumber2 = ItemMaker.Create<Consumable>(
+       name: "Greater Damange Enhancing Potion",
+       description: "Epic: Increases Damage With 1.18",
+       icon: null,
+      itemRarity: Rarity.Epic,
+      price: 50,
+      stats: new Dictionary<string, float> { { "Damage Enhacing", 0f } },
+      type: ConsumableType.HealingPotion,
+      duration: 300f,
+      healAmount: 0f,
+      buffingFactor: 1.18f);
+
+        Consumable DMGBuffNumber3 = ItemMaker.Create<Consumable>(
+      name: "Greater Damange Enhancing Potion",
+      description: "Legendary: Increases Damage With 1.2",
+      icon: null,
+     itemRarity: Rarity.Legendary,
+     price: 70,
+     stats: new Dictionary<string, float> { { "Damage Enhacing", 0f } },
+     type: ConsumableType.HealingPotion,
+     duration: 360f,
+     healAmount: 0f,
+     buffingFactor: 1.2f);
 
 
         Armour LeatherHelmet = ItemMaker.Create<Armour>(
@@ -124,13 +148,17 @@ public class ItemManagerandMaker : MonoBehaviour
         listOfitems.Add(HealingPotion);
         listOfitems.Add(GreaterHealingPotion);
         listOfitems.Add(DMGBuff);
+        listOfitems.Add(DMGBuffNumber2);
+        listOfitems.Add(DMGBuffNumber3);
         listOfitems.Add(LeatherHelmet);
         listOfitems.Add(LeatherChestplate);
         listOfitems.Add(LeatherLeggings);
         listOfitems.Add(LeatherBoots);
 
+
         foreach (var item in listOfitems)
         {
+            Debug.Log($"Geennerated Item : {item.itemName}, Rarity : {item.itemRarity}, Price: {item.price}");
             item.Use();
         }
 

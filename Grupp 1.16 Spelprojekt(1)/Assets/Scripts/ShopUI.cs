@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +11,17 @@ public class ShopUI : MonoBehaviour
     [Header("UI references")]
     public Transform shopContent; // "Content" inom scrolable field
     public GameObject itemUIPrefab; // Prefaben för föremålet
-    public Text currencyText;
+    public TMP_Text currencyText;
     public Sprite placeHolderSprite;
     public GameObject shopUIpanel;
 
    
     [Header("System Referances")]
     public ShopSystem shopSystem;
-
+    public ItemManagerandMaker itemManagerandMaker;
+    //public InventorySystem playerInventory;
+    public ItemSystem item1;
+   
 
     private int playerCurency;
 
@@ -37,14 +41,29 @@ public class ShopUI : MonoBehaviour
     {
 
         shopSystem = FindObjectOfType<ShopSystem>();
+     //   item1 = FindObjectOfType<ItemSystem>();
         playerCurency = shopSystem.placeholderCurrency;
-       // UpdateCurrencyUI();
-        RefreshShopUI(shopSystem.shopitems);
+        // playerInventory FindObjectOfType<InventorySystem>
+        
+
+
+
+        UpdateCurrencyUI();
+      RefreshShopUI(shopSystem.shopitems);
+
+        //Afär UI kommer altid starta dold
+        shopUIpanel.SetActive(false);
 
         
     }
     public void RefreshShopUI(List<ItemSystem> shopItems)
     {
+       // foreach(var item in shopItems)
+     //   {
+       //     GameObject itemUI = Instantiate(itemUIPrefab, shopContent);
+       //     TextMeshProUGUI nameText = itemUI.transform.Find("")
+      //  }
+        Debug.Log(" RefreshingShopUI, Refreshing shop UI...");
         //Jag tömmer afären på alla föremål
         foreach (Transform child in shopContent)
         {
@@ -52,23 +71,28 @@ public class ShopUI : MonoBehaviour
 
         }
 
+        Debug.Log("shopContent cleared");
         //lägger til nya föremål
         foreach (ItemSystem item in shopItems)
         {
+            Debug.Log($"Processing item: {item.itemName}");
             //Skapar flera nya UI för föremålen
             GameObject itemUI = Instantiate(itemUIPrefab, shopContent);
+            TextMeshProUGUI nameText = itemUI.transform.Find("ItemNameTextUI")?.GetComponent<TextMeshProUGUI>();
+            Debug.Log($"Instantioated item prefab: {itemUI.name}");
+
 
 
             //Hämtar alla UI komponenter
             //
             
-            Image itemIconUI = itemUI.transform.Find("itemIconUI").GetComponent<Image>();
-            Text titleTextUI = itemUI.transform.Find("ItemNameTextUI").GetComponent<Text>();
-            Text descriptionTextUI = itemUI.transform.Find("ItemDescriptionUI").GetComponent<Text>();
-            Button itemBUYbutton = itemUI.transform.Find("ItemBuyButtonUI").GetComponent<Button>();
-            Text Price = itemUI.transform.Find("Price").GetComponent<Text>();
-            Text itemPriceTextUI = itemUI.transform.Find("ItemPriceUI").GetComponent<Text>();
-           Text itemTypeTextUI = itemUI.transform.Find("ItemTypeUI").GetComponent<Text>();
+            Image itemIconUI = itemUI.transform.Find("itemIconUI").GetComponent<Image>();//Hämtar föremåls bilden
+            Text titleTextUI = itemUI.transform.Find("ItemNameTextUI").GetComponent<Text>(); // Hämtar föremåls Titeln
+            Text descriptionTextUI = itemUI.transform.Find("ItemDescriptionUI").GetComponent<Text>(); // Hämtar föremåls förklarningen
+            Button itemBUYbutton = itemUI.transform.Find("ItemBuyButtonUI").GetComponent<Button>(); //Hämtar föremålets Köp-knapp
+            Text Price = itemUI.transform.Find("Price").GetComponent<Text>(); //Hämtar föremåls Pris titteln 
+            Text itemPriceTextUI = itemUI.transform.Find("ItemPriceUI").GetComponent<Text>(); //Hämtar föremåls
+            Text itemTypeTextUI = itemUI.transform.Find("ItemTypeUI").GetComponent<Text>();
             Text Stats = itemUI.transform.Find("Stats").GetComponent<Text>();
             Text Statkinds = itemUI.transform.Find("Statkinds").GetComponent<Text>();
             Text itemDurationTextUI = itemUI.transform.Find("ItemDurationUI").GetComponent<Text>();
@@ -89,10 +113,11 @@ public class ShopUI : MonoBehaviour
             if (titleTextUI != null)//Detta är ett testnings debug
             {
                 titleTextUI.text = item.itemName; // namnger föremålet
-
+                
             } else
             {
                 Debug.LogError("ItemnameTextUI not found in the item prefab");
+                continue;
             }
             titleTextUI.text = item.itemName;
             descriptionTextUI.text = item.description;
@@ -154,10 +179,33 @@ public class ShopUI : MonoBehaviour
     }
     // Start is called before the first frame update
    
+    public void ActivateUIforShop()
+    {
+        shopUIpanel.SetActive(!shopUIpanel.activeSelf);
+    }
 
+
+    public void UpdateCurrencyUI()
+    {
+        if (currencyText != null)
+        {
+            currencyText.text = $"Currency : {playerCurency}";
+        }
+
+    }
+
+    public void DeactivateShopUI()
+    {
+        shopUIpanel.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
-        
+        //För att stänga ned UI
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DeactivateShopUI();
+        }
+
     }
 }
