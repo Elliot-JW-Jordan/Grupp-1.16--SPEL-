@@ -24,7 +24,7 @@ public class ShopSystem : MonoBehaviour
 
     public int maximumAmountOfItemsInShop = 10;
 
-
+    
     private void Awake()
     {
         if (shopitems == null)// för säkerhets skull.
@@ -60,13 +60,15 @@ public class ShopSystem : MonoBehaviour
 // Start is called before the first frame update
 void Start()
     {
-        itemManager = FindObjectOfType<ItemManagerandMaker>();
+        
+       ItemManagerandMaker itemManager = FindObjectOfType<ItemManagerandMaker>();
 
         if ( itemManager == null)
         {
             Debug.LogError("itemManager is not found in the scene ");
             return;
         }
+
         StartCoroutine(InitializeShop());
         
     }
