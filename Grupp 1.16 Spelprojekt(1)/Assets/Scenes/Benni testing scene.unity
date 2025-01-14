@@ -548,7 +548,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 2
+  m_Constraints: 6
 --- !u!114 &1144184582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,8 +591,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0d9f8155124b247a9a23b37b8cfd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss1bullet: {fileID: 8628621600807952717, guid: cff1e1da59fe72b44be9e7e5f026899f, type: 3}
+  playerBullet: {fileID: 8628621600807952717, guid: cff1e1da59fe72b44be9e7e5f026899f, type: 3}
   BulletSpeed: 3
+  shotCooldown: 0.5
 --- !u!1 &1680598375
 GameObject:
   m_ObjectHideFlags: 0
