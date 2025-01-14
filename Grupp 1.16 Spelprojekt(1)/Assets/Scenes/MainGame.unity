@@ -173,6 +173,7 @@ MonoBehaviour:
   placeHolderSprite: {fileID: 0}
   shopUIpanel: {fileID: 0}
   shopSystem: {fileID: 0}
+  itemManagerandMaker: {fileID: 0}
 --- !u!114 &160425897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e792bf1974653e84798f1ebdcce96536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemManager: {fileID: 0}
   placeholderCurrency: 1000
   commonChance: 0.4
   uncommonChance: 0.25
@@ -433,7 +435,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -308030239
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
   m_Color: {r: 0.15408784, g: 1, b: 0.33499625, a: 1}
@@ -603,7 +605,6 @@ MonoBehaviour:
   Enemys:
   - {fileID: 6117148497450987960, guid: d1633ac4ef247e4419819064db83136a, type: 3}
   - {fileID: 5507399138944477522, guid: 224cb5ca4d3edea499c8fd4fc53bace5, type: 3}
-  - {fileID: 453267103782530442, guid: 57ddcffabf2b5f1428fcf36577c8ea8f, type: 3}
   waitTime: 10
   boss: {fileID: 6474000456917596281, guid: 014b339e1c9185948b88ed1487eff1fe, type: 3}
   Shop: {fileID: 5180058504251575432, guid: 2ae56f07c76c7104e870852510156101, type: 3}
