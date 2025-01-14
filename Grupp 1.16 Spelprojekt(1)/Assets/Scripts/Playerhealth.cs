@@ -19,6 +19,15 @@ public class Playerhealth : MonoBehaviour
         health = maxHealth;
         UpdateHealthBar();
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("EnemyBullet"))
+        {
+            TakeDamage(5);
+        }
+    }
+
     public void TakeDamage(int amount)
     {
         health -= amount;
