@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 1954360392930922726}
   - component: {fileID: 8657121614955901279}
   - component: {fileID: 934873073271435694}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LUR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
