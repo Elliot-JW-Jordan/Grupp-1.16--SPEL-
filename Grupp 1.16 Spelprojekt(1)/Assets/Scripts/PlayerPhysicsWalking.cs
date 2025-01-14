@@ -33,7 +33,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
 
     [Header("Dodge Values")]
     public float dodgeSpeed = 15f;
-    public float dogeTimer = 0.25f;
+    public float dogeTimer = 0.35f;
     public float dodgeDownTime = 1.5f;
     private bool isDoging = false;
     private bool canDodge = true;
@@ -55,7 +55,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
     private float defaultFOV; // regular fov
     private float minFov;
     public float pulseFrequency = 1.5f;
-    public float pulseIntensity = 0.15f;
+    public float pulseIntensity = 0.1f;
    
 
 
@@ -103,19 +103,16 @@ public class PlayerPhysicsWalking : MonoBehaviour
         {
             lastMoveDirection = inputOfMoving;
         }
-
-
-
         isRunning = Input.GetKey(KeyCode.LeftShift) && canRun;
 
         if (Input.GetKeyDown(KeyCode.Space) && canDodge)
         {
             StartCoroutine(Dodge());
         }
-        ApplyMovement();
-        HandleStamina();
+        
+       HandleStamina();
         ChangeSpriteScale();
-       // ApplyDynamicTurning(); //så att jag kommer ihåg att ta bort ifall det inte funkar
+         //så att jag kommer ihåg att ta bort ifall det inte funkar
         UpdateCameraEffects();
     }
 
@@ -125,7 +122,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
         if (!isDoging)
         {
             ApplyMovement();
-            ApplyDynamicTurning();
+            ApplyDynamicTurning();  //så att jag kommer ihåg att ta bort ifall det inte funkar
         }
 
     }
@@ -137,7 +134,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
         //Jag får velositeten
         //Vector2 targVelocity = inputOfMoving * targetSpeed; // byt ut med undre
 
-        Vector2 targVelocity = inputOfMoving * maxWalkSpeed;
+        Vector2 targVelocity = inputOfMoving * targetSpeed;
 
         //Accerlation och minskning när spelare rör sig
         if (inputOfMoving.magnitude > 0)
@@ -149,8 +146,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
             CurrentVelocity = Vector2.MoveTowards(CurrentVelocity, Vector2.zero, decelerationofWalk * Time.fixedDeltaTime);
         }
 
-        float friction = 1f - linearjarDrag * Time.fixedDeltaTime;
-        CurrentVelocity *= friction;
+      //  CurrentVelocity = Vector2.MoveTowards(CurrentVelocity, Vector2.zero, decelerationofWalk * Time.fixedDeltaTime);
         // velocity = CurrentVelocity; fix senare
 
 
