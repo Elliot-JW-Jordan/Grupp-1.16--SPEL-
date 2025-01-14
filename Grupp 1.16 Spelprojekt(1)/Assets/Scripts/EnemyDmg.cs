@@ -6,13 +6,21 @@ public class EnemyDmg : MonoBehaviour
 {
     public Playerhealth playerhealth;
     public int damage = 2;
-    // Start is called before the first frame update
+
     void Start()
     {
+        GameObject player = GameObject.FindWithTag("Player");
 
+        if (player != null)
+        {
+            playerhealth = player.GetComponent<Playerhealth>();
+        }
+        else
+        {
+            Debug.LogError("No GameObject with the tag 'Player' found in the scene!");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
 
