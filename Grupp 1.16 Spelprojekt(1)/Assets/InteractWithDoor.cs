@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoorTeleport : MonoBehaviour
@@ -17,10 +18,15 @@ public class DoorTeleport : MonoBehaviour
 
     public Vector2 doorDirection;
 
+    private GameObject EnemyContainer;
+
+    public GameObject block;
 
 
     private void Start()
     {
+        EnemyContainer = GameObject.FindGameObjectWithTag("EnemyContainer");
+
         player = GameObject.FindWithTag("Player");
 
         foreach (Transform child in transform)
@@ -38,11 +44,16 @@ public class DoorTeleport : MonoBehaviour
     private void Update()
     {
 
-        if (isPlayerInTrigger == true && Input.GetKeyDown(KeyCode.E) && DoorActive == true)
+        if (isPlayerInTrigger == true && Input.GetKeyDown(KeyCode.E) && DoorActive == true && EnemyContainer.transform.childCount == 0)
         {
             TeleportPlayer();
         }
+        //else if(isPlayerInTrigger == true)
+        //{
+            //Instantiate(block, transform.position, Quaternion.identity);
+        //}
     }
+    
 
     private void invalidDoor()
     {

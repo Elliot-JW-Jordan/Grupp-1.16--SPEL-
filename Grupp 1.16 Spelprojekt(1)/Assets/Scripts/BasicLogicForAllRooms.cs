@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class BasicLogicForAllRooms : MonoBehaviour
 {
-    private bool PlayerHasEnterd = false;
+    public bool playerHasEntered = false;
 
-
-private void OnTriggerEnter2D(Collider2D other)
-{
-    if (other.CompareTag("Player") && PlayerHasEnterd == false)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !playerHasEntered)
         {
-            PlayerHasEnterd = true;
-            print("player has enterd the room");
+            playerHasEntered = true;
+            print("Player has entered the room");
         }
     }
 }
