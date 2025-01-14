@@ -11,8 +11,13 @@ public class DoorTeleport : MonoBehaviour
     private GameObject player;
 
     private bool isPlayerInTrigger = false;
+    private bool DoorActive = false;
 
     private Transform exitPoint;
+
+    public Vector2 doorDirection;
+
+
 
     private void Start()
     {
@@ -26,13 +31,33 @@ public class DoorTeleport : MonoBehaviour
                 break;
             }
         }
+
+        Invoke("invalidDoor", 0.2f);
     }
 
     private void Update()
     {
-        if (isPlayerInTrigger == true && Input.GetKeyDown(KeyCode.E))
+
+        if (isPlayerInTrigger == true && Input.GetKeyDown(KeyCode.E) && DoorActive == true)
         {
             TeleportPlayer();
+        }
+    }
+
+    private void invalidDoor()
+    {
+        RaycastHit2D Hit = Physics2D.Raycast((Vector2)transform.position + doorDirection, doorDirection);
+        if (Hit)
+        {
+            if(Hit.collider.tag == "Door")
+            {
+                DoorActive = true;
+            }
+
+            if (Hit.collider.tag != "Door")
+            {
+                DoorActive = false;
+            }
         }
     }
 

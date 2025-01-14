@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 442749350556841519}
   - component: {fileID: -2309543054150134715}
   - component: {fileID: -6338527998599806630}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DLU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
