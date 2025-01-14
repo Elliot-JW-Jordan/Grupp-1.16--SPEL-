@@ -9,9 +9,10 @@ public class BasicLogicForAllRooms : MonoBehaviour
 
 private void OnTriggerEnter2D(Collider2D other)
 {
-    if (other.CompareTag("Player"))
+    if (other.CompareTag("Player") && PlayerHasEnterd == false)
         {
             PlayerHasEnterd = true;
+            print("player has enterd the room");
         }
     }
 }

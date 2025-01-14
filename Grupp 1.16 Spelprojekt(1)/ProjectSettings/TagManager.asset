@@ -8,18 +8,22 @@ TagManager:
   - StartRoom
   - SpawnPoint
   - Rooms
-  - closedroom
+  - bullet
   - Door
+  - DoorExitPoint
+  - closedroom
+  - EnemyBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - e bullet
   - Water
   - UI
-  - 
-  - 
-  - 
+  - p bullet
+  - 'player '
+  - enemy
   - 
   - 
   - 
@@ -44,12 +48,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Doors
-    uniqueID: 3381123151
+  - name: Backgraound
+    uniqueID: 2940447253
+    locked: 0
+  - name: bullets
+    uniqueID: 3947302679
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 3986937057
+  - name: NPC+PC
+    uniqueID: 3441082847
     locked: 0
