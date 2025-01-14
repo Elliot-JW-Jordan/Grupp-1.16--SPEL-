@@ -257,6 +257,7 @@ MonoBehaviour:
   exitPointTag: DoorExitPoint
   player: {fileID: 0}
   doorDirection: {x: 0, y: -1}
+  block: {fileID: 6985101083623900681, guid: f3fd286aa59780342b482ce03bdfea7c, type: 3}
 --- !u!61 &2171817034754353714
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -7,10 +7,13 @@ public class EnemySpawner : MonoBehaviour
     private RoomTemplates Enemys;
     private int rand;
     public bool ShodSpawnEnemy = true;
+    private GameObject EnemyContainer;
 
     public BasicLogicForAllRooms roomLogic;
     private void Start()
     {
+        EnemyContainer = GameObject.FindGameObjectWithTag("EnemyContainer");
+
         // Get the RoomTemplates component
         Enemys = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
         if (Enemys == null)
@@ -46,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
 
         // Randomly select an enemy prefab
         rand = Random.Range(0, Enemys.Enemys.Length);
-        Instantiate(Enemys.Enemys[rand], transform.position, Enemys.Enemys[rand].transform.rotation);
+        Instantiate(Enemys.Enemys[rand], transform.position, Enemys.Enemys[rand].transform.rotation, EnemyContainer.transform);
     }
 
 } 

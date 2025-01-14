@@ -14,6 +14,7 @@ TagManager:
   - closedroom
   - EnemyBullet
   - Enemy
+  - EnemyContainer
   layers:
   - Default
   - TransparentFX
