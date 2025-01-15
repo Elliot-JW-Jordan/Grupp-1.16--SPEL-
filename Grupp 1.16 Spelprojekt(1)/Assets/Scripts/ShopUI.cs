@@ -109,7 +109,7 @@ public class ShopUI : MonoBehaviour
             // Fyller i med infromation om föremålen
             //handle null values.sprite
             //add to string where needed
-            itemIconUI.sprite = item.spriteIcon ?? placeHolderSprite;
+            itemIconUI.sprite = item.spriteIcon != null ? item.spriteIcon : placeHolderSprite;
             
             if (titleTextUI != null)//Detta är ett testnings debug
             {
@@ -202,7 +202,7 @@ public class ShopUI : MonoBehaviour
     }
     // Update is called once per frame
 
-    public void BuyItem(ItemSystem item)
+    public void BuyItem(ItemSystem item1) // bytte alla item1 till item
     {
         if (item1 == null)
         {
@@ -215,11 +215,26 @@ public class ShopUI : MonoBehaviour
             //Subtrakthera priset från spelarens totalla pengar värde
             playerCurency -= item1.price;
             //Föremålet läggs till till spelarens "inventory"
-            FindObjectOfType<ManagerOfInventory>().AddItemToInventory(item1);
+            var inventoryManager = FindAnyObjectByType<ManagerOfInventory>();
+            // FindObjectOfType<ManagerOfInventory>().AddItemToInventory(item1); //tog bort efeter som
+            if (inventoryManager == null)
+            {
 
-            //Nu ska metoden för att updatera UI kallas
+                Debug.LogError("ManagerOfInvetory is not found in this scene");
+                return;
+            }
+            if (inventoryManager != null)
+            {
+                Debug.Log("Debug item to inventory");
+                inventoryManager.AddItemToInventory(item1);
+               // Debug.Log("Debug added item to inventory");
+            }
+           // inventoryManager.AddItemToInventory(item1);
+            //borde kanske byta til . AddItem istället.
+             //Nu ska metoden för att updatera UI kallas
             UpdateCurrencyUI();
             Debug.Log($"Player payed for {item1.itemName} for {item1.price}. Players remainig currency : {playerCurency}");
+           // return; // ta bort ifall spell inte funkar
         } else
         {
             Debug.LogWarning($"The player does NOT have enough currency to buy {item1.itemName}. Required currency for purchase {item1.price}, Available : {playerCurency}");
