@@ -30,10 +30,12 @@ public class Playerhealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        print("typ nonting" + health);
         health -= amount;
         if (health < 0)
         {
             Destroy(gameObject);
+            print("die");
 
         }
         UpdateHealthBar();
