@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class BulletLogic : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D othere)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (othere.gameObject.CompareTag("Player") || othere.gameObject.CompareTag("Ignore Raycast"))
-        {
-           Destroy(gameObject); 
-        }
-        
+        Destroy(gameObject);
     }
 }
