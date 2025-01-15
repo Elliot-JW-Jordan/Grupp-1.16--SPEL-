@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,21 +32,24 @@ public class ManagerOfInventory : MonoBehaviour
         Debug.Log($"Added {invAddedItem.itemName} to players inventory list. The InventoryList now has the size {inventoryList.Count}");
 
         // hanterar datat i listan invAddedItem);
-        HandleItemData(invAddedItem);
+        // HandleItemData(invAddedItem);
+
+        //Jag lägger till en utökad besrkivning av föremålet med // HandleItemData(invAddedItem);
+        string descriptionPlus = HandleItemData(invAddedItem);
 
         Debug.Log($" trying to add {invAddedItem.itemName} to the Ui itemslots.....");
-        AddItem(invAddedItem.itemName, 1, invAddedItem.spriteIcon); //Jag kommer sranru byta ut sprite.icon
+        AddItem(invAddedItem.itemName, 1, invAddedItem.spriteIcon, descriptionPlus); //Jag kommer sranru byta ut sprite.icon
 
           
 
     }
-    private void HandleItemData(ItemSystem item1)
+    private string HandleItemData(ItemSystem item1)
     {
 
         if (item1 == null)
         {
             Debug.LogError("The item that was passed to HandleItemData is null");
-            return;
+           
         }
         string itemNameINV = item1.itemName;
         string itemDescriptionINV = item1.description;
@@ -61,11 +65,10 @@ public class ManagerOfInventory : MonoBehaviour
         }
 
         Debug.Log($"HandleItem has succsessfully processed the item with Name: {item1.itemName} Stats : {statsINV}  Aditional infromation : {additionalInfoINV}");
-
+        string wholeDescription = $"{itemDescriptionINV}/n Stats: {statsINV}/n {additionalInfoINV}.";
+        return wholeDescription;
     }
-    public void GetItemsOnInventorylist() // place ment  public int iInventoryListplacement = -1;
-    {
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -86,9 +89,9 @@ public class ManagerOfInventory : MonoBehaviour
 
 
     }
-    public void AddItem(string itemName, int quantity, Sprite itemSprite)
+    public void AddItem(string itemName, int quantity, Sprite itemSprite, string descriptionPlus)
     {
-        Debug.Log($"AddItem was called : {itemName} , {quantity}");
+        Debug.Log($"AddItem was called : {itemName} , {quantity}, {descriptionPlus}");
 
         if (itemSlot == null || itemSlot.Length == 0)
         {
@@ -103,7 +106,7 @@ public class ManagerOfInventory : MonoBehaviour
         {
             if (!slot.isfull) //Ifall slotten inte är full.
             {
-                slot.AddItem(itemName, quantity, itemSprite);
+                slot.AddItem(itemName, quantity, itemSprite, descriptionPlus);
                 Debug.Log($"Slot added Item: {itemName}, Quantity : {quantity}");
                 return;
 
@@ -119,6 +122,16 @@ public class ManagerOfInventory : MonoBehaviour
           //  }
         }
         Debug.LogWarning($" There is not empty itemslot for the item : {itemName}");
-    }
 
+
+    }
+    public void DeselectionOfItemSlots()//Denna metod stänger av den vita OUT-LINEN som  klickade itemslots activerar. Sätter invItemSelected till false
+    {
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            itemSlot[i].selectedOutline.SetActive(false);
+            itemSlot[i].invItemSelected = false;
+
+        }
+    }
 }

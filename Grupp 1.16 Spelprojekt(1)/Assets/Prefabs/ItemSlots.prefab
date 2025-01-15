@@ -97,6 +97,8 @@ MonoBehaviour:
   isfull: 0
   quantityText: {fileID: 5338340303497785517}
   itemImageINV: {fileID: 930898340204259342}
+  selectedOutline: {fileID: 7278118464479157410}
+  invItemSelected: 0
 --- !u!1 &4905655432284451066
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7794698440129954033
 RectTransform:
   m_ObjectHideFlags: 0
