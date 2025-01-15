@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class EnemyDMGProjectile : MonoBehaviour
 {
-    public GameObject EnemyProjectile; // The projectile prefab
-    public GameObject player; // Reference to the player's transform
-    public float projectileSpeed = 10f; // Speed of the projectile
-    public float fireRate = 1f; // Time between shots (in seconds)
+    public GameObject EnemyProjectile; 
+    public GameObject player; 
+    public float projectileSpeed = 10f;
+    public float fireRate = 1f;
 
-    private float nextFireTime = 0f; // Time when the next shot can be fired
-
+    private float nextFireTime = 0f;
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -18,7 +17,6 @@ public class EnemyDMGProjectile : MonoBehaviour
 
     void Update()
     {
-        // Check if it's time to shoot
         if (Time.time >= nextFireTime)
         {
             shot();
@@ -34,17 +32,13 @@ public class EnemyDMGProjectile : MonoBehaviour
             return;
         }
 
-        // Calculate the direction to the player
         Vector3 direction = (player.transform.position - transform.position).normalized;
 
-        // Rotate the bullet spawn point towards the player
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        // Instantiate the projectile with the rotation facing the player
         GameObject projectile = Instantiate(EnemyProjectile, transform.position, rotation);
 
-        // Assign velocity to the projectile
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         if (rb != null)
         {

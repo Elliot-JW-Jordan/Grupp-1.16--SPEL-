@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ShopSystem : MonoBehaviour
 {
-    //Todo:
     //Lägtill range till den slummässiga nummer generatorn
     public ItemManagerandMaker itemManager; //refferens till ItemManagerandMaker
     public List<ItemSystem> allitems = new List<ItemSystem>(); // Lista med alla föremål
@@ -32,6 +31,7 @@ public class ShopSystem : MonoBehaviour
             Debug.LogError("Awake: Initalizing shopitems");
             shopitems = new List<ItemSystem>();
         }
+        
     }
 
 
@@ -69,6 +69,9 @@ void Start()
             return;
         }
 
+
+        
+
         StartCoroutine(InitializeShop());
         
     }
@@ -85,6 +88,8 @@ void Start()
 
         int failedLoopAttempts = 0; //fr att motverka "infinite loops"
         const int maxFailedLoopAttempts = 20;
+
+        
           
         while (shopitems.Count < maximumAmountOfItemsInShop && itemsThatAreAvailable.Count > 0)
         {
