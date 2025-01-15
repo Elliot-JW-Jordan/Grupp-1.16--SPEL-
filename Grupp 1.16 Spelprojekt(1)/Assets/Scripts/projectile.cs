@@ -42,7 +42,8 @@ public class projectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            print("dieprojectile");
+            Destroy(playerBullet);
         }
 
 

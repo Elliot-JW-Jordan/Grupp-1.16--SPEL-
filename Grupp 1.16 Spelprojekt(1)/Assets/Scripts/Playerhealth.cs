@@ -24,7 +24,7 @@ public class Playerhealth : MonoBehaviour
     {
         if (other.gameObject.CompareTag("EnemyBullet"))
         {
-            TakeDamage(5);
+            TakeDamage(2);
         }
     }
 
@@ -33,10 +33,9 @@ public class Playerhealth : MonoBehaviour
         print("typ nonting" + health);
         health -= amount;
         if (health < 0)
-        {
-            Destroy(gameObject);
+        {   
             print("die");
-
+            Destroy(gameObject);
         }
         UpdateHealthBar();
         
