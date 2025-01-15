@@ -805,8 +805,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 10
-  green: {fileID: 0}
+  maxHealth: 100
+  green: {fileID: 1422804619}
 --- !u!114 &1284530593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testStart: 
+  playerhealth: {fileID: 0}
 --- !u!1 &1322741175
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,10 +993,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 7482667652216324306, guid: fdf4741fa45efb7418d208fe657cfa35, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

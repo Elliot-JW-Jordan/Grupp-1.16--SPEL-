@@ -12,7 +12,7 @@ public class TeleportToBossRoom : MonoBehaviour
     {
         if (PlayerIsToutching == true && Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene(bossRoomSceneName);
+            SceneManager.LoadScene("Boss Battle");
         }
     }
 

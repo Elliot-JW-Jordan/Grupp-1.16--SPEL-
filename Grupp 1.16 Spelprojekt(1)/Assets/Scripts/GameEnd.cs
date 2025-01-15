@@ -5,7 +5,7 @@ public class MoveOnDestroy : MonoBehaviour
 {
     public string testStart;
 
-    public Playerhealth playerhealth;
+    public playerHealth playerhealth;
 
     private void Start()
     {
@@ -13,7 +13,7 @@ public class MoveOnDestroy : MonoBehaviour
 
         if (player != null)
         {
-            playerhealth = player.GetComponent<Playerhealth>();
+            playerhealth = player.GetComponent<playerHealth>();
         }
     }
 
