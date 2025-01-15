@@ -47,12 +47,15 @@ public class Boss1BulletSummening : MonoBehaviour
 
         //geting player
         Player = GameObject.FindWithTag("Player");
-        PlayerShooting playerShooting = Player.GetComponent<PlayerShooting>();
-        if (playerShooting != null)
+        Transform childTransform = Player.transform.Find("PlayersChild");
+        if (childTransform != null)
         {
-            DamageToTake = playerShooting.Damage;
+            PlayerShooting playerShooting = childTransform.GetComponent<PlayerShooting>();
+            if (playerShooting != null)
+            {
+                DamageToTake = playerShooting.Damage;
+            }
         }
-
 
         BossHealt = MaxBossHealth;
         CurentPhase = 1;

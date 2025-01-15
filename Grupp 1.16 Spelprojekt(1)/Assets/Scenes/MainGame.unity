@@ -586,7 +586,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.36895
+  orthographic size: 9.650757
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -807,6 +807,7 @@ MonoBehaviour:
   playerBullet: {fileID: 8628621600807952717, guid: cff1e1da59fe72b44be9e7e5f026899f, type: 3}
   BulletSpeed: 6
   shotCooldown: 0.5
+  bulletPlsDie: 5
 --- !u!114 &1284530594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,36 +1042,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BottomRooms:
   - {fileID: 2411901310257816857, guid: d50a932fcfd7f2947b694b10468e28d6, type: 3}
-  - {fileID: 6675086316901240356, guid: ba48311a1cd87f7438d2cded5911ab45, type: 3}
   - {fileID: 6063298036439637143, guid: de02e17841de64248bf5a34804ff853c, type: 3}
   - {fileID: 6072717677437969903, guid: 3f6532efc20931e4396f68afc5ed46aa, type: 3}
   - {fileID: 1360245788705091476, guid: f53e18b0ab9107848963b6fde3a90326, type: 3}
-  - {fileID: 1651978316923730631, guid: 6e49f50f190675b40a1d47a4f0be3178, type: 3}
   - {fileID: 2461080183669216249, guid: 3be10383dcd6dda40a39dd1c9cf31a56, type: 3}
+  - {fileID: 6072717677437969903, guid: 3f6532efc20931e4396f68afc5ed46aa, type: 3}
+  - {fileID: 1360245788705091476, guid: f53e18b0ab9107848963b6fde3a90326, type: 3}
   TopRooms:
   - {fileID: 5059394033055004339, guid: 4e4e0293efdc5ec47a952cdfac7e9d40, type: 3}
-  - {fileID: 4802246379753946722, guid: fcd0dfcfe0e423542ab562ebe0ec449f, type: 3}
   - {fileID: 2411901310257816857, guid: d50a932fcfd7f2947b694b10468e28d6, type: 3}
-  - {fileID: 8790852941677454404, guid: ebea981335fb5c047a195015213d1970, type: 3}
   - {fileID: 3605113619288985981, guid: 8dc198e609ca3204ebbec1043a62456a, type: 3}
   - {fileID: 1360245788705091476, guid: f53e18b0ab9107848963b6fde3a90326, type: 3}
   - {fileID: 2461080183669216249, guid: 3be10383dcd6dda40a39dd1c9cf31a56, type: 3}
+  - {fileID: 5059394033055004339, guid: 4e4e0293efdc5ec47a952cdfac7e9d40, type: 3}
+  - {fileID: 1360245788705091476, guid: f53e18b0ab9107848963b6fde3a90326, type: 3}
   LeftRooms:
-  - {fileID: 4802246379753946722, guid: fcd0dfcfe0e423542ab562ebe0ec449f, type: 3}
   - {fileID: 2411901310257816857, guid: d50a932fcfd7f2947b694b10468e28d6, type: 3}
   - {fileID: 2213193327092712214, guid: d77a8332e7a01634d8abef5cb7fb85f8, type: 3}
   - {fileID: 5226663229323140338, guid: 4620ac0c30d632b4b8935bf21c7cfc64, type: 3}
-  - {fileID: 6675086316901240356, guid: ba48311a1cd87f7438d2cded5911ab45, type: 3}
   - {fileID: 6063298036439637143, guid: de02e17841de64248bf5a34804ff853c, type: 3}
   - {fileID: 3605113619288985981, guid: 8dc198e609ca3204ebbec1043a62456a, type: 3}
+  - {fileID: 2213193327092712214, guid: d77a8332e7a01634d8abef5cb7fb85f8, type: 3}
+  - {fileID: 5226663229323140338, guid: 4620ac0c30d632b4b8935bf21c7cfc64, type: 3}
   RightRooms:
   - {fileID: 5226663229323140338, guid: 4620ac0c30d632b4b8935bf21c7cfc64, type: 3}
   - {fileID: 6063298036439637143, guid: de02e17841de64248bf5a34804ff853c, type: 3}
   - {fileID: 6614152007766319697, guid: d1f9e0c435e089248972a51a87b79a2b, type: 3}
-  - {fileID: 8790852941677454404, guid: ebea981335fb5c047a195015213d1970, type: 3}
   - {fileID: 3605113619288985981, guid: 8dc198e609ca3204ebbec1043a62456a, type: 3}
-  - {fileID: 1651978316923730631, guid: 6e49f50f190675b40a1d47a4f0be3178, type: 3}
   - {fileID: 2461080183669216249, guid: 3be10383dcd6dda40a39dd1c9cf31a56, type: 3}
+  - {fileID: 6614152007766319697, guid: d1f9e0c435e089248972a51a87b79a2b, type: 3}
+  - {fileID: 5226663229323140338, guid: 4620ac0c30d632b4b8935bf21c7cfc64, type: 3}
   closedRooms: {fileID: 4154307359304516985, guid: 4b3893b9621f74f4295003422aa7eee5, type: 3}
   DoorU: {fileID: 6906143149289732236, guid: cdbddcbc9bd3a5841b7bf15ad2dce9f0, type: 3}
   DoorD: {fileID: 8271019233929212442, guid: 0ea4cb0a67a06ae48b705eb4d78ae8a0, type: 3}
@@ -1080,7 +1081,7 @@ MonoBehaviour:
   Enemys:
   - {fileID: 6117148497450987960, guid: d1633ac4ef247e4419819064db83136a, type: 3}
   - {fileID: 5507399138944477522, guid: 224cb5ca4d3edea499c8fd4fc53bace5, type: 3}
-  waitTime: 10
+  waitTime: 5
   boss: {fileID: 6474000456917596281, guid: 014b339e1c9185948b88ed1487eff1fe, type: 3}
   Shop: {fileID: 5180058504251575432, guid: 2ae56f07c76c7104e870852510156101, type: 3}
 --- !u!4 &1667920750

@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 669277443}
   - component: {fileID: 669277444}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PlayersChild
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,6 @@ GameObject:
   - component: {fileID: 1449748066}
   - component: {fileID: 1449748065}
   - component: {fileID: 1449748064}
-  - component: {fileID: 1449748069}
   m_Layer: 8
   m_Name: Boss 1 test
   m_TagString: Enemy
@@ -356,22 +355,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1449748069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449748063}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10a5b9b780e5bf8459e2bbd48458fa01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyProjectile: {fileID: 0}
-  player: {fileID: 0}
-  projectileSpeed: 10
-  fireRate: 1
 --- !u!1 &1452148835
 GameObject:
   m_ObjectHideFlags: 0
