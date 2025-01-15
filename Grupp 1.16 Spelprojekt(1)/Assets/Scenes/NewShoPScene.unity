@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryMenuUI: {fileID: 169814161}
   iInventoryListplacement: -1
+  maxStack: 4
   itemSlot:
   - {fileID: 373118853}
   - {fileID: 1327129579}
@@ -340,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80361a41f0f5d114bbd5cafe03aa4726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxNumberOfItems: 4
   itemNAMEInv: 
   quantityInv: 0
   itemSpriteInv: {fileID: 0}

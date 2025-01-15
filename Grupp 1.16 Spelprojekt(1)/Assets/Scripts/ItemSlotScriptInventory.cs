@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 {
     [Header("Slot and item data")]
+    public int maxNumberOfItems = 4;
     public string itemNAMEInv;
     public int quantityInv;
     public Sprite itemSpriteInv;
@@ -18,7 +19,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 
 
     [SerializeField]
-    private TMP_Text quantityText;
+    public TMP_Text quantityText;
 
     [SerializeField]
     private Image itemImageINV;

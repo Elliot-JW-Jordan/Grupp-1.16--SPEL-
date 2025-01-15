@@ -32,8 +32,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7794698440129954033}
-  - {fileID: 7459276351119617059}
   - {fileID: 3884294898211348520}
+  - {fileID: 7459276351119617059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -91,14 +91,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80361a41f0f5d114bbd5cafe03aa4726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxNumberOfItems: 4
   itemNAMEInv: 
   quantityInv: 0
   itemSpriteInv: {fileID: 0}
   isfull: 0
+  descriptionInINV: 
   quantityText: {fileID: 5338340303497785517}
   itemImageINV: {fileID: 930898340204259342}
   selectedOutline: {fileID: 7278118464479157410}
   invItemSelected: 0
+  itemDescriptionImage: {fileID: 0}
+  itemDescriptionNameText: {fileID: 0}
+  itemDescriptionText: {fileID: 0}
 --- !u!1 &4905655432284451066
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +169,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ------------------------------------------------------
+  m_text: 'llllll
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -174,7 +181,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.44705883, g: 0.29559743, b: 0.38431373, a: 0.69411767}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -191,13 +198,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5
-  m_fontSizeBase: 5
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
