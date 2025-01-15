@@ -5,13 +5,23 @@ public class MoveOnDestroy : MonoBehaviour
 {
     public string testStart;
 
-    private void OnDestroy()
+    public Playerhealth playerhealth;
+
+    private void Start()
     {
-        if (!string.IsNullOrEmpty("testStart"))
+        GameObject player = GameObject.FindWithTag("Player");
+
+        if (player != null)
+        {
+            playerhealth = player.GetComponent<Playerhealth>();
+        }
+    }
+
+    private void Update()
+    {
+        if (playerhealth.health == 0)
         {
             SceneManager.LoadScene("testStart");
         }
     }
-
-
 }
