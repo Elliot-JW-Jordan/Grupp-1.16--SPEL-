@@ -125,7 +125,21 @@ public class Boss1BulletSummening : MonoBehaviour
 
     void phase3() // Phase 3 of the boss
     {
+        float randomAngle = Random.Range(0f, 360f);
+        Quaternion randomRotation = Quaternion.Euler(0f, 0f, randomAngle);
+
         GameObject bullet3 = Instantiate(boss1bullet, transform.position, Quaternion.identity);
+
+        Vector2 direction = randomRotation * Vector2.up;
+
+        float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bullet3.transform.rotation = Quaternion.Euler(0f, 0f, rotationAngle + 90f);
+
+        Rigidbody2D rb = bullet3.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.velocity = direction * BulletSpeed; 
+        }
 
         Destroy(bullet3, BulletLifeTime);
     }
@@ -138,7 +152,7 @@ public class Boss1BulletSummening : MonoBehaviour
     {
         GameObject bullet = Instantiate(boss1bullet, transform.position, Quaternion.identity);
 
-        float angle = index * 360f / 8; // Divide 360 degrees into 8 parts
+        float angle = index * 360f / 64; // Divide 360 degrees into 8 parts
         Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)).normalized;
 
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
