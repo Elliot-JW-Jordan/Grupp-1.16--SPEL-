@@ -38,6 +38,7 @@ public class Boss1BulletSummening : MonoBehaviour
     //player
     [Header("player prefab")]
     public GameObject Player;
+    public float DamageToTake;
 
     private void Start()
     {
@@ -46,6 +47,12 @@ public class Boss1BulletSummening : MonoBehaviour
 
         //geting player
         Player = GameObject.FindWithTag("Player");
+        PlayerShooting playerShooting = Player.GetComponent<PlayerShooting>();
+        if (playerShooting != null)
+        {
+            DamageToTake = playerShooting.Damage;
+        }
+
 
         BossHealt = MaxBossHealth;
         CurentPhase = 1;
@@ -125,7 +132,21 @@ public class Boss1BulletSummening : MonoBehaviour
 
     void phase3() // Phase 3 of the boss
     {
+        float randomAngle = Random.Range(0f, 360f);
+        Quaternion randomRotation = Quaternion.Euler(0f, 0f, randomAngle);
+
         GameObject bullet3 = Instantiate(boss1bullet, transform.position, Quaternion.identity);
+
+        Vector2 direction = randomRotation * Vector2.up;
+
+        float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bullet3.transform.rotation = Quaternion.Euler(0f, 0f, rotationAngle + 90f);
+
+        Rigidbody2D rb = bullet3.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.velocity = direction * BulletSpeed; 
+        }
 
         Destroy(bullet3, BulletLifeTime);
     }
@@ -170,5 +191,23 @@ public class Boss1BulletSummening : MonoBehaviour
         bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         Destroy(bullet, BulletLifeTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        {   
+            
+            BossHealt -= DamageToTake;
+                
+                Destroy(collision.gameObject);
+
+                if (BossHealt <= 0)
+                {
+                    Destroy(gameObject); // Destroy the boss
+                    Debug.Log("Boss defeated!");
+                }
+            
+        }
     }
 }

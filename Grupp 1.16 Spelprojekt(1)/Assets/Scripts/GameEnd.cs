@@ -3,19 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class MoveOnDestroy : MonoBehaviour
 {
-    // Name of the scene to load after the object is destroyed
     public string testStart;
 
-    // Update method to check for object destruction
-    private void OnDestroy()
+    public playerHealth playerhealth;
+
+    private void Start()
     {
-        // Check if the scene name is not empty
-        if (!string.IsNullOrEmpty("testStart"))
+        GameObject player = GameObject.FindWithTag("Player");
+
+        if (player != null)
         {
-            // Load the specified scene
-            SceneManager.LoadScene("testStart");
+            playerhealth = player.GetComponent<playerHealth>();
         }
     }
 
-
+    private void Update()
+    {
+        if (playerhealth.health == 0)
+        {
+            SceneManager.LoadScene("testStart");
+        }
+    }
 }

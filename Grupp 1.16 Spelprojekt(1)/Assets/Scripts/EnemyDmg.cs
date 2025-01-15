@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDmg : MonoBehaviour
 {
-    public Playerhealth playerhealth;
+    public playerHealth playerhealth;
     public int damage = 2;
 
     void Start()
@@ -13,7 +13,7 @@ public class EnemyDmg : MonoBehaviour
 
         if (player != null)
         {
-            playerhealth = player.GetComponent<Playerhealth>();
+            playerhealth = player.GetComponent<playerHealth>();
         }
         else
         {
@@ -21,10 +21,6 @@ public class EnemyDmg : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")

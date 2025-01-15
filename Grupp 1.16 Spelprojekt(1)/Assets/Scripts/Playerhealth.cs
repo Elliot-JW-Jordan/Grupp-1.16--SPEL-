@@ -19,13 +19,23 @@ public class Playerhealth : MonoBehaviour
         health = maxHealth;
         UpdateHealthBar();
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("EnemyBullet"))
+        {
+            TakeDamage(2);
+        }
+    }
+
     public void TakeDamage(int amount)
     {
+        print("typ nonting" + health);
         health -= amount;
         if (health < 0)
-        {
+        {   
+            print("die");
             Destroy(gameObject);
-
         }
         UpdateHealthBar();
         

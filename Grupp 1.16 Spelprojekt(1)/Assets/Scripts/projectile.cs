@@ -7,7 +7,9 @@ public class projectile : MonoBehaviour
     public GameObject playerBullet;
     public float BulletSpeed = 3f; // skottens hastighet
     public float shotCooldown = 0.5f; // Cooldown i sekunder
-    private float lastShotTime = 0f;
+    public float bulletPlsDie = 5f; // hur länge skotten finns kvar inan dem försvinner
+    private float lastShotTime = 0f; // senaste gången ett skott avfyrades
+
 
     private void Update()
     {
@@ -37,14 +39,8 @@ public class projectile : MonoBehaviour
         {
             bulletRb.velocity = direction * BulletSpeed;
         }
+       
     }
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(gameObject);
-        }
 
 
-    }
 }
