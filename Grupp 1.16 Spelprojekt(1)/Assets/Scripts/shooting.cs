@@ -5,6 +5,7 @@ public class PlayerShooting : MonoBehaviour
     public GameObject bulletPrefab; // Prefab för kulan
     public Transform firePoint; // Positionen där kulan skjuts ut
     public float bulletSpeed = 10f; // Hastigheten för kulan
+    public float Damage = 1f;
 
     void Update()
     {

@@ -38,6 +38,7 @@ public class Boss1BulletSummening : MonoBehaviour
     //player
     [Header("player prefab")]
     public GameObject Player;
+    public float DamageToTake;
 
     private void Start()
     {
@@ -46,6 +47,12 @@ public class Boss1BulletSummening : MonoBehaviour
 
         //geting player
         Player = GameObject.FindWithTag("Player");
+        PlayerShooting playerShooting = Player.GetComponent<PlayerShooting>();
+        if (playerShooting != null)
+        {
+            DamageToTake = playerShooting.Damage;
+        }
+
 
         BossHealt = MaxBossHealth;
         CurentPhase = 1;
@@ -152,7 +159,7 @@ public class Boss1BulletSummening : MonoBehaviour
     {
         GameObject bullet = Instantiate(boss1bullet, transform.position, Quaternion.identity);
 
-        float angle = index * 360f / 64; // Divide 360 degrees into 8 parts
+        float angle = index * 360f / 8; // Divide 360 degrees into 8 parts
         Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)).normalized;
 
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
@@ -184,5 +191,23 @@ public class Boss1BulletSummening : MonoBehaviour
         bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         Destroy(bullet, BulletLifeTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        {   
+            
+            BossHealt -= DamageToTake;
+                
+                Destroy(collision.gameObject);
+
+                if (BossHealt <= 0)
+                {
+                    Destroy(gameObject); // Destroy the boss
+                    Debug.Log("Boss defeated!");
+                }
+            
+        }
     }
 }
