@@ -586,7 +586,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.36895
+  orthographic size: 9.650757
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -807,6 +807,7 @@ MonoBehaviour:
   playerBullet: {fileID: 8628621600807952717, guid: cff1e1da59fe72b44be9e7e5f026899f, type: 3}
   BulletSpeed: 6
   shotCooldown: 0.5
+  bulletPlsDie: 5
 --- !u!114 &1284530594
 MonoBehaviour:
   m_ObjectHideFlags: 0
