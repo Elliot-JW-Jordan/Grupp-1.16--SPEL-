@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class Enemyhealth : MonoBehaviour
 {
+    Animator animator;
+
     public int health;
     public int maxHealth = 10;
     public int currencyDrop = 20;
@@ -49,8 +51,10 @@ public class Enemyhealth : MonoBehaviour
         if (health < 0)
         {
 
+            animator.Play("Slime_death");
+
          DropCurrency(); //kallar så att spelaren får pengar
-            Destroy(gameObject);
+            Destroy(gameObject, 1);
             
             
         }
