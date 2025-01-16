@@ -8,7 +8,10 @@ public class Boss1BulletSummening : MonoBehaviour
     //Rigidbody
     Rigidbody2D rb;
 
+    //aniations settings
     Animator animator;
+    private bool isHurtCooldown = false;
+    public float hurtCooldownDuration = 1.5f;
 
     //Bullet prefab
     [Header("bullet prefab")]
@@ -68,8 +71,7 @@ public class Boss1BulletSummening : MonoBehaviour
 
     private void Update()
     {
-
-
+        
 
         // phase 1
         if (BossHealt >= MaxBossHealth / 3 * 2 || BossHealt == MaxBossHealth)
@@ -78,7 +80,12 @@ public class Boss1BulletSummening : MonoBehaviour
             {
                 CurentPhase = 1;
             }
-            animator.Play("Spin_Boss");
+
+            if (!isHurtCooldown)
+            {
+                animator.Play("Spin_Boss");
+            }
+            
             phase1();
         }
         // phase 2
@@ -220,9 +227,17 @@ public class Boss1BulletSummening : MonoBehaviour
             
             BossHealt -= DamageToTake;
             animator.Play("Hurt_Boss");
-                
-                Destroy(collision.gameObject);
+            StartCoroutine(HurtCooldown());
+
+            Destroy(collision.gameObject);
             
         }
+    }
+
+    private IEnumerator HurtCooldown()
+    {
+        isHurtCooldown = true; 
+        yield return new WaitForSeconds(hurtCooldownDuration); 
+        isHurtCooldown = false; 
     }
 }
