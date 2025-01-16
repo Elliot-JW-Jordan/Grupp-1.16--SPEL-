@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemUseManagerScript : MonoBehaviour
 {
-    private PlayerHealth playerHealth;
+    private playerHealth playerHealth;
     private Enemyhealth enemyhealth;
     private PlayerPhysicsWalking physicsWalking;
     ItemManagerandMaker itemManagerandMaker;
@@ -14,7 +14,7 @@ public class ItemUseManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerHealth = FindObjectOfType<PlayerHealth>();
+        playerHealth = FindObjectOfType<playerHealth>();
         enemyhealth = FindObjectOfType<Enemyhealth>();
         physicsWalking = FindObjectOfType<PlayerPhysicsWalking>();
         itemManagerandMaker = FindObjectOfType<ItemManagerandMaker>();
@@ -32,32 +32,51 @@ public class ItemUseManagerScript : MonoBehaviour
 
         }
     }
-
-
-
-   
-
     private void ApplyConsumableEffect(Consumable consumable)
     {
         //Ifall föremålet har indelningen HealingPotion
         if (consumable.consumableType1 == ConsumableType.HealingPotion)
         {
-            playerHealth.Heal(consumable.healAmount); //må vara felaktig byter till fungerande senare
+            Debug.Log($"Call HealPlayer method, {consumable.healAmount}");
+            playerHealth.HealPlayer(consumable.healAmount); //må vara felaktig byter till fungerande senare
         }
         if (consumable.consumableType1 == ConsumableType.Buff)
         {
+
             ApplyBuff(consumable.buffingFactor, consumable.duration);
         }
     }
 
     private void ApplyBuff(float buffFactor, float duration)
     {
-        Debug.Log($"An item : /writeNameHere has called method ApplyBuff");
+        Debug.Log($"Call ApplyDamageBuff method, ApplyBuff : {buffFactor} duration {duration}");
+
         enemyhealth.ApplyDamageBuff(buffFactor, duration);
     }
+    private Dictionary<string, Armour> equippedArmour = new Dictionary<string, Armour>
+    {
+        {"Helmet", null },
+        {"ChestPlate", null },
+        {"Leggings", null },
+        {"Boots", null },
+    };
 
     private void EquipArmour(Armour armour)
     {
+        string armourType = armour.armourType.ToString();
+        Debug.Log($"Equipping {armourType} armor : {armour.itemName} ");
+
+        // Byter ut exsisterande armor med en utav samma sort. 
+        if (equippedArmour.ContainsKey(armourType))
+        {
+            equippedArmour[armourType] = armour;
+        } else
+        {
+            Debug.LogWarning($"Armor type : {armourType} is not possible(supported)");
+            return;
+        }
+        playerHealth.WithArmour();
+        physicsWalking.MovementEffectOfArmour();
 
 
     }
