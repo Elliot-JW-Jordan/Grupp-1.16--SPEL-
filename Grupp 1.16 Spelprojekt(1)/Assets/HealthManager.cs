@@ -50,6 +50,8 @@ public class PlayerHealth : MonoBehaviour
     // Example method to heal (could be triggered elsewhere in the game)
     public void Heal(float amount)
     {
+        Debug.Log($"HealthManagers method Heal added {amount} floats of healing to health");
+
         health += amount;
         if (health > maxHealth)
             health = maxHealth;  // Prevent health from exceeding max

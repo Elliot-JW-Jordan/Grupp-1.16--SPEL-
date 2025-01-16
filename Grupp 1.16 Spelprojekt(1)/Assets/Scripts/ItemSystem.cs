@@ -8,6 +8,8 @@ using UnityEngine;
 [Serializable]
 public abstract class ItemSystem  //Skapar en mall för föremålet
 {
+   public ItemUseManagerScript itemUseManager;
+
     public string itemName; //namnet
     public string description; // förklarning
     public Sprite spriteIcon; //  bild på föremålet
@@ -21,8 +23,13 @@ public abstract class ItemSystem  //Skapar en mall för föremålet
 
     public virtual void Use() //en metod för när alla föremål används
     {
-        Debug.Log("Using " + itemName + " ."); 
-        OnUsageOfItem?.Invoke(this);
+        Debug.Log("Using " + itemName + " .");
+        ItemUseManagerScript itemUseManager;
+     //   if (itemUseManager  != null)
+     //   {
+      //      itemUseManager.UseItem(this);
+      //  }
+      //  OnUsageOfItem?.Invoke(this);
     }
    
 }
