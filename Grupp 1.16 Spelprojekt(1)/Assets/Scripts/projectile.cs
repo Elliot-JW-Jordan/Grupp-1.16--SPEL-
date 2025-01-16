@@ -9,6 +9,7 @@ public class projectile : MonoBehaviour
     public float shotCooldown = 0.5f; // Cooldown i sekunder
     public float bulletPlsDie = 5f; // hur länge skotten finns kvar inan dem försvinner
     private float lastShotTime = 0f; // senaste gången ett skott avfyrades
+    public float Damage = 2;
 
 
     private void Update()
