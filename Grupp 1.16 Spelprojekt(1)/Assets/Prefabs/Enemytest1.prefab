@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2323954051114158617}
   - component: {fileID: 9024998361750892191}
-  - component: {fileID: 2358536342544658095}
   - component: {fileID: 7918586388083825125}
   - component: {fileID: 7573531681301758250}
   - component: {fileID: 8986267466600729058}
@@ -89,24 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2358536342544658095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6117148497450987960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9577f5adef5927f42bbc17d47d19d70a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  changeDirectionTime: 2
-  moveArea: {x: 5, y: 5}
-  playerDetectionRange: 1
-  moveAwayDistance: 1
-  cooldownTime: 3
 --- !u!50 &7918586388083825125
 Rigidbody2D:
   serializedVersion: 4
@@ -199,3 +180,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 10
+  currencyDrop: 20
+  buffFactor: 1
+  buffDuration: 0
+  buffTime: 0
+  buffActive: 0
+  dmgBerForeApplyBuff: 5
+  shopSystem1: {fileID: 0}
+  OnCurrencyDropped:
+    m_PersistentCalls:
+      m_Calls: []
