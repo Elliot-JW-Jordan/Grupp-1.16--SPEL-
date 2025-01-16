@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
+ 
     public static CurrencyManager Instance { get; private set; }
     public int CurrentCurrency { get; private set; }
+    
 
     public event Action<int> OnCurrencyChanged;
 

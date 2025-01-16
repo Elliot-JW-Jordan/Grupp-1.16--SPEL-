@@ -88,7 +88,7 @@ public class ManagerOfInventory : MonoBehaviour
 
         //Kollar ifall knappen I 3ttrycks ned
 
-        if (Input.GetKeyDown(KeyCode.I))  // må behöva ändra till
+        if (Input.GetKeyDown(KeyCode.I))  // Hela koden har flyttats tilL ItemUIController.
         {
             if (activatedMenu) // Ifall UI är aktiverad när I trycks så ska UI stängas ned
             {
@@ -107,7 +107,11 @@ public class ManagerOfInventory : MonoBehaviour
             //Kommihåg att sätta inventoryButton till i i settings//
 
 
-        }
+       
+       }
+   
+        
+        
     }
 
     public int AddItem(string itemName, int quantity, Sprite itemSprite, string descriptionPlus)
@@ -175,6 +179,22 @@ public class ManagerOfInventory : MonoBehaviour
             itemSlot[i].selectedOutline.SetActive(false);
             itemSlot[i].invItemSelected = false;
 
+        }
+    }
+    public void RemoveItemFromInventory(ItemSystem item)
+    {
+        //Ta bort föremållet ifrån listan
+        inventoryList.Remove(item);
+        Debug.Log($"Removed {item.itemName} from the inentory list");
+
+        //tar ochså bort föremmålet från UI inventory slots
+        foreach(var slot in itemSlot)
+        {
+            if(slot.itemNAMEInv == item.itemName)
+            {
+                slot.ClearSlot();
+                break;
+            }
         }
     }
 }
