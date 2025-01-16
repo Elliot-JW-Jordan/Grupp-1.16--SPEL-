@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
@@ -22,9 +23,13 @@ public class ShopUI : MonoBehaviour
     public ItemManagerandMaker itemManagerandMaker;
     //public InventorySystem playerInventory;
     public ItemSystem item1;
+
+    [SerializeField]
+    private string currencyFormat = "Currency {0}";
+
    
 
-    private int playerCurency;
+   
 
     
 
@@ -40,39 +45,22 @@ public class ShopUI : MonoBehaviour
 
     void Start()
     {
-        CurrencyManager.Instance.OnCurrencyChanged += UpdateCurrencyUI();
-        UpdateCurrencyUI(CurrencyManager.Instance.PlayerTotalCurrency);
+        // SUB till peng-updaterings eventet
+        if (CurrencyManager.Instance != null)
+        {
+            CurrencyManager.Instance.OnCurrencyChanged += UpdateCurrencyUI;
+            UpdateCurrencyUI(CurrencyManager.Instance.CurrentCurrency); //
+        }
+        
+        RefreshShopUI(shopSystem.shopitems);
 
-
-
-
-        //   item1 = FindObjectOfType<ItemSystem>();
-
-        // playerInventory FindObjectOfType<InventorySystem>
-
-
-
-
-  
 
         //Afär UI kommer altid starta dold
         shopUIpanel.SetActive(false);
 
         
     }
-    private void UpdateCurrencyUI(int newCurrency)
-    {
-        if (currencyText != null)
-        {
-            currencyText.text = $"Currency : {newCurrency}";
-
-        }
-    }
-
-
-
-
-
+ 
     public void RefreshShopUI(List<ItemSystem> shopItems)
     {
        // foreach(var item in shopItems)
@@ -119,9 +107,6 @@ public class ShopUI : MonoBehaviour
             TextMeshProUGUI itemDefensiveValueTextUI = itemUI.transform.Find("ItemDefensiveValueUI").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI itemWeightATextUI = itemUI.transform.Find("ItemWeightAUI").GetComponent<TextMeshProUGUI>();
 
-
-
-
             // Fyller i med infromation om föremålen
             //handle null values.sprite
             //add to string where needed
@@ -148,10 +133,6 @@ public class ShopUI : MonoBehaviour
             "Durability :" +
             "Defensive value :\n" +
             "WeightA :";
-
-
-               
-
 
           if (item is Consumable consumable)
             {
@@ -203,14 +184,7 @@ public class ShopUI : MonoBehaviour
     }
 
 
-    public void UpdateCurrencyUI()
-    {
-        if (currencyText != null)
-        {
-            currencyText.text = $"Currency : {playerCurency}";
-        }
-
-    }
+   
 
     public void DeactivateShopUI()
     {
@@ -226,11 +200,9 @@ public class ShopUI : MonoBehaviour
             return;
         }
         //Se till så att spelaren har tillräkligt med pengar 
-        if (playerCurency >= item1.price)
+        if ( CurrencyManager.Instance.TrySpendCurrency(item1.price))
         {
-            //Subtrakthera priset från spelarens totalla pengar värde
-            playerCurency -= item1.price;
-            //Föremålet läggs till till spelarens "inventory"
+            UpdateCurrencyUI(CurrencyManager.Instance.CurrentCurrency);
             var inventoryManager = FindAnyObjectByType<ManagerOfInventory>();
             // FindObjectOfType<ManagerOfInventory>().AddItemToInventory(item1); //tog bort efeter som
             if (inventoryManager == null)
@@ -241,22 +213,50 @@ public class ShopUI : MonoBehaviour
             }
             if (inventoryManager != null)
             {
-                Debug.Log("Debug item to inventory");
+                Debug.Log($"Debug item to inventory, Currency remaining {CurrencyManager.Instance.CurrentCurrency}");
                 inventoryManager.AddItemToInventory(item1);
                // Debug.Log("Debug added item to inventory");
             }
            // inventoryManager.AddItemToInventory(item1);
             //borde kanske byta til . AddItem istället.
              //Nu ska metoden för att updatera UI kallas
-            UpdateCurrencyUI();
-            Debug.Log($"Player payed for {item1.itemName} for {item1.price}. Players remainig currency : {playerCurency}");
+        
+            Debug.Log($"Player payed for {item1.itemName} for {item1.price}. Players remainig currency : {CurrencyManager.Instance.CurrentCurrency}");
            // return; // ta bort ifall spell inte funkar
         } else
         {
-            Debug.LogWarning($"The player does NOT have enough currency to buy {item1.itemName}. Required currency for purchase {item1.price}, Available : {playerCurency}");
+            Debug.LogWarning($"The player does NOT have enough currency to buy {item1.itemName}. Required currency for purchase {item1.price}, Available : {CurrencyManager.Instance.CurrentCurrency}");
 
         }
     }
+
+
+
+
+    public void UpdateCurrencyUI(int newCurrency)
+    {
+        if (currencyText == null)
+        {
+            Debug.LogWarning($"There is not currencyText assigned in inspector");
+            return;
+        } else if (currencyText != null)
+        {
+            currencyText.text = $"Currency : {newCurrency}";
+            currencyText.text = string.Format(currencyFormat, newCurrency);
+
+        }
+
+    }
+
+    private void OnDestroy()
+    {
+        // UnSUB FRÅN currency eventet
+        if (CurrencyManager.Instance != null)
+        {
+            CurrencyManager.Instance.OnCurrencyChanged -= UpdateCurrencyUI;
+        }
+    }
+
     void Update()
     {
         //För att stänga ned UI

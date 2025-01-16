@@ -59,7 +59,17 @@ public class Enemyhealth : MonoBehaviour
 
      void DropCurrency()
     {
-        CurrencyManager.Instance?.AddCurrency(currencyDrop);
+        //Lägger till pengar 
+        if (CurrencyManager.Instance != null)
+        {
+            CurrencyManager.Instance.AddCurrency(currencyDrop);
+            Debug.Log($"Dropped {currencyDrop} currency.");
+
+        }
+        else
+        {
+            Debug.LogWarning("CurrencyManager instance is missing.");
+        }
         OnCurrencyDropped?.Invoke(currencyDrop);
     }
 

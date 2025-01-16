@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,44 +6,57 @@ using UnityEngine;
 public class CurrencyManager : MonoBehaviour
 {
     public static CurrencyManager Instance { get; private set; }
-    private int playerTotalCurrency;
+    public int CurrentCurrency { get; private set; }
 
-    public int PlayerTotalCurrency
-    {
-        get => playerTotalCurrency;
-        private set
-        {
-            playerTotalCurrency = value;
-            OnCurrencyChanged?.invoke(playerTotalCurrency);
-        }
-    }
-    public delegate void CurrencyChanged(int newCurrency);
-    public event CurrencyChanged OnCurrencyChanged;
+    public event Action<int> OnCurrencyChanged;
 
-    private void Awake()
+
+private void Awake()
     {
-        if (Instance !=null && Instance != this)
+        //fr att säkerställa att det bara kna finnas en instans i taget.
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
      public void AddCurrency(int amount)
     {
-        playerTotalCurrency += amount;
-    }
-    public bool SpeendCurrency(int amount)
-    {
-        if (amount <= playerTotalCurrency)
+        if(amount < 0 )
         {
-            playerTotalCurrency -= amount;
+            Debug.LogWarning("You can not add a negative amount of currency");
+            return;
+        }
+        CurrentCurrency += amount;
+        CurrentCurrency = Mathf.Max(CurrentCurrency, 0); // så att CurrentCurrency aldring kan komma under noll.
+        OnCurrencyChanged?.Invoke(CurrentCurrency);
+        Debug.Log($"Added {amount} currency. New Total: {CurrentCurrency}");
+    }
+
+    public bool TrySpendCurrency(int amount)
+    {
+        if (CurrentCurrency >= amount)
+        {
+            AddCurrency(-amount); 
+            Debug.Log($"Spent {amount} currency, New total : {CurrentCurrency}");
             return true;
         }
         return false;
     }
 
+    public void SetCurrency(int amount)
+    {
+        CurrentCurrency = Mathf.Max(amount, 0);
+        OnCurrencyChanged?.Invoke(CurrentCurrency);
+    }
+
+
+    
     // Start is called before the first frame update
     void Start()
     {
