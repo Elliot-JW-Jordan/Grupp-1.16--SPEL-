@@ -270,6 +270,13 @@ public class PlayerPhysicsWalking : MonoBehaviour
             camera.transform.localPosition = Vector3.Lerp(currentPosition, new Vector3(currentPosition.x, currentPosition.y + pulseOffset, currentPosition.z), 0.1f);
         }
     }
+       public void MovementEffectOfArmour()
+    {
+
+    }
+
+
+
 
     void Animation()
     {
