@@ -54,15 +54,13 @@ public class Boss1BulletSummening : MonoBehaviour
 
         //geting player
         Player = GameObject.FindWithTag("Player");
-        Transform childTransform = Player.transform.Find("PlayersChild");
-        if (childTransform != null)
-        {
-            PlayerShooting playerShooting = childTransform.GetComponent<PlayerShooting>();
+            PlayerShooting playerShooting = Player.GetComponent<PlayerShooting>();
             if (playerShooting != null)
             {
+            print("PlayerFaound");
                 DamageToTake = playerShooting.Damage;
             }
-        }
+        
 
         BossHealt = MaxBossHealth;
         CurentPhase = 1;
@@ -223,15 +221,12 @@ public class Boss1BulletSummening : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        {   
-            
-            BossHealt -= DamageToTake;
-            animator.Play("Hurt_Boss");
-            StartCoroutine(HurtCooldown());
+        
+        BossHealt -= DamageToTake;
+        animator.Play("Hurt_Boss");
+        StartCoroutine(HurtCooldown());
 
-            Destroy(collision.gameObject);
-            
-        }
+        Destroy(collision.gameObject);
     }
 
     private IEnumerator HurtCooldown()
