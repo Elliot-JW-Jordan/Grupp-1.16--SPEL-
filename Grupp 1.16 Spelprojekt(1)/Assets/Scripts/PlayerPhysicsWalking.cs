@@ -112,7 +112,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
         {
             animator.Play("inputOfMoving");
         }
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.AS))
+        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
             
         }
