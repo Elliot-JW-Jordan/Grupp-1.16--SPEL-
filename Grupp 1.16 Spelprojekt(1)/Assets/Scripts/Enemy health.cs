@@ -59,33 +59,41 @@ public class Enemyhealth : MonoBehaviour
 
      void DropCurrency()
     {
+        CurrencyManager.Instance?.AddCurrency(currencyDrop);
         OnCurrencyDropped?.Invoke(currencyDrop);
     }
 
    public void ApplyDamageBuff(float buffFactor,float durationOfBuff)
     {
-        this.buffFactor = buffFactor;
-        this.buffDuration = durationOfBuff; //Buff längden i sekunder
-         if (buffActive) //ifall det redan finns en buff som påverkar så skapar metoden inte en till. Alltså den retunerar metoden.
+        if (buffFactor <= 1.0f)
+        {
+            Debug.LogWarning($"BuffFactor must be equal to or greater than one, this BuffFactor had the value of  {buffFactor}");
+            return;
+       }
+
+        if (buffActive) //ifall det redan finns en buff som påverkar så skapar metoden inte en till. Alltså den retunerar metoden.
         {
             return;
         }
-        StartCoroutine(ApplyDamageBuffWithTimer(buffFactor, buffDuration));
-          
+
+        this.buffFactor = buffFactor;
+            this.buffDuration = durationOfBuff; //Buff längden i sekunder
+           
+            StartCoroutine(ApplyDamageBuffWithTimer(buffFactor, durationOfBuff));
+
+       
+       
     }
     private IEnumerator ApplyDamageBuffWithTimer(float buffFactor, float duration)
     {
         buffActive = true;
         buffTime = duration;
+       
         int initialDMG = dmgBerForeApplyBuff; // Lagar det initiala värdet
-
-
         //Jag kalkulerar värdet av Buffen
-
         float buffedDMG = dmgBerForeApplyBuff * buffFactor;
         int buffedDMGint = Mathf.RoundToInt(buffedDMG);
         appliedincrease = buffedDMGint - dmgBerForeApplyBuff;
-
         Debug.Log($"A Damage buff has been activated, Applied : {buffedDMGint}, Increase : {appliedincrease}  ");
         // Väntar på att timer för Buffen ska ta slut;
         yield return new WaitForSeconds(duration);

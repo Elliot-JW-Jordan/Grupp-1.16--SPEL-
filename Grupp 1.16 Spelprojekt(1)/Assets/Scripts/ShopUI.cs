@@ -40,23 +40,39 @@ public class ShopUI : MonoBehaviour
 
     void Start()
     {
+        CurrencyManager.Instance.OnCurrencyChanged += UpdateCurrencyUI();
+        UpdateCurrencyUI(CurrencyManager.Instance.PlayerTotalCurrency);
 
-        shopSystem = FindObjectOfType<ShopSystem>();
-     //   item1 = FindObjectOfType<ItemSystem>();
-        playerCurency = shopSystem.placeholderCurrency;
+
+
+
+        //   item1 = FindObjectOfType<ItemSystem>();
+
         // playerInventory FindObjectOfType<InventorySystem>
-        
 
 
 
-        UpdateCurrencyUI();
-      RefreshShopUI(shopSystem.shopitems);
+
+  
 
         //Afär UI kommer altid starta dold
         shopUIpanel.SetActive(false);
 
         
     }
+    private void UpdateCurrencyUI(int newCurrency)
+    {
+        if (currencyText != null)
+        {
+            currencyText.text = $"Currency : {newCurrency}";
+
+        }
+    }
+
+
+
+
+
     public void RefreshShopUI(List<ItemSystem> shopItems)
     {
        // foreach(var item in shopItems)
