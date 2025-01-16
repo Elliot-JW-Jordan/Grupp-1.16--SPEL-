@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class PlayerPhysicsWalking : MonoBehaviour
 {
+    Animator animator;
+
+
     //Jag börjar med att definera värden av olika slag
 
     [Header("Values of Walking and Sprinting")]
@@ -97,6 +100,22 @@ public class PlayerPhysicsWalking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+        {
+            animator.Play("inputOfMoving");
+        }
+        if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
+        {
+            animator.Play("inputOfMoving");
+        }
+        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        {
+            animator.Play("inputOfMoving");
+        }
+        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.AS))
+        {
+            
+        }
         inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         if (inputOfMoving != Vector2.zero)
