@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 
 public class PlayerPhysicsWalking : MonoBehaviour
 {
-    // Vi matade in hela scriptet i chatGPT för att skirva om det EFTER ATT CODEN HADE FÖRSTÖRTS AV EN MERGE CONFLICT
     Animator animator;
     private int FelixDirection = 0;
 
