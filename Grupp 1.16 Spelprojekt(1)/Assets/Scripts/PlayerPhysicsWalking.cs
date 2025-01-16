@@ -189,6 +189,7 @@
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         newScaleX = InOutEasing(currentScaleX, newScaleX, smoothness);
         //jag tillämpar skala av x fast håller kvar vid de andra 
         transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
@@ -204,12 +205,17 @@
         return Mathf.Lerp(start, end, floatT * floatT * (3f - 2f * floatT)); //kubic funktion InOutEase en mer dynamisk rörelse
     }
 =======
+=======
+>>>>>>> 4bbc7670d75f021bbf7c5c64fc8134dca8dc985d
         float InOutEasing(float start, float end, float speed)
         {
             //noramlisering av tiden
             float floatT = Mathf.Clamp01((Time.time * speed) % 1f);
             return Mathf.Lerp(start, end, floatT * floatT * (3f - 2f * floatT)); //kubic funktion InOutEase en mer dynamisk rörelse
         }
+<<<<<<< HEAD
+>>>>>>> 4bbc7670d75f021bbf7c5c64fc8134dca8dc985d
+=======
 >>>>>>> 4bbc7670d75f021bbf7c5c64fc8134dca8dc985d
            
 
@@ -335,6 +341,7 @@
             float newScale = Mathf.Lerp(minimumSprite, maxScale, 1f - speedF);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
 
 
@@ -347,10 +354,13 @@
         //En pulserande kamera när spelaren är trött och sånt.
         if (isfatigued || isExhausted)
 =======
+=======
+>>>>>>> 4bbc7670d75f021bbf7c5c64fc8134dca8dc985d
             if (playerSpr != null)
             {
                 playerSpr.localScale = new Vector3(newScale, newScale, 1f);
             }
+<<<<<<< HEAD
 
         }
         void UpdateCameraEffects()
@@ -366,10 +376,27 @@
                 float pulseOffset = Mathf.Sin(Time.time * pulseFrequency) * pulseIntensity;
                 // för att försäkra att den pulserande cameran kommer igågn på ett bra sätt 
 
+=======
+
+        }
+        void UpdateCameraEffects()
+        {
+            //FOV blir dynamiskt påverkat av spelarns hastighet
+            float currentSpeed = rigid2d.velocity.magnitude;
+            float targetFOV = Mathf.Lerp(minFov, defaultFOV, currentSpeed / sprintSpeed);
+            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetFOV, zoomspeed * Time.deltaTime);
+            //En pulserande kamera när spelaren är trött och sånt.
+            if (isfatigued || isExhausted)
+            {
+                float pulseOffset = Mathf.Sin(Time.time * pulseFrequency) * pulseIntensity;
+                // för att försäkra att den pulserande cameran kommer igågn på ett bra sätt 
+
+>>>>>>> 4bbc7670d75f021bbf7c5c64fc8134dca8dc985d
                 Vector3 currentPosition = camera.transform.localPosition;
                 camera.transform.localPosition = Vector3.Lerp(currentPosition, new Vector3(currentPosition.x, currentPosition.y + pulseOffset, currentPosition.z), 0.1f);// Kolla så att vector3 även stämmer för 2d
             }
         
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -382,6 +409,8 @@
     }
 }
 =======
+=======
+>>>>>>> 4bbc7670d75f021bbf7c5c64fc8134dca8dc985d
         }
         void Animation()
         {
@@ -426,5 +455,8 @@
         }
 
     }
+<<<<<<< HEAD
+>>>>>>> 4bbc7670d75f021bbf7c5c64fc8134dca8dc985d
+=======
 >>>>>>> 4bbc7670d75f021bbf7c5c64fc8134dca8dc985d
 
