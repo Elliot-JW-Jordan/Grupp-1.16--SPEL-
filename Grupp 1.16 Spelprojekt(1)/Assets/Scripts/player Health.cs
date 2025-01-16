@@ -12,6 +12,7 @@ public class playerHealth : MonoBehaviour
     public int maxHealth = 10;
     public int healAmountQ = 0;
     public Image green;
+    public int DamageOnPlayer = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class playerHealth : MonoBehaviour
     {
         if (other.gameObject.CompareTag("EnemyBullet"))
         {
-            TakeDamage(5);
+            TakeDamage(DamageOnPlayer);
         }
     }
     public void TakeDamage(int amount)

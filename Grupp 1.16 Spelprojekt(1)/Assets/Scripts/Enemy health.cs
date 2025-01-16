@@ -17,7 +17,8 @@ public class Enemyhealth : MonoBehaviour
     public int dmgBerForeApplyBuff = 5;
     private int appliedincrease = 0;
 
-
+    public bool EnemyTyp2 = false;
+    public GameObject BloodStains;
 
     public ShopSystem shopSystem1;
     public UnityEvent<int> OnCurrencyDropped;
@@ -27,15 +28,18 @@ public class Enemyhealth : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log($"Collided with: {other.gameObject.name}");
         if (other.gameObject.CompareTag("bullet"))
         {
-            TakeDamage(5);
+            TakeDamage(2);
         }
     }
+
     public void Initialize(ShopSystem shopSystem)
     {
         this.shopSystem1 = shopSystem;
@@ -50,18 +54,34 @@ public class Enemyhealth : MonoBehaviour
         health -= amount;
         if (health < 0)
         {
+            animator.Play("Eye_Fram_die");
+            float EyedeathAnimationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+
+            Invoke(nameof(HandleDeathLogic), EyedeathAnimationLength);
 
             animator.Play("Slime_death");
+            DropCurrency();
+            float deathAnimationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+            Destroy(gameObject, deathAnimationLength);
 
-         DropCurrency(); //kallar så att spelaren får pengar
-            Destroy(gameObject, 1);
-            
-            
+
         }
 
     }
 
-     void DropCurrency()
+    private void HandleDeathLogic()
+    {
+        if (EnemyTyp2)
+        {
+            Instantiate(BloodStains, transform.position, Quaternion.identity);
+        }
+
+        DropCurrency();
+
+        Destroy(gameObject);
+    }
+
+    void DropCurrency()
     {
         //Lägger till pengar 
         if (CurrencyManager.Instance != null)

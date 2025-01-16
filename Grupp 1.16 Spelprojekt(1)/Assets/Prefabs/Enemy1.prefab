@@ -227,6 +227,7 @@ MonoBehaviour:
   buffTime: 0
   buffActive: 0
   dmgBerForeApplyBuff: 5
+  EnemyTyp: 2
   shopSystem1: {fileID: 0}
   OnCurrencyDropped:
     m_PersistentCalls:
