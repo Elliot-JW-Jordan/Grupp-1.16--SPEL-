@@ -19,7 +19,7 @@ public class MoveOnDestroy : MonoBehaviour
 
     private void Update()
     {
-        if (playerhealth.health == 0)
+        if (playerhealth.health <= 0)
         {
             SceneManager.LoadScene("testStart");
         }
