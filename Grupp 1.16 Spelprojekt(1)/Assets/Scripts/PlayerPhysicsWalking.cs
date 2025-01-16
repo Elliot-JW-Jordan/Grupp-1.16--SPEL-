@@ -371,7 +371,7 @@
             {
                 animator.Play("Felix_sida_idle");
         }
-            if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W  ))
         {
                 FelixDirection = 4;
                 animator.Play("Felix_sida_walk");
