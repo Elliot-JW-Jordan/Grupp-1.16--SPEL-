@@ -826,6 +826,7 @@ MonoBehaviour:
   BulletSpeed: 6
   shotCooldown: 0.5
   bulletPlsDie: 5
+  Damage: 2
 --- !u!114 &1284530594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,10 +889,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0537fe3209d5bef49a9f20f877dc0efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWalkSpeed: 4
-  sprintSpeed: 8
-  accelerationofWalk: 5
-  decelerationofWalk: 20
+  maxWalkSpeed: 10
+  sprintSpeed: 20
+  accelerationofWalk: 30
+  decelerationofWalk: 50
   turn: 20
   maxStamnina: 100
   staminaDeductionRate: 10
