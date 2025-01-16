@@ -8,6 +8,11 @@ public class Boss1BulletSummening : MonoBehaviour
     //Rigidbody
     Rigidbody2D rb;
 
+    //aniations settings
+    Animator animator;
+    private bool isHurtCooldown = false;
+    public float hurtCooldownDuration = 1.5f;
+
     //Bullet prefab
     [Header("bullet prefab")]
     public GameObject boss1bullet;
@@ -45,17 +50,17 @@ public class Boss1BulletSummening : MonoBehaviour
         //sets rigidbody
         rb = GetComponent<Rigidbody2D>();
 
+        animator = GetComponent<Animator>();
+
         //geting player
         Player = GameObject.FindWithTag("Player");
-        Transform childTransform = Player.transform.Find("PlayersChild");
-        if (childTransform != null)
-        {
-            PlayerShooting playerShooting = childTransform.GetComponent<PlayerShooting>();
+            PlayerShooting playerShooting = Player.GetComponent<PlayerShooting>();
             if (playerShooting != null)
             {
+            print("PlayerFaound");
                 DamageToTake = playerShooting.Damage;
             }
-        }
+        
 
         BossHealt = MaxBossHealth;
         CurentPhase = 1;
@@ -64,6 +69,8 @@ public class Boss1BulletSummening : MonoBehaviour
 
     private void Update()
     {
+        
+
         // phase 1
         if (BossHealt >= MaxBossHealth / 3 * 2 || BossHealt == MaxBossHealth)
         {
@@ -72,6 +79,11 @@ public class Boss1BulletSummening : MonoBehaviour
                 CurentPhase = 1;
             }
 
+            if (!isHurtCooldown)
+            {
+                animator.Play("Spin_Boss");
+            }
+            
             phase1();
         }
         // phase 2
@@ -85,7 +97,7 @@ public class Boss1BulletSummening : MonoBehaviour
             phase2();
         }
         // phase 3
-        else if (BossHealt < MaxBossHealth / 3 || BossHealt > 0)
+        else if (BossHealt < MaxBossHealth / 3 || BossHealt >= 1)
         {
             if (CurentPhase != 3)
             {
@@ -101,11 +113,14 @@ public class Boss1BulletSummening : MonoBehaviour
             {
                 CurentPhase = 4;
             }
+            phase4();
         }
     }
 
     void phase1() // Phase 1 of the boss
     {
+        
+
         if (Time.time >= nextPlayerBulletTime)
         {
             FireBulletTowardsPlayer(); ;
@@ -154,7 +169,14 @@ public class Boss1BulletSummening : MonoBehaviour
         Destroy(bullet3, BulletLifeTime);
     }
 
-
+    void phase4()//phase 4
+    {
+        if (BossHealt <= 0)
+        {
+            animator.Play("Die_Boss");
+            Debug.Log("Boss defeated!");
+        }
+    }
 
 
     //extention to phase 1
@@ -199,18 +221,18 @@ public class Boss1BulletSummening : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        {   
-            
-            BossHealt -= DamageToTake;
-                
-                Destroy(collision.gameObject);
+        
+        BossHealt -= DamageToTake;
+        animator.Play("Hurt_Boss");
+        StartCoroutine(HurtCooldown());
 
-                if (BossHealt <= 0)
-                {
-                    Destroy(gameObject); // Destroy the boss
-                    Debug.Log("Boss defeated!");
-                }
-            
-        }
+        Destroy(collision.gameObject);
+    }
+
+    private IEnumerator HurtCooldown()
+    {
+        isHurtCooldown = true; 
+        yield return new WaitForSeconds(hurtCooldownDuration); 
+        isHurtCooldown = false; 
     }
 }

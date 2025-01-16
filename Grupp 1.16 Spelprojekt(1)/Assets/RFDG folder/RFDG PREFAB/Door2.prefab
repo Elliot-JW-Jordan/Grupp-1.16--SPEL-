@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 3384311771514163193}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.2, z: 0}
+  m_LocalPosition: {x: 0, y: -11.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exitPointTag: DoorExitPoint
   player: {fileID: 0}
-  doorDirection: {x: 0, y: -1}
+  doorDirection: {x: 0, y: -5}
   block: {fileID: 6985101083623900681, guid: f3fd286aa59780342b482ce03bdfea7c, type: 3}
 --- !u!61 &2171817034754353714
 BoxCollider2D:
