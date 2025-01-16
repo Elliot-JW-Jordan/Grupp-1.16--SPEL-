@@ -180,7 +180,7 @@ public class ShopUI : MonoBehaviour
    
     public void ActivateUIforShop()
     {
-        shopUIpanel.SetActive(!shopUIpanel.activeSelf);
+        shopUIpanel.SetActive(true);
     }
 
 

@@ -10,7 +10,7 @@ public class ManagerOfInventory : MonoBehaviour
 {
     public List<ItemSystem> inventoryList = new List<ItemSystem>();
     public GameObject InventoryMenuUI;
-    private bool activatedMenu;
+    private bool activatedMenu = false;
     public int iInventoryListplacement = -1;
     //public int maxStack = maxNumberOfItems;
     public int maxStack = 4;
@@ -20,6 +20,13 @@ public class ManagerOfInventory : MonoBehaviour
 
     void Start()
     {
+        //För att säkerställa att Inventory UI börjar som avstängd
+        InventoryMenuUI.SetActive(false); //Skymmer Inventory
+        activatedMenu = false; // sätter menyns tillstond till inactivt
+        Time.timeScale = 1; // Så att spelet brjar i en normal standard hastighet.
+
+
+
     }
     public void AddItemToInventory(ItemSystem invAddedItem) // Lägger till en föremåls lista//kanske bya till Sting namn, 
     {
@@ -77,21 +84,32 @@ public class ManagerOfInventory : MonoBehaviour
     void Update()
     {
         //Controlls Inventory UI
-        if (Input.GetKey("i") && activatedMenu)  // må behöva ändra till
-        {
-            Time.timeScale = 1; // Återställer tiden
-            InventoryMenuUI.SetActive(false);
-            activatedMenu = false;
-        } else if (Input.GetKey("i") && activatedMenu) //Kommihåg att sätta inventoryButton till i i settings//
-        {
-            Time.timeScale = 0; //Ger möjlighet att pausa spelet //Må ta bort ifall det ställer till med problem.
 
-            InventoryMenuUI.SetActive(true);
-            activatedMenu = true;
+
+        //Kollar ifall knappen I 3ttrycks ned
+
+        if (Input.GetKeyDown(KeyCode.I))  // må behöva ändra till
+        {
+            if (activatedMenu) // Ifall UI är aktiverad när I trycks så ska UI stängas ned
+            {
+
+                Time.timeScale = 1; // Återställer tiden, Spelet är ite längre pausat
+                InventoryMenuUI.SetActive(false); //stänger ned UI
+                activatedMenu = false; //uPDATERAR BOOLEN för att indikera att UI nu är stängd
+            }
+            else
+            {
+                Time.timeScale = 0; // stoppar tiden, Pausar spelet
+                InventoryMenuUI.SetActive(true); //Visr  OCH öppmnar inventory UI
+                activatedMenu = true; // Nu indikerar boolen att UI är ppen, VIlket den är
+
+            }
+            //Kommihåg att sätta inventoryButton till i i settings//
+
+
         }
-
-
     }
+
     public int AddItem(string itemName, int quantity, Sprite itemSprite, string descriptionPlus)
     {
         Debug.Log($"AddItem was called : {itemName} , {quantity}, {descriptionPlus}");
