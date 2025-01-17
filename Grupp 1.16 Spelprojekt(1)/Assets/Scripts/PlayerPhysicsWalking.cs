@@ -110,7 +110,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         if (!isDoging)
         {
             ApplyMovement();
-            //  ApplyDynamicTurning();
+             ApplyDynamicTurning();
         }
     }
 
