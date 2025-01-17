@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -30,6 +31,8 @@ public class Boss1BulletSummening : MonoBehaviour
     public float MaxBossHealth = 1000f;
     public float BossHealt = 0f;
     public int CurentPhase = 0;
+    private bool HasBossDied = false;
+    public GameObject BossDeath;
 
     //setting for logic
     [Header("setting for logic")]
@@ -69,10 +72,15 @@ public class Boss1BulletSummening : MonoBehaviour
 
     private void Update()
     {
-        
-
-        // phase 1
-        if (BossHealt >= MaxBossHealth / 3 * 2 || BossHealt == MaxBossHealth)
+        if (BossHealt <= 0)
+        {
+            if (CurentPhase != 4)
+            {
+                CurentPhase = 4;
+            }
+            phase4();
+        }
+        else if (BossHealt >= MaxBossHealth / 3 * 2 || BossHealt == MaxBossHealth)
         {
             if (CurentPhase != 1)
             {
@@ -83,10 +91,9 @@ public class Boss1BulletSummening : MonoBehaviour
             {
                 animator.Play("Spin_Boss");
             }
-            
+
             phase1();
         }
-        // phase 2
         else if (BossHealt >= MaxBossHealth / 3 && BossHealt < MaxBossHealth / 3 * 2)
         {
             if (CurentPhase != 2)
@@ -96,8 +103,7 @@ public class Boss1BulletSummening : MonoBehaviour
 
             phase2();
         }
-        // phase 3
-        else if (BossHealt < MaxBossHealth / 3 || BossHealt >= 1)
+        else if (BossHealt < MaxBossHealth / 3 && BossHealt >= 1)
         {
             if (CurentPhase != 3)
             {
@@ -105,15 +111,6 @@ public class Boss1BulletSummening : MonoBehaviour
             }
 
             phase3();
-        }
-        // dead
-        else if (BossHealt == 0)
-        {
-            if (CurentPhase != 4)
-            {
-                CurentPhase = 4;
-            }
-            phase4();
         }
     }
 
@@ -150,7 +147,7 @@ public class Boss1BulletSummening : MonoBehaviour
 
     void phase3() // Phase 3 of the boss
     {
-        float randomAngle = Random.Range(0f, 360f);
+        float randomAngle = UnityEngine.Random.Range(0f, 360f); // Use UnityEngine.Random here
         Quaternion randomRotation = Quaternion.Euler(0f, 0f, randomAngle);
 
         GameObject bullet3 = Instantiate(boss1bullet, transform.position, Quaternion.identity);
@@ -163,20 +160,50 @@ public class Boss1BulletSummening : MonoBehaviour
         Rigidbody2D rb = bullet3.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.velocity = direction * BulletSpeed; 
+            rb.velocity = direction * BulletSpeed;
         }
 
         Destroy(bullet3, BulletLifeTime);
     }
 
-    void phase4()//phase 4
+
+    void phase4()
     {
-        if (BossHealt <= 0)
-        {
-            animator.Play("Death_Boss");
-            Debug.Log("Boss defeated!");
-        }
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Death_Boss"))
+            {
+                if (HasBossDied == false)
+                {
+                    animator.Play("Death_Boss");
+                    Debug.Log("Boss defeated!");
+
+                    // Instantiate the death object
+                    GameObject deathInstance = Instantiate(BossDeath, transform.position, Quaternion.identity);
+
+                    // Start a coroutine to destroy the instantiated object when its animation ends
+                    Animator deathAnimator = deathInstance.GetComponent<Animator>();
+                    if (deathAnimator != null)
+                    {
+                        StartCoroutine(DestroyAfterAnimation(deathInstance, deathAnimator));
+                    }
+
+                    // Destroy the boss game object
+                    Destroy(gameObject);
+
+                    HasBossDied = true;
+                }
+            }
     }
+
+        private IEnumerator DestroyAfterAnimation(GameObject instance, Animator instanceAnimator)
+        {
+            while (!instanceAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") &&
+                   instanceAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            {
+                yield return null; 
+            }
+
+            Destroy(instance);
+        }
 
 
     //extention to phase 1
@@ -220,10 +247,11 @@ public class Boss1BulletSummening : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        BossHealt -= DamageToTake;
-        animator.Play("Damage_Boss");
-        StartCoroutine(HurtCooldown());
+            BossHealt -= DamageToTake;
+            BossHealt = Mathf.Max(0, BossHealt);
+            animator.Play("Damage_Boss");
+            StartCoroutine(HurtCooldown());
+        
 
     }
 
