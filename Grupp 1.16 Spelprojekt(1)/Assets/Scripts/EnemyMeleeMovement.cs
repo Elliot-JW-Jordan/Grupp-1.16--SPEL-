@@ -32,13 +32,23 @@ public class EnemyAI_MoveTowardsPlayer : MonoBehaviour
 
             CalculatePredominantDirection();
 
-            if (predominantDirection == "Positive X")
+            if (predominantDirection == "Negative X")
             {
                 animator.Play("Eye_Side_Move");
+
+                if (transform.localScale.x < 0)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
             }
-            else if (predominantDirection == "Negative X")
+            else if (predominantDirection == "Positive X")
             {
                 animator.Play("Eye_Side_Move");
+
+                if (transform.localScale.x > 0)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
             }
             else if (predominantDirection == "Positive Y")
             {
