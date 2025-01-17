@@ -12,11 +12,11 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     private int FelixDirection = 0;
 
     [Header("Values of Walking and Sprinting")]
-    public float maxWalkSpeed = 4f; //Maximala hastigheten som felix kkan gåå ii
-    public float sprintSpeed = 8f;
-    public float accelerationofWalk = 5f;
-    public float decelerationofWalk = 15f;
-    public float turn = 20f;
+    public float maxWalkSpeed = 20f; //Maximala hastigheten som felix kkan gåå ii
+    public float sprintSpeed = 30f;
+    public float accelerationofWalk = 20f;
+    public float decelerationofWalk = 50f;
+    public float turn = 40f;
 
     private bool isFlipping = false; // kollar ifall spelraren flipper eller inte
 
@@ -33,15 +33,15 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     private float fatigueTime = 0f;
 
     [Header("Dodge Values")]
-    public float dodgeSpeed = 15f;
-    public float dogeTimer = 0.35f;
+    public float dodgeSpeed = 30f;
+    public float dogeTimer = 0.5f;
     public float dodgeDownTime = 1.5f;
     private bool isDoging = false;
     private bool canDodge = true;
 
     [Header("Physics Values")]
-    public float angularDrag = 5f;
-    public float linearjarDrag = 10f;
+    public float angularDrag = 9f;
+    public float linearjarDrag = 19f;
 
     [Header("Camera Settings")]
     public Camera camera;

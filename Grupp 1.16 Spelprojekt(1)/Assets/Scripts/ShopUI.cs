@@ -57,8 +57,7 @@ public class ShopUI : MonoBehaviour
 
         //Afär UI kommer altid starta dold
         shopUIpanel.SetActive(false);
-        // fortesting porpusese
-        CurrencyManager.Instance.AddCurrency(10000);
+        
         
     }
  

@@ -175,7 +175,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         //visar att rutan är tom  genom bool
         isfull = false;
         quantityText.text = string.Empty;
-        itemImageINV.sprite = null;
+        itemImageINV.sprite = itemSpriteInv;
         quantityText.enabled = false;
 
     }
