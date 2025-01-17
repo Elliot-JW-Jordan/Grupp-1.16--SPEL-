@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UI;
+
 
 public class Boss1BulletSummening : MonoBehaviour
 {
@@ -33,6 +35,7 @@ public class Boss1BulletSummening : MonoBehaviour
     public int CurentPhase = 0;
     private bool HasBossDied = false;
     public GameObject BossDeath;
+    public Image bossgreen;
 
     //setting for logic
     [Header("setting for logic")]
@@ -47,6 +50,7 @@ public class Boss1BulletSummening : MonoBehaviour
     [Header("player prefab")]
     public GameObject Player;
     public float DamageToTake;
+
 
     private void Start()
     {
@@ -63,10 +67,19 @@ public class Boss1BulletSummening : MonoBehaviour
                 print("PlayerFaound");
                 DamageToTake = playerShooting.Damage;
             }
-        
 
-        BossHealt = MaxBossHealth;
-        CurentPhase = 1;
+        {
+            BossHealt = MaxBossHealth;
+            UpdateHealthBar();
+            CurentPhase = 1;
+
+        }
+          void UpdateHealthBar()
+        {
+            float healthPercentage = (float)BossHealt / MaxBossHealth;
+            bossgreen.fillAmount = healthPercentage; // Update the fill amount of the green health bar
+        }
+
 
     }
 
@@ -251,7 +264,12 @@ public class Boss1BulletSummening : MonoBehaviour
             BossHealt = Mathf.Max(0, BossHealt);
             animator.Play("Damage_Boss");
             StartCoroutine(HurtCooldown());
-        
+        UpdateHealthBar();
+        void UpdateHealthBar()
+        {
+            float healthPercentage = (float)BossHealt / MaxBossHealth;
+            bossgreen.fillAmount = healthPercentage; // Update the fill amount of the green health bar
+        }
 
     }
 

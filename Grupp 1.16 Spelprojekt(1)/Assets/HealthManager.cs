@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
+    
 {
     public float maxHealth = 10f;  // Max health of the player (set to 10)
     public float health;           // Current health of the player

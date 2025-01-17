@@ -2,34 +2,93 @@ using UnityEngine;
 
 public class EnemyAI_MoveTowardsPlayer : MonoBehaviour
 {
-    public float moveSpeed = 3f;  // Speed of enemy movement
-    private Transform player;     // Reference to the player's transform
-    private Rigidbody2D rb;       // Reference to the Rigidbody2D component
+    public float moveSpeed = 3f; 
+    private Transform player;     
+    private Rigidbody2D rb;      
+    Animator animator;
+
+    private float lastXPosition;
+    private float lastYPosition;
+
+    public string predominantDirection = "None";
 
     void Start()
     {
-        // Find the player by tag
+        animator = GetComponent<Animator>();
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // Get the Rigidbody2D component
         rb = GetComponent<Rigidbody2D>();
+
+        lastXPosition = transform.position.x;
+        lastYPosition = transform.position.y;
     }
 
     void FixedUpdate()
     {
         if (player != null)
         {
-            // Move the enemy towards the player
             MoveTowardsPlayer();
+
+            CalculatePredominantDirection();
+
+            if (predominantDirection == "Negative X")
+            {
+                animator.Play("Eye_Side_Move");
+
+                if (transform.localScale.x < 0)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
+            }
+            else if (predominantDirection == "Positive X")
+            {
+                animator.Play("Eye_Side_Move");
+
+                if (transform.localScale.x > 0)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
+            }
+            else if (predominantDirection == "Positive Y")
+            {
+                animator.Play("Eye_Back_Move");
+            }
+            else if (predominantDirection == "Negative Y")
+            {
+                animator.Play("Eye_Fram_Walk");
+            }
         }
     }
 
     void MoveTowardsPlayer()
     {
-        // Calculate direction from enemy to player
         Vector2 direction = (player.position - transform.position).normalized;
 
-        // Move the enemy using Rigidbody2D's velocity
         rb.velocity = direction * moveSpeed;
+    }
+
+    void CalculatePredominantDirection()
+    {
+        float deltaX = Mathf.Abs(transform.position.x - lastXPosition);
+        float deltaY = Mathf.Abs(transform.position.y - lastYPosition);
+
+        if (deltaX > deltaY)
+        {
+            predominantDirection = transform.position.x > lastXPosition ? "Positive X" : "Negative X";
+        }
+        else if (deltaY > deltaX)
+        {
+            predominantDirection = transform.position.y > lastYPosition ? "Positive Y" : "Negative Y";
+        }
+        else
+        {
+            predominantDirection = "None";
+        }
+
+        lastXPosition = transform.position.x;
+        lastYPosition = transform.position.y;
+
+        Debug.Log("Predominant Direction: " + predominantDirection);
     }
 }
