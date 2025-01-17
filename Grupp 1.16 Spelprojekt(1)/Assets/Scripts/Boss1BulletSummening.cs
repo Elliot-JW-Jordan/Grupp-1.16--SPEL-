@@ -54,10 +54,10 @@ public class Boss1BulletSummening : MonoBehaviour
 
         //geting player
         Player = GameObject.FindWithTag("Player");
-            PlayerShooting playerShooting = Player.GetComponent<PlayerShooting>();
+            projectile playerShooting = Player.GetComponent<projectile>();
             if (playerShooting != null)
             {
-            print("PlayerFaound");
+                print("PlayerFaound");
                 DamageToTake = playerShooting.Damage;
             }
         
@@ -220,13 +220,13 @@ public class Boss1BulletSummening : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        
+
+        print("Damage" +DamageToTake);
         BossHealt -= DamageToTake;
+        print("Boss: " + BossHealt);
         animator.Play("Hurt_Boss");
         StartCoroutine(HurtCooldown());
 
-        Destroy(collision.gameObject);
     }
 
     private IEnumerator HurtCooldown()

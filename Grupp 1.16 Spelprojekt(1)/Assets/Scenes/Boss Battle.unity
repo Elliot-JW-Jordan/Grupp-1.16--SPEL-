@@ -174,7 +174,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 10
+  healAmountQ: 0
   green: {fileID: 0}
+  DamageOnPlayer: 2
 --- !u!114 &41995004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +207,7 @@ MonoBehaviour:
   BulletSpeed: 6
   shotCooldown: 0.5
   bulletPlsDie: 5
+  Damage: 2
 --- !u!50 &41995006
 Rigidbody2D:
   serializedVersion: 4
@@ -400,8 +403,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 9.6}
-    newSize: {x: 19.2, y: 9.6}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 3.2, y: 3.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -445,8 +448,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 9.6}
-    newSize: {x: 19.2, y: 9.6}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 3.2, y: 3.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -493,6 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3084327fb1875b41bc5e88843f938ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtCooldownDuration: 1.5
   boss1bullet: {fileID: 7980892092367775816, guid: 59224ae1456bd8240b7495373b3ab187, type: 3}
   BulletSpeed: 6
   BulletAmount: 0
@@ -569,12 +573,12 @@ SpriteRenderer:
   m_SortingLayerID: -853884449
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 180795641, guid: 4adb56ffa8c3b024bafb4904cd646811, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: b62632b066b58c74899ff6970db8c787, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 19.2, y: 9.6}
+  m_Size: {x: 3.2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
