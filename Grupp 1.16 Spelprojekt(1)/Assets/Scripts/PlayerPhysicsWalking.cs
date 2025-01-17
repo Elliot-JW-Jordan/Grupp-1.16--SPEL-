@@ -18,6 +18,8 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     public float decelerationofWalk = 15f;
     public float turn = 20f;
 
+    private bool isFlipping = false; // kollar ifall spelraren flipper eller inte
+
     [Header("Stamina Values")]
     public float maxStamnina = 100f;
     public float staminaDeductionRate = 10f;
@@ -108,7 +110,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         if (!isDoging)
         {
             ApplyMovement();
-          //  ApplyDynamicTurning();
+            //  ApplyDynamicTurning();
         }
     }
 
@@ -132,18 +134,33 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
     void ApplyDynamicTurning()
     {
-        if (inputOfMoving.x != 0)
-        {
-            ForASmoothHorizontalFlip(inputOfMoving.x > 0 ? 1f : -1f, turn);
+        //Börjar bara flippa ifalll spelaren inte gör det och spelaren rörs sig horizontielt
+        if (!isFlipping && inputOfMoving.x != 0) //Om spelaren inte FLIPPAR och input of moving x inte är lika med noll
+
+        {// Påbörjer en corountine baserat på inputen
+            StartCoroutine(ForASmoothHorizontalFlip(inputOfMoving.x > 0 ? 1f : -1f, turn));
         }
+
     }
 
-    void ForASmoothHorizontalFlip(float targetScaleX, float smoothness)
+    IEnumerator ForASmoothHorizontalFlip(float targetScaleX, float smoothness)
     {
+        isFlipping = true; //Signalerar att figuren "flippar"
+        //hämtar X skalan av spelaren
         float currentScaleX = transform.localScale.x;
-        float newScaleX = Mathf.MoveTowards(currentScaleX, targetScaleX, Time.deltaTime * smoothness);
-        newScaleX = InOutEasing(currentScaleX, newScaleX, smoothness);
-        transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
+        //sluta inte med skalan innan den når targetScaleX
+        while (!Mathf.Approximately(currentScaleX, targetScaleX))
+        {// Flytta skalan till målskalam
+            currentScaleX = Mathf.MoveTowards(currentScaleX, targetScaleX, Time.deltaTime * smoothness);
+            currentScaleX = InOutEasing(currentScaleX, targetScaleX, smoothness);
+            //Uppdaterar skala av x
+            transform.localScale = new Vector3(currentScaleX, transform.localScale.y, transform.localScale.z);
+            yield return null; // Den väntar på nästa frame
+        }
+        //snappar till målet, Exakt
+      
+        transform.localScale = new Vector3(currentScaleX, transform.localScale.y, transform.localScale.z); //Snappar spelaren till targetscale.x
+        isFlipping = false; //spelaren har lyckats med att flippa
     }
 
     float InOutEasing(float start, float end, float speed)
@@ -269,7 +286,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
             camera.transform.localPosition = Vector3.Lerp(currentPosition, new Vector3(currentPosition.x, currentPosition.y + pulseOffset, currentPosition.z), 0.1f);
         }
     }
-       public void MovementEffectOfArmour()
+    public void MovementEffectOfArmour()
     {
 
     }
@@ -319,4 +336,8 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
             animator.Play("Felix_sida_idle");
         }
     }
+
 }
+    
+
+
