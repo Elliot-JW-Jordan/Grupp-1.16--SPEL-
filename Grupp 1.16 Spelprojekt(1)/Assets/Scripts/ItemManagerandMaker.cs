@@ -57,7 +57,7 @@ public class ItemManagerandMaker : MonoBehaviour
        itemRarity: Rarity.Common,
        price: 30,
        stats: new Dictionary<string, float> { { "Damage Enhacing", 1.1f } },
-       type: ConsumableType.HealingPotion,
+       type: ConsumableType.Buff,
        duration: 200f,
        healAmount: 0f,
        buffingFactor: 1.1f);
@@ -69,7 +69,7 @@ public class ItemManagerandMaker : MonoBehaviour
       itemRarity: Rarity.Epic,
       price: 50,
       stats: new Dictionary<string, float> { { "Damage Enhacing", 1.18f } },
-      type: ConsumableType.HealingPotion,
+      type: ConsumableType.Buff,
       duration: 300f,
       healAmount: 0f,
       buffingFactor: 1.18f);
@@ -81,7 +81,7 @@ public class ItemManagerandMaker : MonoBehaviour
      itemRarity: Rarity.Legendary,
      price: 70,
      stats: new Dictionary<string, float> { { "Damage Enhacing", 1.2f } },
-     type: ConsumableType.HealingPotion,
+     type: ConsumableType.Buff,
      duration: 360f,
      healAmount: 0f,
      buffingFactor: 1.2f);

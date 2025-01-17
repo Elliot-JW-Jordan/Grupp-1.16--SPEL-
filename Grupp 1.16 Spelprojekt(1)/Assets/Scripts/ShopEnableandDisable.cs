@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopEnableandDisable : MonoBehaviour
@@ -9,29 +10,29 @@ public class ShopEnableandDisable : MonoBehaviour
 
 
 
-    private void OnMouseDown()
-    {
-        //undersök och se ifall Shop Ui går att activera
-        if (shopUI != null)
-        {
-            shopUI.ActivateUIforShop();
-            //Kallar till metoden för att activera shoppen
-            Debug.Log("The Shop has been activated");
-        } else
-        {
-            Debug.Log("The shop is not able to be activated. Chech if assigned correctlt");
-        }
-    }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (shopUI == null)
+        {
+            Debug.LogError("ShopUI not found, Please assign in inspector");
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            shopUI.ActivateUIforShop();
+            Debug.Log("The Shop has been activated");
+
+        }
+
     }
 }
