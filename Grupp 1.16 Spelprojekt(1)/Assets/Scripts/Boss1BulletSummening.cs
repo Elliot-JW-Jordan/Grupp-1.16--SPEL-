@@ -173,7 +173,7 @@ public class Boss1BulletSummening : MonoBehaviour
     {
         if (BossHealt <= 0)
         {
-            animator.Play("Die_Boss");
+            animator.Play("Death_Boss");
             Debug.Log("Boss defeated!");
         }
     }
@@ -221,10 +221,8 @@ public class Boss1BulletSummening : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        print("Damage" +DamageToTake);
         BossHealt -= DamageToTake;
-        print("Boss: " + BossHealt);
-        animator.Play("Hurt_Boss");
+        animator.Play("Damage_Boss");
         StartCoroutine(HurtCooldown());
 
     }
