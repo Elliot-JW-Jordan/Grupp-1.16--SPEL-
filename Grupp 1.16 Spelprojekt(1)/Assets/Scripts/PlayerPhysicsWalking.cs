@@ -34,7 +34,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
     [Header("Dodge Values")]
     public float dodgeSpeed = 100f;
-    public float dogeTimer = 0.7f;
+    public float dogeTimer = 0.2f;
     public float dodgeDownTime = 1.5f;
     private bool isDoging = false;
     private bool canDodge = true;

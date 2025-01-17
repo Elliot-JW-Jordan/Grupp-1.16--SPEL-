@@ -2197,7 +2197,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.46274513, g: 0.46274513, b: 0.46274513, a: 0.27058825}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2275,7 +2275,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3687,7 +3687,7 @@ MonoBehaviour:
   sprintSpeed: 30
   accelerationofWalk: 20
   decelerationofWalk: 50
-  turn: 20
+  turn: 40
   maxStamnina: 100
   staminaDeductionRate: 10
   staminaRegen: 10
@@ -3695,14 +3695,14 @@ MonoBehaviour:
   fatigueTreshhold: 8
   staminaFatiguerate: 0.5
   exhuastionPenalty: 0.5
-  dodgeSpeed: 15
-  dogeTimer: 0.35
+  dodgeSpeed: 100
+  dogeTimer: 0.2
   dodgeDownTime: 1.5
-  angularDrag: 5
-  linearjarDrag: 10
+  angularDrag: 9
+  linearjarDrag: 19
   camera: {fileID: 519420031}
   cameraSShake: {fileID: 519420034}
-  shakeMagnitude: 0.3
+  shakeMagnitude: 0.5
   shakeLe: 0.2
   zoomspeed: 0.15
   fovReduction: 0
