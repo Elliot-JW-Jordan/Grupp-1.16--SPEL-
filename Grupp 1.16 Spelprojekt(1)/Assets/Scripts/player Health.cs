@@ -43,17 +43,25 @@ public class playerHealth : MonoBehaviour
         Debug.Log($"Original DMG to payer : {amount}, Reduced DMG : {finalDamage}, Reduction Percentage : {damageRadeuctionperventage * 100}%");
 
         
-        health -= finalDamage;
-        if (health < 0)
-        {
-            ripFelix.CrossFade("död_felix_rip", 0.1f);
-
-            float FelixDeathAnimationLenght = ripFelix.GetCurrentAnimatorStateInfo(4).length;
-            
-            Invoke(nameof(gameEndLoadNewScene), FelixDeathAnimationLenght);
-        }
+            health -= finalDamage;
+            if (health < 0)
+            {
+                StartCoroutine(PlayAnimationAndLoadScene());
+            }
         UpdateHealthBar();
 
+    }
+    // Coroutine för att spela animationen och ladda scenen med fördröjning
+    IEnumerator PlayAnimationAndLoadScene()
+    {
+        // Spela animationen
+        ripFelix.Play("död_felix_rip");
+
+        // Vänta på att animationen ska spela klart (t.ex. 3 sekunder, eller hur lång tid animationen är)
+        yield return new WaitForSeconds(35); // Justera tiden efter din animation
+
+        // Ladda scenen efter animationen
+        SceneManager.LoadScene("testStart");
     }
 
     public void WithArmour()
@@ -109,9 +117,6 @@ public class playerHealth : MonoBehaviour
 
     }
 
-    void gameEndLoadNewScene()
-    {
-        SceneManager.LoadScene("testStart");
-    }
+    
 
 }
