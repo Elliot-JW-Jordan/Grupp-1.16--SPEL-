@@ -6,10 +6,9 @@ public class MoveOnDestroy : MonoBehaviour
 {
    
     public string testStart;
-    public int waitDontLoadNextSceneYet = 5; // Fördröjning i sekunder
     public playerHealth playerhealth;
 
-    private bool isSceneLoading = false; // För att säkerställa att scenen bara laddas en gång
+   
 
     private void Start()
     {
@@ -24,18 +23,12 @@ public class MoveOnDestroy : MonoBehaviour
 
     private void Update()
     {
-        if (playerhealth != null && playerhealth.health <= 0 && !isSceneLoading)
+        if (playerhealth != null && playerhealth.health <= 0)
         {
-            
-            
-            isSceneLoading = true; // Förhindrar att Coroutine startas flera gånger
-            StartCoroutine(LoadSceneWithDelay());
+
+            SceneManager.LoadScene("testStart"); // Ladda scenn
         }
     }
 
-    private IEnumerator LoadSceneWithDelay()
-    {
-        yield return new WaitForSeconds(waitDontLoadNextSceneYet); // Vänta i angivet antal sekunder
-        SceneManager.LoadScene("testStart"); // Ladda scenen
-    }
+   
 }
