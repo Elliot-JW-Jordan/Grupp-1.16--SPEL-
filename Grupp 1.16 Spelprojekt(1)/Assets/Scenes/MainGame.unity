@@ -1086,8 +1086,8 @@ MonoBehaviour:
   DoorL: {fileID: 2609226954368091820, guid: 5cdd3eb0d2ecf104496f7eda8523a3e6, type: 3}
   rooms: []
   Enemys:
-  - {fileID: 6117148497450987960, guid: d1633ac4ef247e4419819064db83136a, type: 3}
-  - {fileID: 5507399138944477522, guid: 224cb5ca4d3edea499c8fd4fc53bace5, type: 3}
+  - {fileID: 8674349106252009857, guid: 7137afc6c58facb47804879f85dd798c, type: 3}
+  - {fileID: 4287560983983936026, guid: 9fd98d1ed12ce2f4492cb4917fc2f64a, type: 3}
   waitTime: 5
   boss: {fileID: 6474000456917596281, guid: 014b339e1c9185948b88ed1487eff1fe, type: 3}
   Shop: {fileID: 5180058504251575432, guid: 2ae56f07c76c7104e870852510156101, type: 3}
