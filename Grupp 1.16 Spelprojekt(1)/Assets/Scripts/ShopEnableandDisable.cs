@@ -27,7 +27,7 @@ public class ShopEnableandDisable : MonoBehaviour
             Debug.LogError("ShopUI not found, Please assign in inspector");
             return;
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             shopUI.ActivateUIforShop();
             Debug.Log("The Shop has been activated");
