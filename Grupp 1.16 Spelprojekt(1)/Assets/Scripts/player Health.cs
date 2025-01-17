@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 
 public class playerHealth : MonoBehaviour
 {
+    Animator ripFelix;
     public int health;
     public int maxHealth = 10;
     public int healAmountQ = 0;
@@ -20,6 +22,7 @@ public class playerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ripFelix = GetComponent<Animator>();
         health = maxHealth;
         UpdateHealthBar();
     }
@@ -43,8 +46,11 @@ public class playerHealth : MonoBehaviour
         health -= finalDamage;
         if (health < 0)
         {
-            Destroy(gameObject);
+            ripFelix.CrossFade("död_felix_rip", 0.1f);
+
+            float FelixDeathAnimationLenght = ripFelix.GetCurrentAnimatorStateInfo(4).length;
             
+            Invoke(nameof(gameEndLoadNewScene), FelixDeathAnimationLenght);
         }
         UpdateHealthBar();
 
@@ -100,8 +106,12 @@ public class playerHealth : MonoBehaviour
     {
         float healthPercentage = (float)health / maxHealth;
         green.fillAmount = healthPercentage; // Update the fill amount of the green health bar
+
     }
 
-
+    void gameEndLoadNewScene()
+    {
+        SceneManager.LoadScene("testStart");
+    }
 
 }
