@@ -766,7 +766,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 472383239}
   m_HandleRect: {fileID: 472383238}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2895,6 +2895,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1963907863}
     m_Modifications:
+    - target: {fileID: 1485609370327701602, guid: c390a12b800a449438ba9eb7319f467e, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1485609370327701602, guid: c390a12b800a449438ba9eb7319f467e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3060745049268813352, guid: c390a12b800a449438ba9eb7319f467e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2986,6 +2994,18 @@ PrefabInstance:
     - target: {fileID: 3060745049268813352, guid: c390a12b800a449438ba9eb7319f467e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290521451964969973, guid: c390a12b800a449438ba9eb7319f467e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3387633
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290521451964969973, guid: c390a12b800a449438ba9eb7319f467e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.31980526
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290521451964969973, guid: c390a12b800a449438ba9eb7319f467e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9685534
       objectReference: {fileID: 0}
     - target: {fileID: 4611579291740894599, guid: c390a12b800a449438ba9eb7319f467e, type: 3}
       propertyPath: m_Maskable

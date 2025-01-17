@@ -12,10 +12,10 @@ public class PlayerPhysicsWalking : MonoBehaviour
     private int FelixDirection = 0;
 
     [Header("Values of Walking and Sprinting")]
-    public float maxWalkSpeed = 4f;
+    public float maxWalkSpeed = 4f; //Maximala hastigheten som felix kkan gåå ii
     public float sprintSpeed = 8f;
     public float accelerationofWalk = 5f;
-    public float decelerationofWalk = 10f;
+    public float decelerationofWalk = 15f;
     public float turn = 20f;
 
     [Header("Stamina Values")]
@@ -108,7 +108,7 @@ public class PlayerPhysicsWalking : MonoBehaviour
         if (!isDoging)
         {
             ApplyMovement();
-            ApplyDynamicTurning();
+          //  ApplyDynamicTurning();
         }
     }
 
