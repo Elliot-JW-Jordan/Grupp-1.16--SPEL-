@@ -33,8 +33,8 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     private float fatigueTime = 0f;
 
     [Header("Dodge Values")]
-    public float dodgeSpeed = 30f;
-    public float dogeTimer = 0.5f;
+    public float dodgeSpeed = 100f;
+    public float dogeTimer = 0.7f;
     public float dodgeDownTime = 1.5f;
     private bool isDoging = false;
     private bool canDodge = true;
@@ -46,7 +46,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     [Header("Camera Settings")]
     public Camera camera;
     public CameraSShake cameraSShake;
-    public float shakeMagnitude = 0.3f;
+    public float shakeMagnitude = 0.5f;
     public float shakeLe = 0.2f;
 
     [Header("Dynamic Camera effects")]
