@@ -428,6 +428,7 @@ MonoBehaviour:
   shopUIpanel: {fileID: 0}
   shopSystem: {fileID: 0}
   itemManagerandMaker: {fileID: 0}
+  currencyFormat: Currency {0}
 --- !u!114 &160425897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,7 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0d9f8155124b247a9a23b37b8cfd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBullet: {fileID: 8628621600807952717, guid: cff1e1da59fe72b44be9e7e5f026899f, type: 3}
+  playerBullet: {fileID: 7155064023601529802, guid: 437afe1e2587b644a9980aeabb0386bb, type: 3}
   BulletSpeed: 6
   shotCooldown: 0.5
   bulletPlsDie: 5
@@ -855,7 +856,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 10
+  healAmountQ: 0
   green: {fileID: 1422804619}
+  DamageOnPlayer: 2
 --- !u!95 &1284530596
 Animator:
   serializedVersion: 5
@@ -890,9 +893,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxWalkSpeed: 20
-  sprintSpeed: 40
-  accelerationofWalk: 30
-  decelerationofWalk: 20
+  sprintSpeed: 30
+  accelerationofWalk: 20
+  decelerationofWalk: 50
   turn: 20
   maxStamnina: 100
   staminaDeductionRate: 10
