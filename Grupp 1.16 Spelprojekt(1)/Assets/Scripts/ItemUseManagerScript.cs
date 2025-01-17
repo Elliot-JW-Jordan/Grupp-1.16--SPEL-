@@ -53,7 +53,7 @@ public class ItemUseManagerScript : MonoBehaviour
 
         enemyhealth.ApplyDamageBuff(buffFactor, duration);
     }
-    private Dictionary<string, Armour> equippedArmour = new Dictionary<string, Armour>
+    public static Dictionary<string, Armour> equippedArmour = new Dictionary<string, Armour>
     {
         {"Helmet", null },
         {"ChestPlate", null },
@@ -61,7 +61,7 @@ public class ItemUseManagerScript : MonoBehaviour
         {"Boots", null },
     };
 
-    private void EquipArmour(Armour armour)
+    public void EquipArmour(Armour armour)
     {
         string armourType = armour.armourType.ToString();
         Debug.Log($"Equipping {armourType} armor : {armour.itemName} ");

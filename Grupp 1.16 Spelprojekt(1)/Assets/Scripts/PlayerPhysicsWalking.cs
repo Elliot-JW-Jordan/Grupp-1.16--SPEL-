@@ -6,7 +6,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerPhysicsWalking : MonoBehaviour
+public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 {
     Animator animator;
     private int FelixDirection = 0;
