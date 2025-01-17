@@ -26,6 +26,19 @@ public class ItemManagerandMaker : MonoBehaviour
           buffingFactor: 0f);
 
 
+        Consumable tinyHealingPotion = ItemMaker.Create<Consumable>(
+          name: "Tiny Healing Potion",
+          description: "Common: Heals 1 HP",
+          icon: null,
+         itemRarity: Rarity.Common,
+         price: 5,
+         stats: new Dictionary<string, float> { { "HealingPower", 1f } },
+         type: ConsumableType.HealingPotion,
+         duration: 0f,
+         healAmount: 1f,
+         buffingFactor: 0f);
+
+
         Consumable HealingPotion = ItemMaker.Create<Consumable>(
            name: "Regular Healing Potion",
            description: "Uncommon: Heals 4 HP",
@@ -86,6 +99,18 @@ public class ItemManagerandMaker : MonoBehaviour
      healAmount: 0f,
      buffingFactor: 1.2f);
 
+        Consumable DMGBuffNumber4 = ItemMaker.Create<Consumable>(
+   name: "Tiny Damange Enhancing Potion",
+   description: "Common: Increases Damage With 1.2",
+   icon: null,
+  itemRarity: Rarity.Common,
+  price: 70,
+  stats: new Dictionary<string, float> { { "Damage Enhacing", 1.2f } },
+  type: ConsumableType.Buff,
+  duration: 30f,
+  healAmount: 0f,
+  buffingFactor: 1.2f);
+
 
         Armour LeatherHelmet = ItemMaker.Create<Armour>(
             name: "Weathered Leather Cap",
@@ -99,6 +124,62 @@ public class ItemManagerandMaker : MonoBehaviour
             defensiveValue: 10f,
             weightA: 1.5f
             );
+
+
+        Armour IronHelmet = ItemMaker.Create<Armour>(
+          name: "Old Iron Helmet",
+          description: " A soliders standard helmet",
+          icon: null,
+          itemRarity: Rarity.Uncommon,
+          price: 100,
+          stats: new Dictionary<string, float> { { "Armour Rating", 15f } },
+          type: ArmourType.Helmet,
+          durability: 80f,
+          defensiveValue: 15f,
+          weightA: 2f
+          );
+
+        Armour IronChestPlate = ItemMaker.Create<Armour>(
+          name: "Old Iron Chestplate",
+          description: " A soliders standard chestplate",
+          icon: null,
+          itemRarity: Rarity.Uncommon,
+          price: 120,
+          stats: new Dictionary<string, float> { { "Armour Rating", 25f } },
+          type: ArmourType.Chestplate,
+          durability: 80f,
+          defensiveValue: 25f,
+          weightA: 4f
+          );
+
+
+        Armour IronLeggings = ItemMaker.Create<Armour>(
+         name: "Old Iron Leggings",
+         description: " A soliders standard Leggings",
+         icon: null,
+         itemRarity: Rarity.Uncommon,
+         price: 120,
+         stats: new Dictionary<string, float> { { "Armour Rating", 25f } },
+         type: ArmourType.Leggings,
+         durability: 80f,
+         defensiveValue: 25f,
+         weightA: 4f
+         );
+
+        Armour IronBoots = ItemMaker.Create<Armour>(
+        name: "Old Iron Boots",
+        description: " A soliders standard Boot",
+        icon: null,
+        itemRarity: Rarity.Uncommon,
+        price: 110,
+        stats: new Dictionary<string, float> { { "Armour Rating", 15f } },
+        type: ArmourType.boots,
+        durability: 80f,
+        defensiveValue: 15f,
+        weightA: 2f
+        );
+
+
 
         Armour LeatherChestplate = ItemMaker.Create<Armour>(
            name: "Weathered Leather Chestplate",
@@ -143,10 +224,15 @@ public class ItemManagerandMaker : MonoBehaviour
            defensiveValue: 15f,
            weightA: 2.5f
            );
-
+        
         listOfitems.Add(ssmallHealingPotion);
+        listOfitems.Add(tinyHealingPotion);
         listOfitems.Add(HealingPotion);
         listOfitems.Add(GreaterHealingPotion);
+        listOfitems.Add(IronHelmet);
+        listOfitems.Add(IronChestPlate);
+        listOfitems.Add(IronLeggings);
+        listOfitems.Add(IronBoots);
         listOfitems.Add(DMGBuff);
         listOfitems.Add(DMGBuffNumber2);
         listOfitems.Add(DMGBuffNumber3);
