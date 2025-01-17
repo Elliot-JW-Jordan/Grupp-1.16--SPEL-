@@ -37,14 +37,14 @@ public class CameraSShake : MonoBehaviour
                 Vector3 shakeShake = Random.insideUnitSphere * magnitude;
                 shakeShake.z = 0; //så den inte skakar på Z-leden
                 //Påverkar CurrenCamaeraPos med offsetten, Tillämpar kamera med offset.
-                transform.localPosition = currentCameraPos + shakeShake;
+                transform.localPosition +=  shakeShake;
                 shakeTimeCounter -= Time.deltaTime;
             }
             else
             {
                 //Upphör skakningen
                 isshaking = false;
-                transform.localPosition = currentCameraPos;
+               
             }
         }
     }
