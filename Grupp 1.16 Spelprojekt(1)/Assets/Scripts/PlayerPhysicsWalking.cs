@@ -40,8 +40,8 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     private bool canDodge = true;
 
     [Header("Physics Values")]
-    public float angularDrag = 9f;
-    public float linearjarDrag = 19f;
+    public float angularDrag = 20f;
+    public float linearjarDrag = 24f;
 
     [Header("Camera Settings")]
     public Camera camera;
