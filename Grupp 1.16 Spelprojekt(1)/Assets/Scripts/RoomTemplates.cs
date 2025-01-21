@@ -23,11 +23,6 @@ public class RoomTemplates : MonoBehaviour
     private bool spawnedBoss = false;
     public GameObject boss;
 
-    private int ShopRoomNumber = 0;
-    public GameObject Shop;
-    private int maxShops;
-    private bool spawnedAllShops = false;
-
     private void Update()
     {
         if (waitTime > 0)
@@ -38,9 +33,6 @@ public class RoomTemplates : MonoBehaviour
 
         if (!spawnedBoss)
             SpawnBoss();
-
-        if (!spawnedAllShops)
-            SpawnShops();
     }
 
     private void SpawnBoss()
@@ -51,25 +43,4 @@ public class RoomTemplates : MonoBehaviour
         spawnedBoss = true;
     }
 
-    private void SpawnShops()
-    {
-        if (rooms.Count < 5) return;
-
-        maxShops = Mathf.Max(1, rooms.Count / 7); // Ensure at least 1 shop.
-        HashSet<int> usedIndices = new HashSet<int>();
-
-        for (int i = 0; i < maxShops; i++)
-        {
-            int shopRoomIndex;
-            do
-            {
-                shopRoomIndex = Random.Range(2, rooms.Count);
-            } while (usedIndices.Contains(shopRoomIndex));
-
-            usedIndices.Add(shopRoomIndex);
-            Instantiate(Shop, rooms[shopRoomIndex].transform.position, Quaternion.identity);
-        }
-
-        spawnedAllShops = true;
-    }
 }
