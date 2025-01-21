@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class RoomTemplates : MonoBehaviour
 {
+    [Header("Main Rooms")]
     public GameObject[] BottomRooms;
     public GameObject[] TopRooms;
     public GameObject[] LeftRooms;
     public GameObject[] RightRooms;
 
+    [Header("OneDoorRooms")]
+    public GameObject[] EndBottomRooms;
+    public GameObject[] EndTopRooms;
+    public GameObject[] EndLeftRooms;
+    public GameObject[] EndRightRooms;
+
+    [Header("Extra")]
     public GameObject closedRooms;
     public GameObject DoorU;
     public GameObject DoorD;
