@@ -49,6 +49,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgraound ot the backgraound
+    uniqueID: 3695413575
+    locked: 0
   - name: Door
     uniqueID: 1436712407
     locked: 0

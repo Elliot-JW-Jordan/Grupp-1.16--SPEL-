@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6537228050189171105}
   - component: {fileID: 2494112515662487545}
+  - component: {fileID: 8097261170098549499}
   m_Layer: 0
   m_Name: ClosedRoom
   m_TagString: closedroom
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8097261170098549499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4154307359304516985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e402b5cd50ac06b4289445e56e3b512e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
