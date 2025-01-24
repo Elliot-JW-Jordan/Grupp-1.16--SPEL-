@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class playerHealth : MonoBehaviour
 {
-    Animator ripFelix;
+    
     public int health;
     public int maxHealth = 10;
     public int healAmountQ = 0;
@@ -22,7 +22,7 @@ public class playerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ripFelix = GetComponent<Animator>();
+        
         health = maxHealth;
         UpdateHealthBar();
     }
@@ -46,7 +46,7 @@ public class playerHealth : MonoBehaviour
             health -= finalDamage;
             if (health < 0)
             {
-                StartCoroutine(PlayAnimationAndLoadScene());
+                Destroy(GameObject);
             }
         UpdateHealthBar();
 

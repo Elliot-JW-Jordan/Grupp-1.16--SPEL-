@@ -14,6 +14,9 @@ public class SpawnPoint : MonoBehaviour
     private RoomTemplates templates;
     private int rand;
     public bool spawned = false;
+    public bool AllRoomsSpawned = false;
+
+    public int RoomAmount = 0;
 
     public float waitTimeOptemizing = 4f;
 
@@ -24,33 +27,71 @@ public class SpawnPoint : MonoBehaviour
         Invoke("Spawn", 0.1f);
     }
 
+    private void Update()
+    {
+        RoomAmount = templates.rooms.Count;
+        if(RoomAmount >= 10)
+        {
+            AllRoomsSpawned = true;
+        }
+    }
+
     void Spawn()
     {
         if (spawned == false )
         {
             if(OppeningDirection == 1)       
             {
+                if(AllRoomsSpawned == false)
+                {
                 //spawn a room with at least a door facing bottom
                 rand = Random.Range(0, templates.BottomRooms.Length);
                 Instantiate(templates.BottomRooms[rand], transform.position, templates.BottomRooms[rand].transform.rotation);
+                }
+                else if (AllRoomsSpawned == true)
+                {
+                    Instantiate(templates.EndBottomRooms[0], transform.position, templates.EndBottomRooms[0].transform.rotation);
+                }
+                
             }
             else if (OppeningDirection == 2)       
             {
-                //spawn a room with at least a door facing top
-                rand = Random.Range(0, templates.TopRooms.Length);
+                if (AllRoomsSpawned == false)
+                {
+                    //spawn a room with at least a door facing top
+                    rand = Random.Range(0, templates.TopRooms.Length);
                 Instantiate(templates.TopRooms[rand], transform.position, templates.TopRooms[rand].transform.rotation);
+                }
+                else if (AllRoomsSpawned == true)
+                {
+                    Instantiate(templates.EndTopRooms[0], transform.position, templates.EndTopRooms[0].transform.rotation);
+                }
             }
             else if (OppeningDirection == 3)       
             {
-                //spawn a room with at least a door facing left
-                rand = Random.Range(0, templates.LeftRooms.Length);
+                if (AllRoomsSpawned == false)
+                {
+                    //spawn a room with at least a door facing left
+                    rand = Random.Range(0, templates.LeftRooms.Length);
                 Instantiate(templates.LeftRooms[rand], transform.position, templates.LeftRooms[rand].transform.rotation);
-            }
+                }
+                else if (AllRoomsSpawned == true)
+                {
+                    Instantiate(templates.EndLeftRooms[0], transform.position, templates.EndLeftRooms[0].transform.rotation);
+                }
+             }
             else if (OppeningDirection == 4)       
             {
-                //spawn a room with at least a door facing right
-                rand = Random.Range(0, templates.RightRooms.Length);
+                if (AllRoomsSpawned == false)
+                {
+                    //spawn a room with at least a door facing right
+                    rand = Random.Range(0, templates.RightRooms.Length);
                 Instantiate(templates.RightRooms[rand], transform.position, templates.RightRooms[rand].transform.rotation);
+                }
+                else if (AllRoomsSpawned == true)
+                {
+                    Instantiate(templates.EndRightRooms[0], transform.position, templates.EndRightRooms[0].transform.rotation);
+                }
             }
             spawned = true;
         }

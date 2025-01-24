@@ -27,7 +27,7 @@ TagManager:
   - enemy
   - rooom
   - 
-  - 
+  - Settings
   - 
   - 
   - 
@@ -49,11 +49,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgraound ot the backgraound
+    uniqueID: 3695413575
+    locked: 0
   - name: Door
     uniqueID: 1436712407
     locked: 0
   - name: Backgraound
     uniqueID: 2940447253
+    locked: 0
+  - name: Alter
+    uniqueID: 59698803
     locked: 0
   - name: BloodStain
     uniqueID: 2889278365

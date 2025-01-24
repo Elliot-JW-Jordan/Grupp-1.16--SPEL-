@@ -23,7 +23,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     [Header("Stamina Values")]
     public float maxStamnina = 100f;
     public float staminaDeductionRate = 10f;
-    public float staminaRegen = 10f;
+    public float staminaRegen = 15f;
     public float currentStamina;
     public float fatigueTreshhold = 8f;
     public float staminaFatiguerate = 0.5f;
@@ -33,15 +33,15 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     private float fatigueTime = 0f;
 
     [Header("Dodge Values")]
-    public float dodgeSpeed = 100f;
+    public float dodgeSpeed = 60f;
     public float dogeTimer = 0.2f;
     public float dodgeDownTime = 1.5f;
     private bool isDoging = false;
     private bool canDodge = true;
 
     [Header("Physics Values")]
-    public float angularDrag = 9f;
-    public float linearjarDrag = 19f;
+    public float angularDrag = 40f;
+    public float linearjarDrag = 30f;
 
     [Header("Camera Settings")]
     public Camera camera;
