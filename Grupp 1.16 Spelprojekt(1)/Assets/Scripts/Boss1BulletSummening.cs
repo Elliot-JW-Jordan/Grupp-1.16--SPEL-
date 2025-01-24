@@ -25,8 +25,11 @@ public class Boss1BulletSummening : MonoBehaviour
     public float BulletSpeed = 0f;
     public float BulletAmount = 0f;
     public float Bulletspread = 0f;
-    public float Bulletwait = 0.1f;
+    public float Bulletwait = 0.3f;
     public float BulletLifeTime = 5f;
+
+    private float PhaselastShotTime = 0f;
+    public float PhaseshotCooldown = 1f;
 
     //boss settings
     [Header("boss settings")]
@@ -43,7 +46,7 @@ public class Boss1BulletSummening : MonoBehaviour
     private float nextFireTime = 0f;
     public float fireCooldown = 0.1f; 
     private bool isPhase1Active = false;
-    public float nextPlayerBulletTime = 1f;
+    public float nextPlayerBulletTime = 3f;
     public float playerBulletCooldown = 0f;
 
     //player
@@ -160,23 +163,28 @@ public class Boss1BulletSummening : MonoBehaviour
 
     void phase3() // Phase 3 of the boss
     {
-        float randomAngle = UnityEngine.Random.Range(0f, 360f); // Use UnityEngine.Random here
-        Quaternion randomRotation = Quaternion.Euler(0f, 0f, randomAngle);
-
-        GameObject bullet3 = Instantiate(boss1bullet, transform.position, Quaternion.identity);
-
-        Vector2 direction = randomRotation * Vector2.up;
-
-        float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bullet3.transform.rotation = Quaternion.Euler(0f, 0f, rotationAngle + 90f);
-
-        Rigidbody2D rb = bullet3.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (Time.time - PhaselastShotTime >= PhaseshotCooldown)
         {
-            rb.velocity = direction * BulletSpeed;
-        }
+            PhaselastShotTime = Time.time; // Update the time of the last shot
 
-        Destroy(bullet3, BulletLifeTime);
+            float randomAngle = UnityEngine.Random.Range(0f, 360f); // Use UnityEngine.Random here
+            Quaternion randomRotation = Quaternion.Euler(0f, 0f, randomAngle);
+
+            GameObject bullet3 = Instantiate(boss1bullet, transform.position, Quaternion.identity);
+
+            Vector2 direction = randomRotation * Vector2.up;
+
+            float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            bullet3.transform.rotation = Quaternion.Euler(0f, 0f, rotationAngle + 90f);
+
+            Rigidbody2D rb = bullet3.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.velocity = direction * BulletSpeed;
+            }
+
+            Destroy(bullet3, BulletLifeTime);
+        }
     }
 
 

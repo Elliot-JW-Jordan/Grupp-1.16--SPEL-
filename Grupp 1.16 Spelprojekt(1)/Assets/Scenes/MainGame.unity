@@ -4290,7 +4290,7 @@ MonoBehaviour:
   Enemys:
   - {fileID: 8674349106252009857, guid: 7137afc6c58facb47804879f85dd798c, type: 3}
   - {fileID: 4287560983983936026, guid: 9fd98d1ed12ce2f4492cb4917fc2f64a, type: 3}
-  waitTime: 5
+  waitTime: 2
   boss: {fileID: 6474000456917596281, guid: 014b339e1c9185948b88ed1487eff1fe, type: 3}
 --- !u!4 &1667920750
 Transform:

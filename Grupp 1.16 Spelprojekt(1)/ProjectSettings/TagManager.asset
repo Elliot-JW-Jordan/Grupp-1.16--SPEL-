@@ -55,6 +55,9 @@ TagManager:
   - name: Backgraound
     uniqueID: 2940447253
     locked: 0
+  - name: Alter
+    uniqueID: 59698803
+    locked: 0
   - name: BloodStain
     uniqueID: 2889278365
     locked: 0
