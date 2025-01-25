@@ -9,7 +9,9 @@ public class TrapScriptForPrefab : MonoBehaviour
     PlayerPhysicsWalking thePlayersMovemenWhileTrapped;
     private int requiredPressesOFtHEButtonSPACE = 30; // hur många gånger spelaren måsta spamma MELLANSLAG för att fly ifrån fällan.
     private int traptimmerBeforeInstantDeath = 8; // tid som spelaren får på sig att rymma ifrån fällan i sekunder
-
+    private int currentPresses = 0;//hur många gågner spelaren har tryckt
+    private SpriteRenderer playerspriteRenderer;
+    [SerializeField] private Color trapped = Color.red; // färg när spelaren är fångad
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class TrapScriptForPrefab : MonoBehaviour
     {
 
         // kollar ifall det är ett objekt med spelar "Player" tag som kolliderar med fällan.
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !playerIsTrapped)
         {
 
             Debug.Log("The player collided with the trap!! Calling TrapScript...");
@@ -45,6 +47,14 @@ public class TrapScriptForPrefab : MonoBehaviour
             //stänger av spelarens förmåga att rörasig när splearen sittier i fällan
             thePlayersMovemenWhileTrapped.enabled = false;
         }
+
+        //byter färg
+        playerspriteRenderer = player.GetComponent<SpriteRenderer>();
+        if (playerspriteRenderer !=null)
+        {
+            playerspriteRenderer.color = trapped;
+        }
+
         StartCoroutine(Traptimer());
 
     }
@@ -83,6 +93,11 @@ public class TrapScriptForPrefab : MonoBehaviour
             thePlayersMovemenWhileTrapped.enabled = true;
         }
 
+        if (playerspriteRenderer != null)
+        {
+            playerspriteRenderer.color = Color.white;
+        }
+
     }
 
 
@@ -92,6 +107,32 @@ public class TrapScriptForPrefab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ifall splaren är fast i fällan
+        if (playerIsTrapped)
+        {
+            // mellanslag
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                currentPresses++;
+                Debug.Log($"Player has pressed space : {currentPresses} times");
+
+
+                if (currentPresses >= requiredPressesOFtHEButtonSPACE)
+                {
+                    Debug.Log("The player has escaped the trap");
+                    ReleasePlayer(gameObject);
+                    currentPresses = 0; //återställer
+                }
+            }
+
+
+
+        }
+
+
+
+
+
         
     }
 }
