@@ -15,6 +15,7 @@ TagManager:
   - EnemyBullet
   - Enemy
   - EnemyContainer
+  - Trap
   layers:
   - Default
   - TransparentFX
