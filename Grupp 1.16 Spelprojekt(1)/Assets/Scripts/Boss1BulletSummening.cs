@@ -194,6 +194,12 @@ public class Boss1BulletSummening : MonoBehaviour
             {
                 if (HasBossDied == false)
                 {
+                    Collider[] colliders = GetComponents<Collider>();
+                    foreach (Collider collider in colliders)
+                    {
+                        collider.enabled = false;
+                    }
+
                     animator.Play("Death_Boss");
                     Debug.Log("Boss defeated!");
 

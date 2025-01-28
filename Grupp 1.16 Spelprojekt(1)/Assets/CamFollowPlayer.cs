@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class CamFollowPlayer : MonoBehaviour
 {
-    public Transform player; 
+    public GameObject player; 
     public float maxOffset = 6f;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
 
     void Update()
     {
         if (player == null || transform.parent == null)
             return;
 
-        float playerY = player.position.y;
+        float playerY = player.transform.position.y;
 
         float parentY = transform.parent.position.y;
 
