@@ -6,6 +6,9 @@ public class CameraBehavior : MonoBehaviour
 {
     private GameObject mainCamera;
 
+    private bool isPlayerInTrigger = false;
+    private Collider2D playerCollider;
+
     private void Start()
     {
         mainCamera = GameObject.FindWithTag("MainCamera");
@@ -19,6 +22,9 @@ public class CameraBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player") && mainCamera != null)
         {
+            isPlayerInTrigger = true; 
+            playerCollider = other; 
+
             mainCamera.transform.position = transform.position + new Vector3(0, 0, -10);
             mainCamera.transform.SetParent(transform);
         }
@@ -28,7 +34,27 @@ public class CameraBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player") && mainCamera != null)
         {
+            isPlayerInTrigger = false;
+            playerCollider = null; 
+
             mainCamera.transform.SetParent(null);
+        }
+    }
+
+    private void Update()
+    {
+        if (isPlayerInTrigger && playerCollider != null)
+        {
+            if (!playerCollider.bounds.Intersects(GetComponent<Collider2D>().bounds))
+            {
+                isPlayerInTrigger = false;
+                playerCollider = null;
+
+                if (mainCamera != null)
+                {
+                    mainCamera.transform.SetParent(null);
+                }
+            }
         }
     }
 }
