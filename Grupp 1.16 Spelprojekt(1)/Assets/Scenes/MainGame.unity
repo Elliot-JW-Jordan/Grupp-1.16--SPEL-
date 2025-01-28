@@ -3551,8 +3551,8 @@ GameObject:
   - component: {fileID: 1284530593}
   - component: {fileID: 1284530594}
   - component: {fileID: 1284530595}
-  - component: {fileID: 1284530596}
   - component: {fileID: 1284530597}
+  - component: {fileID: 1284530596}
   m_Layer: 7
   m_Name: Felix
   m_TagString: Player

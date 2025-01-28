@@ -16,6 +16,8 @@ public class playerHealth : MonoBehaviour
     public Image green;
     public int DamageOnPlayer = 2;
 
+    Animator ripFelix;
+
     private float totalDefensivevalue = 0f;// från spelarens rustningar
     private float damageRadeuctionperventage = 0f; //procent baserad reduktion
 
@@ -25,6 +27,8 @@ public class playerHealth : MonoBehaviour
         
         health = maxHealth;
         UpdateHealthBar();
+
+        ripFelix = GetComponent<Animator>();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -46,7 +50,7 @@ public class playerHealth : MonoBehaviour
             health -= finalDamage;
             if (health < 0)
             {
-                Destroy(GameObject);
+                Destroy(gameObject);
             }
         UpdateHealthBar();
 
