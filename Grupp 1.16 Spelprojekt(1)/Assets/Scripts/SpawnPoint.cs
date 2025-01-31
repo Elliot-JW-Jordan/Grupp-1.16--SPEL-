@@ -23,7 +23,7 @@ public class SpawnPoint : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, waitTimeOptemizing);
-        templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        templates = GameObject.FindGameObjectWithTag("RoomSpawner").GetComponent<RoomTemplates>();
         Invoke("Spawn", 0.1f);
     }
 

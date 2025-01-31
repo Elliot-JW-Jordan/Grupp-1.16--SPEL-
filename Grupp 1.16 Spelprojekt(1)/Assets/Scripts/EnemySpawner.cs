@@ -15,18 +15,10 @@ public class EnemySpawner : MonoBehaviour
         EnemyContainer = GameObject.FindGameObjectWithTag("EnemyContainer");
 
         // Get the RoomTemplates component
-        Enemys = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-        if (Enemys == null)
-        {
-            Debug.LogError("RoomTemplates component not found on object with tag 'Rooms'!");
-        }
-
+        Enemys = GameObject.FindGameObjectWithTag("RoomSpawner").GetComponent<RoomTemplates>();
+        
         // Get the parent script
         roomLogic = GetComponentInParent<BasicLogicForAllRooms>();
-        if (roomLogic == null)
-        {
-            Debug.LogError("BasicLogicForAllRooms script not found on the parent!");
-        }
     }
 
     private void Update()

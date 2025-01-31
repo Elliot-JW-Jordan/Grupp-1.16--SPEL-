@@ -12,7 +12,7 @@ public class DoorSpawnScript : MonoBehaviour
 
     private void Start()
     {
-        Doors = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        Doors = GameObject.FindGameObjectWithTag("RoomSpawner").GetComponent<RoomTemplates>();
         Invoke("DoorSpawn", 0.1f);
     }
 

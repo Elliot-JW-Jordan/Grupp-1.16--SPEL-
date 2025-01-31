@@ -244,7 +244,6 @@ public class ItemManagerandMaker : MonoBehaviour
 
         foreach (var item in listOfitems)
         {
-            Debug.Log($"Geennerated Item : {item.itemName}, Rarity : {item.itemRarity}, Price: {item.price}");
             item.Use();
         }
 
