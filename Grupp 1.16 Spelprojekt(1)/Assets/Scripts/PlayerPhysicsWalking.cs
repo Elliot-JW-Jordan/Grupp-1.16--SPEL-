@@ -92,9 +92,10 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         {
             lastMoveDirection = inputOfMoving;
         }
-        isRunning = Input.GetKey(KeyCode.LeftShift) && canRun;
 
-        if (Input.GetKeyDown(KeyCode.Space) && canDodge)
+        isRunning = (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Fire3")) && canRun;
+
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1")) && canDodge)
         {
             StartCoroutine(Dodge());
         }

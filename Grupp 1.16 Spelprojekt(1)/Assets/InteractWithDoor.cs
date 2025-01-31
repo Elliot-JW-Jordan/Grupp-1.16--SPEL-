@@ -43,14 +43,13 @@ public class DoorTeleport : MonoBehaviour
 
     private void Update()
     {
-
-        if (isPlayerInTrigger == true && Input.GetKeyDown(KeyCode.E) && DoorActive == true && EnemyContainer.transform.childCount == 0)
+        if (isPlayerInTrigger && (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Fire2")) && DoorActive && EnemyContainer.transform.childCount == 0)
         {
             TeleportPlayer();
         }
         //else if(isPlayerInTrigger == true)
         //{
-            //Instantiate(block, transform.position, Quaternion.identity);
+        //Instantiate(block, transform.position, Quaternion.identity);
         //}
     }
     
