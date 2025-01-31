@@ -58,13 +58,10 @@ public class playerHealth : MonoBehaviour
     // Coroutine för att spela animationen och ladda scenen med fördröjning
     IEnumerator PlayAnimationAndLoadScene()
     {
-        // Spela animationen
         ripFelix.Play("död_felix_rip");
 
-        // Vänta på att animationen ska spela klart (t.ex. 3 sekunder, eller hur lång tid animationen är)
-        yield return new WaitForSeconds(35); // Justera tiden efter din animation
+        yield return new WaitForSeconds(35); 
 
-        // Ladda scenen efter animationen
         SceneManager.LoadScene("testStart");
     }
 
