@@ -1,21 +1,63 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class TrapScriptForPrefab : MonoBehaviour
 {
-
+    public CameraSShake camera; //reffererar till CameraSShake scriptet
     public bool playerIsTrapped = false; //indikerar om spelaren har fastnat i en fälla eller inte 
     PlayerPhysicsWalking thePlayersMovemenWhileTrapped;
     private int requiredPressesOFtHEButtonSPACE = 30; // hur många gånger spelaren måsta spamma MELLANSLAG för att fly ifrån fällan.
     private int traptimmerBeforeInstantDeath = 8; // tid som spelaren får på sig att rymma ifrån fällan i sekunder
     private int currentPresses = 0;//hur många gågner spelaren har tryckt
     private SpriteRenderer playerspriteRenderer;
+   
+    
     [SerializeField] private Color trapped = Color.red; // färg när spelaren är fångad
-    // Start is called before the first frame update
+    [SerializeField] private Color defualt = Color.white;
+    [SerializeField]
+    private float trapCooldown = 5f; //Tiden i sekunder som det tar innan fällan kan om aktiveras
+    private bool trapIsActive = true; // bool för tillståndet av fällan, activerade och de actriverad
+
+  
+    [SerializeField]  private Slider progressOFEscape; // visar infomationen i fomr uta ui
+    [SerializeField] private ParticleSystem smokeEffect; //Rök 
+
+
+    private Renderer trapRenderer;
     void Start()
     {
-        
+        trapRenderer = GetComponent<Renderer>();
+        trapRenderer.enabled = false; //gömmer fällan i början
+
+        // Så att fällan börjar i korrekt förg
+        GetComponent<SpriteRenderer>().color = defualt;
+
+
+        if (progressOFEscape == null)
+        {
+            GameObject Trapslider1 = GameObject.Find("Trapslider");
+            if (Trapslider1 != null)
+            {
+                progressOFEscape = Trapslider1.GetComponent<Slider>();
+            } else
+            {
+                Debug.LogWarning("The slider object Trapslider is not found inn the scene");
+
+            }
+
+        }
+        if (progressOFEscape !=null)
+        {
+
+
+            progressOFEscape.gameObject.SetActive(false);
+            progressOFEscape.value = 0;
+        }
+       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +82,8 @@ public class TrapScriptForPrefab : MonoBehaviour
         }
 
         playerIsTrapped = true; // Fällan har nu fångat spelaren
+        trapIsActive = false; // fällans tillstånd
+
 
         thePlayersMovemenWhileTrapped = player.GetComponent<PlayerPhysicsWalking>();
         if (thePlayersMovemenWhileTrapped != null)
@@ -54,6 +98,26 @@ public class TrapScriptForPrefab : MonoBehaviour
         {
             playerspriteRenderer.color = trapped;
         }
+        
+        // nedan aktiverar röken runt fällan
+        if (smokeEffect != null)
+        {
+            smokeEffect.Play(); // när spelaren aktiverar fälla så börjar rök effekten spela
+        }
+        if ( trapRenderer != null)
+        {
+            trapRenderer.enabled = true;
+        }
+
+
+
+        // bar 
+        if(progressOFEscape != null)
+        {
+            progressOFEscape.gameObject.SetActive(true); // gör den synlig
+            progressOFEscape.value = 0;
+
+        }
 
         StartCoroutine(Traptimer());
 
@@ -67,7 +131,14 @@ public class TrapScriptForPrefab : MonoBehaviour
 
          if (playerIsTrapped)
         {
-            Debug.Log("The player failed to escape. Death awaits");
+
+            Debug.Log("Death awaits");
+            playerHealth playerHP = thePlayersMovemenWhileTrapped.GetComponent<playerHealth>();
+            if (playerHP != null)
+            {
+                playerHP.TakeDamage(3); // Skadar spelaren när spelarn är fångad i fällan för länge
+            }
+            ReleasePlayer(thePlayersMovemenWhileTrapped.gameObject);
             //döds placeholder här 
         }
     }
@@ -77,6 +148,7 @@ public class TrapScriptForPrefab : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && playerIsTrapped)
         {
             Debug.Log("Player escaped the trap");
+            camera.BeginShake(0.2f, 3f); // Activerar skakningen
             ReleasePlayer(collision.gameObject);
         }
        
@@ -98,9 +170,44 @@ public class TrapScriptForPrefab : MonoBehaviour
             playerspriteRenderer.color = Color.white;
         }
 
+        if (progressOFEscape != null)
+        {
+            progressOFEscape.gameObject.SetActive(true); // gör den synlig
+            progressOFEscape.value = 0;
+
+        }
+
+        StartCoroutine(TimerReset());
+
+
+
+    }
+
+    private IEnumerator TimerReset() 
+    {
+        Debug.Log("The cooldown of the trap has started");
+        yield return new WaitForSeconds(trapCooldown);
+
+        trapIsActive = true;
+        Debug.Log("The trap can be triggered again");
     }
 
 
+    private void ResetTrap()
+    {
+        playerIsTrapped = false;
+
+        // återställer färgen
+        if (playerspriteRenderer != null)
+        {
+            playerspriteRenderer.color = Color.white;
+
+        }
+
+        // återställer ptillstånd
+        StartCoroutine(TimerReset());
+
+    }
 
 
 
@@ -110,20 +217,8 @@ public class TrapScriptForPrefab : MonoBehaviour
         //ifall splaren är fast i fällan
         if (playerIsTrapped)
         {
-            // mellanslag
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                currentPresses++;
-                Debug.Log($"Player has pressed space : {currentPresses} times");
-
-
-                if (currentPresses >= requiredPressesOFtHEButtonSPACE)
-                {
-                    Debug.Log("The player has escaped the trap");
-                    ReleasePlayer(gameObject);
-                    currentPresses = 0; //återställer
-                }
-            }
+            TakeCareOFInput(); 
+           
 
 
 
@@ -134,5 +229,32 @@ public class TrapScriptForPrefab : MonoBehaviour
 
 
         
+    }
+
+  private void  TakeCareOFInput()
+    {
+        // mellanslag
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            currentPresses++;
+            Debug.Log($"Player has pressed space : {currentPresses} times");
+
+            if (progressOFEscape != null)
+            {
+
+                progressOFEscape.value = currentPresses;
+
+            }
+            camera.BeginShake(0.1f, 0.2f); //vid klicknind utav mellanslag
+
+            if (currentPresses >= requiredPressesOFtHEButtonSPACE)
+            {
+                Debug.Log("The player has escaped the trap");
+                camera.BeginShake(0.3f, 5f);// När spelaren rymmer
+                ReleasePlayer(gameObject);
+                currentPresses = 0; //återställer
+            }
+        }
+
     }
 }
