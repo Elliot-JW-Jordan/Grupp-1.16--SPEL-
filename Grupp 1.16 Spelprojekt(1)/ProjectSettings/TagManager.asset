@@ -17,6 +17,7 @@ TagManager:
   - EnemyContainer
   - Trap
   - RoomSpawner
+  - Trapslider
   layers:
   - Default
   - TransparentFX

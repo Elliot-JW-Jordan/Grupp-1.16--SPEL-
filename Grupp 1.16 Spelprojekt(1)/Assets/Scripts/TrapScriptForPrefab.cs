@@ -39,7 +39,7 @@ public class TrapScriptForPrefab : MonoBehaviour
 
         if (progressOFEscape == null)
         {
-            GameObject Trapslider1 = GameObject.Find("Trapslider");
+            GameObject Trapslider1 = GameObject.FindWithTag("Trapslider");
             if (Trapslider1 != null)
             {
                 progressOFEscape = Trapslider1.GetComponent<Slider>();
@@ -76,7 +76,7 @@ public class TrapScriptForPrefab : MonoBehaviour
 
      public void ActivateTrap(GameObject player)
     {
-        if (playerIsTrapped)
+        if (playerIsTrapped || !trapIsActive)
         {
             return; //Så spelaren inte kan bli fångad gång på gång 
         }
@@ -102,6 +102,7 @@ public class TrapScriptForPrefab : MonoBehaviour
         // nedan aktiverar röken runt fällan
         if (smokeEffect != null)
         {
+            smokeEffect.transform.position = transform.position; // ser till att rök effect pwanwr på rätt ställe
             smokeEffect.Play(); // när spelaren aktiverar fälla så börjar rök effekten spela
         }
         if ( trapRenderer != null)
@@ -172,8 +173,9 @@ public class TrapScriptForPrefab : MonoBehaviour
 
         if (progressOFEscape != null)
         {
-            progressOFEscape.gameObject.SetActive(true); // gör den synlig
             progressOFEscape.value = 0;
+            progressOFEscape.gameObject.SetActive(false); // gör den synlig 
+           
 
         }
 
@@ -190,12 +192,15 @@ public class TrapScriptForPrefab : MonoBehaviour
 
         trapIsActive = true;
         Debug.Log("The trap can be triggered again");
+
+        ResetTrap(); // återställer fällan
     }
 
 
     private void ResetTrap()
     {
         playerIsTrapped = false;
+        trapIsActive = true;
 
         // återställer färgen
         if (playerspriteRenderer != null)
@@ -204,8 +209,9 @@ public class TrapScriptForPrefab : MonoBehaviour
 
         }
 
+        Debug.Log("tHE TRAP has been reset");
         // återställer ptillstånd
-        StartCoroutine(TimerReset());
+       // StartCoroutine(TimerReset());
 
     }
 
@@ -251,7 +257,7 @@ public class TrapScriptForPrefab : MonoBehaviour
             {
                 Debug.Log("The player has escaped the trap");
                 camera.BeginShake(0.3f, 5f);// När spelaren rymmer
-                ReleasePlayer(gameObject);
+                ReleasePlayer(thePlayersMovemenWhileTrapped.gameObject);
                 currentPresses = 0; //återställer
             }
         }
