@@ -17,7 +17,7 @@ public class TrapScriptForPrefab : MonoBehaviour
    
     
     [SerializeField] private Color trapped = Color.red; // färg när spelaren är fångad
-    [SerializeField] private Color defualt = Color.white;
+    [SerializeField] private Color defualtColor = Color.white;
     [SerializeField]
     private float trapCooldown = 5f; //Tiden i sekunder som det tar innan fällan kan om aktiveras
     private bool trapIsActive = true; // bool för tillståndet av fällan, activerade och de actriverad
@@ -34,7 +34,7 @@ public class TrapScriptForPrefab : MonoBehaviour
         trapRenderer.enabled = false; //gömmer fällan i början
 
         // Så att fällan börjar i korrekt förg
-        GetComponent<SpriteRenderer>().color = defualt;
+        GetComponent<SpriteRenderer>().color = defualtColor;
 
 
         if (progressOFEscape == null)
