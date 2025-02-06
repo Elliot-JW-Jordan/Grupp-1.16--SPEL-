@@ -34,8 +34,10 @@ private void Awake()
             Debug.LogWarning("You can not add a negative amount of currency");
             return;
         }
+        Debug.Log($"Adding currency: {amount}. currency before ; {CurrentCurrency}");
         CurrentCurrency += amount;
-        CurrentCurrency = Mathf.Max(CurrentCurrency, 0); // så att CurrentCurrency aldring kan komma under noll.
+      //  CurrentCurrency = Mathf.Max(CurrentCurrency, 0); // så att CurrentCurrency aldring kan komma under noll.
+        Debug.Log($" currency after ; {CurrentCurrency}"); //debugg
         OnCurrencyChanged?.Invoke(CurrentCurrency);
         Debug.Log($"Added {amount} currency. New Total: {CurrentCurrency}");
     }
@@ -44,7 +46,11 @@ private void Awake()
     {
         if (CurrentCurrency >= amount)
         {
-            AddCurrency(-amount); 
+            Debug.Log($"Trying to spend {amount} currecny. Current {CurrentCurrency}");
+            CurrentCurrency -= amount;
+            CurrentCurrency = Mathf.Max(CurrentCurrency, 0); // så att CurrentCurrency aldring kan komma under noll.
+                                                             // AddCurrency(-amount); // försöker ta bort ifån splearens summa
+            Debug.Log($"Added {amount} currency. New Total: {CurrentCurrency}");
             Debug.Log($"Spent {amount} currency, New total : {CurrentCurrency}");
             return true;
         }
