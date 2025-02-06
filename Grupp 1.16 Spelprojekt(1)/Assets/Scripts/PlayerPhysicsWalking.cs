@@ -96,9 +96,9 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
         isRunning = (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Fire3")) && canRun;
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1")) && canDodge)
-        {
-            StartCoroutine(Dodge());
+        if ((Input.GetKeyDown(KeyCode.Space) && canDodge))
+            {
+       StartCoroutine(Dodge());
         }
 
         HandleStamina();
