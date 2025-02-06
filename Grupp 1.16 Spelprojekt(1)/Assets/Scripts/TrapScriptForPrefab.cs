@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class TrapScriptForPrefab : MonoBehaviour
@@ -19,13 +20,14 @@ public class TrapScriptForPrefab : MonoBehaviour
     [SerializeField] private Color trapped = Color.red; // färg när spelaren är fångad
     [SerializeField] private Color defualtColor = Color.white;
     [SerializeField]
+
     private float trapCooldown = 5f; //Tiden i sekunder som det tar innan fällan kan om aktiveras
     private bool trapIsActive = true; // bool för tillståndet av fällan, activerade och de actriverad
 
   
     [SerializeField]  private Slider progressOFEscape; // visar infomationen i fomr uta ui
     [SerializeField] private ParticleSystem smokeEffect; //Rök 
-
+    [SerializeField] private TMP_Text instructionalText; // refferance till en ui text
 
     private Renderer trapRenderer;
     void Start()
@@ -57,10 +59,12 @@ public class TrapScriptForPrefab : MonoBehaviour
         }
         if (progressOFEscape !=null)
         {
-
-
-            progressOFEscape.gameObject.SetActive(true); // må vara felaktikt
+            progressOFEscape.gameObject.SetActive(false); // må vara felaktikt
             progressOFEscape.value = 0;
+        }
+        if (instructionalText != null)
+        {
+            instructionalText.gameObject.SetActive(false);  // gömmer texten 
         }
        
     }
@@ -124,7 +128,12 @@ public class TrapScriptForPrefab : MonoBehaviour
             progressOFEscape.value = 0;
 
         }
+        if (instructionalText  != null)
+        {
+            instructionalText.gameObject.SetActive(true); // gör texten synlig igen
+            
 
+        }
         StartCoroutine(Traptimer());
 
     }
