@@ -176,13 +176,18 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         //visar att rutan är tom  genom bool
         isfull = false;
         quantityText.text = string.Empty;
-        itemImageINV.sprite = itemSpriteInv;
+        itemImageINV.sprite = null;
         //Använder en PLACEHOLDER SPRITE ISTÄLLET FÖR NULL
         if (itemImageINV.sprite == null)
         {
             itemImageINV.sprite = placeholderImage;
         }
 
+        itemDescriptionImage.sprite = null;
+        if(itemDescriptionImage == null)
+        {
+            itemDescriptionImage.sprite = placeholderImage;
+        }
 
         quantityText.enabled = false;
 

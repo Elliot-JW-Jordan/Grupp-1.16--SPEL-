@@ -39,14 +39,19 @@ public class TrapScriptForPrefab : MonoBehaviour
 
         if (progressOFEscape == null)
         {
-            GameObject Trapslider1 = GameObject.FindWithTag("Trapslider");
+            GameObject Trapslider1 = GameObject.Find("Trapslider");
             if (Trapslider1 != null)
             {
                 progressOFEscape = Trapslider1.GetComponent<Slider>();
-            } else
-            {
-                Debug.LogWarning("The slider object Trapslider is not found inn the scene");
+                if (progressOFEscape == null)
+                {
+                    Debug.LogError("Slider component not found on the trapslidere");
 
+                }
+
+            }  else
+            {
+                Debug.LogWarning("The slider object trapslider is not found in the scene");
             }
 
         }
@@ -54,7 +59,7 @@ public class TrapScriptForPrefab : MonoBehaviour
         {
 
 
-            progressOFEscape.gameObject.SetActive(false);
+            progressOFEscape.gameObject.SetActive(true); // må vara felaktikt
             progressOFEscape.value = 0;
         }
        
@@ -108,7 +113,7 @@ public class TrapScriptForPrefab : MonoBehaviour
         if ( trapRenderer != null)
         {
             trapRenderer.enabled = true;
-        }
+        } 
 
 
 
@@ -134,17 +139,32 @@ public class TrapScriptForPrefab : MonoBehaviour
         {
 
             Debug.Log("Death awaits");
-            playerHealth playerHP = thePlayersMovemenWhileTrapped.GetComponent<playerHealth>();
-            if (playerHP != null)
+
+
+            if (thePlayersMovemenWhileTrapped != null) // kollar ifall  spelarens referens är riktig
             {
-                playerHP.TakeDamage(3); // Skadar spelaren när spelarn är fångad i fällan för länge
+                playerHealth playerHP = thePlayersMovemenWhileTrapped.GetComponent<playerHealth>();
+
+
+                if (playerHP != null)
+                {
+                    playerHP.TakeDamage(3); // Skadar spelaren när spelarn är fångad i fällan för länge
+                } 
+                else
+                {
+                    Debug.LogError("PlayerHealth component not found on the playerobject");
+                }
+                ReleasePlayer(thePlayersMovemenWhileTrapped.gameObject);
+            } else
+            {
+                Debug.LogError("thePlayersMovementWhileTrapped is null, Make sure the player physic walking is assigned");
             }
-            ReleasePlayer(thePlayersMovemenWhileTrapped.gameObject);
-            //döds placeholder här 
+         
+  
         }
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && playerIsTrapped)
         {
@@ -178,6 +198,9 @@ public class TrapScriptForPrefab : MonoBehaviour
            
 
         }
+
+
+        currentPresses = 0;
 
         StartCoroutine(TimerReset());
 
@@ -239,7 +262,7 @@ public class TrapScriptForPrefab : MonoBehaviour
 
   private void  TakeCareOFInput()
     {
-        // mellanslag
+        // om mellanslag trycks
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentPresses++;
@@ -247,8 +270,8 @@ public class TrapScriptForPrefab : MonoBehaviour
 
             if (progressOFEscape != null)
             {
-
-                progressOFEscape.value = currentPresses;
+                // normaliserar värdet
+                progressOFEscape.value = (float)currentPresses / requiredPressesOFtHEButtonSPACE;
 
             }
             camera.BeginShake(0.1f, 0.2f); //vid klicknind utav mellanslag
