@@ -86,7 +86,8 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
     void Update()
     {
-        inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        // jag hämtar rörelse riktningen
+       inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         if (inputOfMoving != Vector2.zero)
         {
@@ -136,16 +137,35 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     void ApplyDynamicTurning()
     {
         //Börjar bara flippa ifalll spelaren inte gör det och spelaren rörs sig horizontielt
-        if (!isFlipping && inputOfMoving.x != 0) //Om spelaren inte FLIPPAR och input of moving x inte är lika med noll
+        if (inputOfMoving.x != 0 && !isFlipping) //Om spelaren inte FLIPPAR och input of moving x inte är lika med noll
 
-        {// Påbörjer en corountine baserat på inputen
-            StartCoroutine(ForASmoothHorizontalFlip(inputOfMoving.x > 0 ? 1f : -1f, turn));
+        {
+            float targetScaleX = inputOfMoving.x > 0 ? 1f : -1f; 
+
+            // karantäner börjar bARA OM rörelse riktningen förrändras 
+            if (Mathf.Sign(transform.localScale.x) !=Mathf.Sign(targetScaleX))
+            {
+
+                // Påbörjer en corountine baserat på inputen
+                StartCoroutine(ForASmoothHorizontalFlip(inputOfMoving.x > 0 ? 1f : -1f, turn));
+
+            }
+
+            
         }
 
     }
 
     IEnumerator ForASmoothHorizontalFlip(float targetScaleX, float smoothness)
     {
+       // if fall flip funtionen inte behövs 
+       if (Mathf.Sign(transform.localScale.x) == Mathf.Sign(targetScaleX))
+        {
+            yield break;
+        }
+
+
+
         isFlipping = true; //Signalerar att figuren "flippar"
         //hämtar X skalan av spelaren
         float currentScaleX = transform.localScale.x;

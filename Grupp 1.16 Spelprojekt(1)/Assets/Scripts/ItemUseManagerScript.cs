@@ -19,7 +19,7 @@ public class ItemUseManagerScript : MonoBehaviour
         physicsWalking = FindObjectOfType<PlayerPhysicsWalking>();
         itemManagerandMaker = FindObjectOfType<ItemManagerandMaker>();
 
-        if(enemyhealth == null) {
+        if(enemyhealth == null) { // Gör samma med de ädnra iffalld e går södner
             Debug.LogWarning("No EnemyHealth found in scene, making a new one..");
             // skapar enn GameObject och lägger till Enemyhealth till objectet
             GameObject enemy = new GameObject("Enemy");
