@@ -11,7 +11,7 @@ public class playerHealth : MonoBehaviour
 {
     
     public int health;
-    public int maxHealth = 10;
+    public int maxHealth = 40;
     public int healAmountQ = 0;
     public Image green;
     public int DamageOnPlayer = 2;
