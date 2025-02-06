@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ItemManagerandMaker : MonoBehaviour
 {
+    [Header("ItemIcons")]
+    public Sprite helmetSPRITE;
+    public Sprite chestplateSPRITE;
+    public Sprite leggingsSPRITE;
+    public Sprite bootSprite;
     public  List<ItemSystem> listOfitems { get; private set; } = new List<ItemSystem>();
 
     // Start is called before the first frame update
@@ -129,7 +134,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Armour IronHelmet = ItemMaker.Create<Armour>(
           name: "Old Iron Helmet",
           description: " A soliders standard helmet",
-          icon: null,
+          icon: helmetSPRITE ,
           itemRarity: Rarity.Uncommon,
           price: 100,
           stats: new Dictionary<string, float> { { "Armour Rating", 15f } },
@@ -142,7 +147,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Armour IronChestPlate = ItemMaker.Create<Armour>(
           name: "Old Iron Chestplate",
           description: " A soliders standard chestplate",
-          icon: null,
+          icon: chestplateSPRITE,
           itemRarity: Rarity.Uncommon,
           price: 120,
           stats: new Dictionary<string, float> { { "Armour Rating", 25f } },
@@ -156,7 +161,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Armour IronLeggings = ItemMaker.Create<Armour>(
          name: "Old Iron Leggings",
          description: " A soliders standard Leggings",
-         icon: null,
+         icon: leggingsSPRITE,
          itemRarity: Rarity.Uncommon,
          price: 120,
          stats: new Dictionary<string, float> { { "Armour Rating", 25f } },
@@ -169,7 +174,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Armour IronBoots = ItemMaker.Create<Armour>(
         name: "Old Iron Boots",
         description: " A soliders standard Boot",
-        icon: null,
+        icon: bootSprite,
         itemRarity: Rarity.Uncommon,
         price: 110,
         stats: new Dictionary<string, float> { { "Armour Rating", 15f } },
@@ -184,7 +189,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Armour LeatherChestplate = ItemMaker.Create<Armour>(
            name: "Weathered Leather Chestplate",
            description: "Weak and cheap, none the less, it is still protection ",
-           icon: null,
+           icon: chestplateSPRITE,
            itemRarity: Rarity.Common,
            price: 90,
            stats: new Dictionary<string, float> { { "Armour Rating", 15f } },
@@ -200,7 +205,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Armour LeatherLeggings = ItemMaker.Create<Armour>(
            name: "Weathered Leather Leggings",
            description: "Weak and cheap, none the less, it is still protection ",
-           icon: null,
+           icon: leggingsSPRITE,
            itemRarity: Rarity.Common,
            price: 90,
            stats: new Dictionary<string, float> { { "Armour Rating", 15f } },
@@ -215,7 +220,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Armour LeatherBoots = ItemMaker.Create<Armour>(
            name: "Weathered Leather Boots",
            description: "Weak and cheap, none the less, it is still protection ",
-           icon: null,
+           icon: bootSprite,
            itemRarity: Rarity.Common,
            price: 80,
            stats: new Dictionary<string, float> { { "Armour Rating", 15f } },

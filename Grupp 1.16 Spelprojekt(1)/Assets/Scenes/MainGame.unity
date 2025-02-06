@@ -3915,7 +3915,7 @@ MonoBehaviour:
   fovReduction: 0
   pulseFrequency: 1.5
   pulseIntensity: 0.1
-  playerSpr: {fileID: 0}
+  playerSpr: {fileID: 1284530589}
   minimumSprite: 0.8
   maxScale: 1.2
 --- !u!1 &1322741175
@@ -4341,6 +4341,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2095240ac80ff4696cb8f5b3981d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  helmetSPRITE: {fileID: 21300000, guid: 59eceb2c05cc7cf4ba7248c3d03a1604, type: 3}
+  chestplateSPRITE: {fileID: 21300000, guid: 63d4247f823518041805dd19f32366cb, type: 3}
+  leggingsSPRITE: {fileID: 21300000, guid: 3da4f2470b430c44bba4db8815bfe554, type: 3}
+  bootSprite: {fileID: 21300000, guid: 1ef5a13d0b154f444a85e767f67eb9a9, type: 3}
 --- !u!4 &1580615519
 Transform:
   m_ObjectHideFlags: 0
