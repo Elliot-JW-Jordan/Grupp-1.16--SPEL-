@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -290,7 +291,10 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
         if (playerSpr != null)
         {
-            playerSpr.localScale = new Vector3(newScale, newScale, 1f);
+            // bevarar den förra vändningen 
+            float currentSign = Mathf.Sign(playerSpr.localScale.x);
+
+            playerSpr.localScale = new Vector3(newScale * currentSign, newScale, 1f);
         }
     }
 
