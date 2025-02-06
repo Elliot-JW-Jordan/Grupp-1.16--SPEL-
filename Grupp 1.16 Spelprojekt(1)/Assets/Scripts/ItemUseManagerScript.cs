@@ -19,6 +19,20 @@ public class ItemUseManagerScript : MonoBehaviour
         physicsWalking = FindObjectOfType<PlayerPhysicsWalking>();
         itemManagerandMaker = FindObjectOfType<ItemManagerandMaker>();
 
+        if(enemyhealth == null) {
+            Debug.LogWarning("No EnemyHealth found in scene, making a new one..");
+            // skapar enn GameObject och lägger till Enemyhealth till objectet
+            GameObject enemy = new GameObject("Enemy");
+            enemyhealth = enemy.AddComponent<Enemyhealth>();
+            // lägger till null referance protection senare
+        
+        
+        }
+        
+
+
+
+
     }
     //Nedan finns det en metod som ska kunna använda vilket förmål som helst ooch appilicera dess egenskaper
     public void UseItem(ItemSystem item)
@@ -49,6 +63,13 @@ public class ItemUseManagerScript : MonoBehaviour
 
     private void ApplyBuff(float buffFactor, float duration)
     {
+        if (enemyhealth == null)
+        {
+            Debug.LogWarning("Enemyhealth is not found. The buff can not be applied");
+            return;
+        }
+
+
         Debug.Log($"Call ApplyDamageBuff method, ApplyBuff : {buffFactor} duration {duration}");
 
         enemyhealth.ApplyDamageBuff(buffFactor, duration);

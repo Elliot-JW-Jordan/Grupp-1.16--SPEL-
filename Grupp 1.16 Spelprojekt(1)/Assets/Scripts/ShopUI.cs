@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ShopUI : MonoBehaviour
 {
@@ -194,6 +195,9 @@ public class ShopUI : MonoBehaviour
 
     public void BuyItem(ItemSystem item1) // bytte alla item1 till item
     {
+        ManagerOfInventory[] inventoryManagerS = FindObjectsOfType<ManagerOfInventory>(true);
+        ManagerOfInventory inventoryManager = inventoryManagerS.FirstOrDefault();
+
         if (item1 == null)
         {
             Debug.LogError("Player tried to buy a null item.");
@@ -203,7 +207,7 @@ public class ShopUI : MonoBehaviour
         if ( CurrencyManager.Instance.TrySpendCurrency(item1.price))
         {
             UpdateCurrencyUI(CurrencyManager.Instance.CurrentCurrency);
-            var inventoryManager = FindAnyObjectByType<ManagerOfInventory>();
+           
             // FindObjectOfType<ManagerOfInventory>().AddItemToInventory(item1); //tog bort efeter som
             if (inventoryManager == null)
             {

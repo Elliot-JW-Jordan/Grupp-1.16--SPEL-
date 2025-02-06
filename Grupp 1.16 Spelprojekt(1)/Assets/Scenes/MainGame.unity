@@ -3815,8 +3815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a63c054b8d434847aee1e62c0f1cace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 10
+  health: 40
+  maxHealth: 40
   healAmountQ: 0
   green: {fileID: 681780312}
   DamageOnPlayer: 2
