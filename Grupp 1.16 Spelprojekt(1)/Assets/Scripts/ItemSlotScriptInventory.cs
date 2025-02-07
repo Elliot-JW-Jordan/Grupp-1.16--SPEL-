@@ -225,6 +225,9 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 
         quantityText.enabled = false;
 
+        //Kallar en metod för att ordna om inventory när  
+        inventoryM.RearangeInventory();
+
     }
 }
 
