@@ -24,7 +24,7 @@ private void Awake()
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); //help
         }
     }
      public void AddCurrency(int amount)
