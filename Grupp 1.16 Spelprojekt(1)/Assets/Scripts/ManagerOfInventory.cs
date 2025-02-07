@@ -199,4 +199,48 @@ public class ManagerOfInventory : MonoBehaviour
             }
         }
     }
+
+    public void RearangeInventory()
+    {
+        for (int i = 0; i < itemSlot.Length - 1; i++) // Koden ska stanna innan den sista 'slot' in 'Iteminventory'
+        {
+            if (!itemSlot[i].isfull) //finner tomma 'slot'
+            {
+                for (int j = i +1; j < itemSlot.Length; j++){     // LETAR EFTER nästa FYLLda 'Slot'
+                 
+                    if (itemSlot[j].isfull) 
+                    {
+
+                        //överförning av datta från J till I
+                        itemSlot[i].itemNAMEInv = itemSlot[j].itemNAMEInv;
+                        itemSlot[i].quantityInv = itemSlot[j].quantityInv;
+                        itemSlot[i].itemSpriteInv = itemSlot[j].itemSpriteInv;
+                        itemSlot[i].descriptionInINV = itemSlot[j].descriptionInINV;
+                        itemSlot[i].isfull = true;
+
+                        // Nu uppdaterar jag UI element av det förflyttade 
+                        itemSlot[i].quantityText.text = itemSlot[j].quantityText.text;
+                        
+                        itemSlot[i].itemDescriptionImage.sprite = itemSlot[j].itemSpriteInv;
+                        itemSlot[i].quantityText.enabled = true;
+
+                        // överför selektion
+                        itemSlot[i].invItemSelected = itemSlot[j].invItemSelected;
+                        itemSlot[i].selectedOutline.SetActive(itemSlot[j].invItemSelected);
+                        
+
+
+                        //Tommer den originälla 'slot':en
+
+                        itemSlot[j].ClearSlot();
+                        break; // förflytta till nästa tomma 'slot'
+
+
+                    }
+
+            }
+
+        }
+    }
 }
+    }
