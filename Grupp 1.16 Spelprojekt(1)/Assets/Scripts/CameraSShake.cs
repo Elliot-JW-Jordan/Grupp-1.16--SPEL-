@@ -13,18 +13,19 @@ public class CameraSShake : MonoBehaviour
     private Vector3 originalPos; //Kamernans originala position,  MITTEN AV SKÄRMEN
     private Vector3 currentCameraPos;
     private float shakeTimeCounter = 0f;
-    private bool isshaking = false;
+    private float dampeningSpeed = 1.5f;
+    public bool isshaking = false;
 
 
     private void Awake()
     {
-        currentCameraPos = transform.localPosition;//Nuvarande position till transform.local
+       // currentCameraPos = transform.localPosition;//Nuvarande position till transform.local
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        originalPos = transform.position;//
     }
 
     // Update is called once per frame
@@ -38,16 +39,21 @@ public class CameraSShake : MonoBehaviour
                 shakeShake.z = 0; //så den inte skakar på Z-leden
                 //Påverkar CurrenCamaeraPos med offsetten, Tillämpar kamera med offset.
                 transform.localPosition +=  shakeShake;
-                shakeTimeCounter -= Time.deltaTime;
+                transform.position = originalPos + (Vector3)Random.insideUnitCircle * magnitude;
+                shakeTimeCounter -= Time.deltaTime * dampeningSpeed;
             }
             else
             {
+                timeofShake = 0f;
+                //åter ställer positionen 
+                transform.position = originalPos;
                 //Upphör skakningen
                 isshaking = false;
                
             }
         }
     }
+    
 
     public void BeginShake(float duration, float magnitudeS)
     {
@@ -55,6 +61,7 @@ public class CameraSShake : MonoBehaviour
         timeofShake = duration;
         magnitude = magnitudeS;
         shakeTimeCounter = timeofShake;
+        originalPos = transform.position;
         isshaking = true;
 
     }

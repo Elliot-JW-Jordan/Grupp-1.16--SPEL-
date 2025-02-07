@@ -70,6 +70,9 @@ TagManager:
   - name: bullets
     uniqueID: 3947302679
     locked: 0
+  - name: Shadows
+    uniqueID: 553128123
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
