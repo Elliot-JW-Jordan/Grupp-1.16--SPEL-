@@ -188,6 +188,7 @@ public class ManagerOfInventory : MonoBehaviour
         inventoryList.Remove(item);
         Debug.Log($"Removed {item.itemName} from the inentory list");
 
+
         //tar ochså bort föremmålet från UI inventory slots
         foreach(var slot in itemSlot)
         {
