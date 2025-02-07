@@ -220,14 +220,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 10
-  currencyDrop: 20
+  maxHealth: 6
+  currencyDrop: 25
   buffFactor: 1
   buffDuration: 0
   buffTime: 0
   buffActive: 0
   dmgBerForeApplyBuff: 5
-  EnemyTyp: 2
+  EnemyTyp2: 0
+  BloodStains: {fileID: 0}
   shopSystem1: {fileID: 0}
   OnCurrencyDropped:
     m_PersistentCalls:
