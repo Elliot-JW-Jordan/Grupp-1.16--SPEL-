@@ -63,6 +63,9 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     public float minimumSprite = 0.8f;
     public float maxScale = 1.2f;
 
+    [Header("Particles")]
+    public ParticleSystem turningDust;
+
     private Rigidbody2D rigid2d;
 
     private Vector2 inputOfMoving;
@@ -164,7 +167,11 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         {
             yield break;
         }
-
+       // spelar "turningDust" 
+       if (turningDust !=  null)
+        {
+            turningDust.Play(); // partiklar vid vändning
+        }
 
 
         isFlipping = true; //Signalerar att figuren "flippar"
