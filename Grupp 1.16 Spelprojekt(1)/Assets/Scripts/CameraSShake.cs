@@ -10,7 +10,7 @@ public class CameraSShake : MonoBehaviour
 
 
 
-    private Vector3 originalPos; //Kamernans originala position,  MITTEN AV SKÄRMEN
+    private Vector3 originalLocalPos; //Kamernans originala position,  MITTEN AV SKÄRMEN
     private Vector3 currentCameraPos;
     private float shakeTimeCounter = 0f;
     private float dampeningSpeed = 1.5f;
@@ -25,7 +25,25 @@ public class CameraSShake : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originalPos = transform.position;//
+        originalLocalPos = transform.localPosition;//
+    }
+
+    public void BeginShake(float duration, float magnitudeS)
+    {
+        // Kollar ifall kameran redan skakar eller inte
+        if (isshaking)
+        {
+            // ifall kamaeran redan skakar så ska coden ignorera den nya skakningen.
+            return;
+        }
+        originalLocalPos = transform.localPosition; // positionering
+         //parametrar
+        timeofShake = duration;
+        magnitude = magnitudeS;
+        shakeTimeCounter = timeofShake;
+        
+       isshaking = true;
+
     }
 
     // Update is called once per frame
@@ -38,15 +56,15 @@ public class CameraSShake : MonoBehaviour
                 Vector3 shakeShake = Random.insideUnitSphere * magnitude;
                 shakeShake.z = 0; //så den inte skakar på Z-leden
                 //Påverkar CurrenCamaeraPos med offsetten, Tillämpar kamera med offset.
-                transform.localPosition +=  shakeShake;
-                transform.position = originalPos + (Vector3)Random.insideUnitCircle * magnitude;
+                transform.localPosition = originalLocalPos + shakeShake;  // applicerar shakeshake till orginal positionen
+              //  transform.localPosition = originalPos + (Vector3)Random.insideUnitCircle * magnitude;
                 shakeTimeCounter -= Time.deltaTime * dampeningSpeed;
             }
             else
             {
                 timeofShake = 0f;
                 //åter ställer positionen 
-                transform.position = originalPos;
+                transform.localPosition = originalLocalPos;
                 //Upphör skakningen
                 isshaking = false;
                
@@ -55,14 +73,6 @@ public class CameraSShake : MonoBehaviour
     }
     
 
-    public void BeginShake(float duration, float magnitudeS)
-    {
+  
 
-        timeofShake = duration;
-        magnitude = magnitudeS;
-        shakeTimeCounter = timeofShake;
-        originalPos = transform.position;
-        isshaking = true;
-
-    }
 }
