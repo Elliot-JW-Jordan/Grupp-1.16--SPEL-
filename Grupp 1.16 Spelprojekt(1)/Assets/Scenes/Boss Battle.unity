@@ -415,8 +415,8 @@ MonoBehaviour:
   dodgeDownTime: 1.5
   angularDrag: 5
   linearjarDrag: 10
-  camera: {fileID: 0}
-  cameraSShake: {fileID: 0}
+  camera: {fileID: 6973711112620474472}
+  cameraSShake: {fileID: 6973711112620474473}
   shakeMagnitude: 0.3
   shakeLe: 0.2
   zoomspeed: 0.15
@@ -426,6 +426,7 @@ MonoBehaviour:
   playerSpr: {fileID: 0}
   minimumSprite: 0.8
   maxScale: 1.2
+  turningDust: {fileID: 0}
 --- !u!114 &612314976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,8 +1331,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 927589405949256539, guid: faea9005397d41349af88b127c201373, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6973711112620474473}
   m_SourcePrefab: {fileID: 100100000, guid: faea9005397d41349af88b127c201373, type: 3}
+--- !u!1 &6973711112620474471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 927589405949256539, guid: faea9005397d41349af88b127c201373, type: 3}
+  m_PrefabInstance: {fileID: 6973711112620474470}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &6973711112620474472 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2850647874240522546, guid: faea9005397d41349af88b127c201373, type: 3}
+  m_PrefabInstance: {fileID: 6973711112620474470}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6973711112620474473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6973711112620474471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd34ef8b95f83c842aff4358cf94d12d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 0.3
+  timeofShake: 0.2
+  isshaking: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
