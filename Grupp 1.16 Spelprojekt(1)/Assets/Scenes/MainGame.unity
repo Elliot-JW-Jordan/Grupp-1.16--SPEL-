@@ -4328,7 +4328,7 @@ MonoBehaviour:
   pulseFrequency: 1.5
   pulseIntensity: 0.1
   playerSpr: {fileID: 1284530589}
-  minimumSprite: 0.8
+  minimumSprite: 1
   maxScale: 1.2
   turningDust: {fileID: 1753932557}
 --- !u!1 &1322741175
