@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -7,7 +6,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
+public class TestWalk : MonoBehaviour//AI "RENAD"
 {
     Animator animator;
     private int FelixDirection = 0;
@@ -63,9 +62,6 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     public float minimumSprite = 0.8f;
     public float maxScale = 1.2f;
 
-    [Header("Particles")]
-    public ParticleSystem turningDust;
-
     private Rigidbody2D rigid2d;
 
     private Vector2 inputOfMoving;
@@ -90,8 +86,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
     void Update()
     {
-        // jag hämtar rörelse riktningen
-       inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         if (inputOfMoving != Vector2.zero)
         {
@@ -100,15 +95,15 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
         isRunning = (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Fire3")) && canRun;
 
-        if ((Input.GetKeyDown(KeyCode.Space) && canDodge))
-            {
-       StartCoroutine(Dodge());
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1")) && canDodge)
+        {
+            StartCoroutine(Dodge());
         }
 
         HandleStamina();
         ChangeSpriteScale();
         UpdateCameraEffects();
-        Animation();
+        
     }
 
     private void FixedUpdate()
@@ -116,7 +111,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         if (!isDoging)
         {
             ApplyMovement();
-             ApplyDynamicTurning();
+            ApplyDynamicTurning();
         }
     }
 
@@ -141,39 +136,16 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     void ApplyDynamicTurning()
     {
         //Börjar bara flippa ifalll spelaren inte gör det och spelaren rörs sig horizontielt
-        if (inputOfMoving.x != 0 && !isFlipping) //Om spelaren inte FLIPPAR och input of moving x inte är lika med noll
+        if (!isFlipping && inputOfMoving.x != 0) //Om spelaren inte FLIPPAR och input of moving x inte är lika med noll
 
-        {
-            float targetScaleX = inputOfMoving.x > 0 ? 1f : -1f; 
-
-            // karantäner börjar bARA OM rörelse riktningen förrändras 
-            if (Mathf.Sign(transform.localScale.x) !=Mathf.Sign(targetScaleX))
-            {
-
-                // Påbörjer en corountine baserat på inputen
-                StartCoroutine(ForASmoothHorizontalFlip(inputOfMoving.x > 0 ? 1f : -1f, turn));
-
-            }
-
-            
+        {// Påbörjer en corountine baserat på inputen
+            StartCoroutine(ForASmoothHorizontalFlip(inputOfMoving.x > 0 ? 1f : -1f, turn));
         }
 
     }
 
     IEnumerator ForASmoothHorizontalFlip(float targetScaleX, float smoothness)
     {
-       // if fall flip funtionen inte behövs 
-       if (Mathf.Sign(transform.localScale.x) == Mathf.Sign(targetScaleX))
-        {
-            yield break;
-        }
-       // spelar "turningDust" 
-       if (turningDust !=  null)
-        {
-            turningDust.Play(); // partiklar vid vändning
-        }
-
-
         isFlipping = true; //Signalerar att figuren "flippar"
         //hämtar X skalan av spelaren
         float currentScaleX = transform.localScale.x;
@@ -187,7 +159,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
             yield return null; // Den väntar på nästa frame
         }
         //snappar till målet, Exakt
-      
+
         transform.localScale = new Vector3(currentScaleX, transform.localScale.y, transform.localScale.z); //Snappar spelaren till targetscale.x
         isFlipping = false; //spelaren har lyckats med att flippa
     }
@@ -298,10 +270,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
         if (playerSpr != null)
         {
-            // bevarar den förra vändningen 
-            float currentSign = Mathf.Sign(playerSpr.localScale.x);
-
-            playerSpr.localScale = new Vector3(newScale * currentSign, newScale, 1f);
+            playerSpr.localScale = new Vector3(newScale, newScale, 1f);
         }
     }
 
@@ -326,50 +295,10 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
 
 
-    void Animation()
-    {
-        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-        {
-            FelixDirection = 1;
-            animator.Play("Felix_walk_baksidan");
-        }
-        else if (!Input.GetKey(KeyCode.W) && FelixDirection == 1)
-        {
-            animator.Play("idle animation baksidan");
-        }
-
-        if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-        {
-            FelixDirection = 2;
-            animator.Play("Felix_walk_framsidan");
-        }
-        else if (!Input.GetKey(KeyCode.S) && FelixDirection == 2)
-        {
-            animator.Play("idle_framsidan_Felix 0");
-        }
-
-        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
-        {
-            FelixDirection = 3;
-            animator.Play("Felix_sida_walk");
-        }
-        else if (!Input.GetKey(KeyCode.A) && FelixDirection == 3)
-        {
-            animator.Play("Felix_sida_idle");
-        }
-
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W))
-        {
-            FelixDirection = 4;
-            animator.Play("Felix_sida_walk");
-        }
-        else if (!Input.GetKey(KeyCode.D) && FelixDirection == 4)
-        {
-            animator.Play("Felix_sida_idle");
-        }
-    }
+    
 
 }
-    
+
+
 
 

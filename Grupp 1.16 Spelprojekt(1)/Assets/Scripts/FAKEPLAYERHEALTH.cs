@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 
 
-public class playerHealth : MonoBehaviour
+public class playerHealthFake : MonoBehaviour
 {
-    
+
     public int health;
-    public int maxHealth = 40;
+    public int maxHealth = 10;
     public int healAmountQ = 0;
     public Image green;
     public int DamageOnPlayer = 2;
@@ -24,9 +24,9 @@ public class playerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         health = maxHealth;
-        UpdateHealthBar();
+     
 
         ripFelix = GetComponent<Animator>();
     }
@@ -46,21 +46,19 @@ public class playerHealth : MonoBehaviour
         int finalDamage = Mathf.RoundToInt(reducedDamage);
         Debug.Log($"Original DMG to payer : {amount}, Reduced DMG : {finalDamage}, Reduction Percentage : {damageRadeuctionperventage * 100}%");
 
-        
-            health -= finalDamage;
-            if (health < 0)
-            {
-                Destroy(gameObject);
-            }
-        UpdateHealthBar();
 
+        health -= finalDamage;
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
     }
     // Coroutine för att spela animationen och ladda scenen med fördröjning
     IEnumerator PlayAnimationAndLoadScene()
     {
         ripFelix.Play("död_felix_rip");
 
-        yield return new WaitForSeconds(35); 
+        yield return new WaitForSeconds(35);
 
         SceneManager.LoadScene("testStart");
     }
@@ -95,7 +93,7 @@ public class playerHealth : MonoBehaviour
 
 
 
-  public void HealPlayer(float healAmount)
+    public void HealPlayer(float healAmount)
     {
         Debug.Log($"ItemUseManagerScript called HealPlayer healAmount : {healAmount}");
         health += Mathf.RoundToInt(healAmount); // Detta konverterar healthAmount till en Integer
@@ -105,19 +103,13 @@ public class playerHealth : MonoBehaviour
             health = maxHealth; // för att se till så att health aldrig överstiger MaxHealth
 
         }
-        UpdateHealthBar();
-
+       
     }
 
 
-
-    void UpdateHealthBar()
-    {
-        float healthPercentage = (float)health / maxHealth;
-        green.fillAmount = healthPercentage; // Update the fill amount of the green health bar
-
-    }
 
     
+
+
 
 }

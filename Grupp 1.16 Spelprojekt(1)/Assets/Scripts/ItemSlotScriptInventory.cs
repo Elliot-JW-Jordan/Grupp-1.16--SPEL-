@@ -17,7 +17,8 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
     public bool isfull;
     public string descriptionInINV;
 
-
+    [Header("Placeholder")]
+    public Sprite placeholderImage;
 
     [SerializeField]
     public TMP_Text quantityText;
@@ -110,7 +111,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         //koller ifall datan verkligen finns
         if (string.IsNullOrEmpty(itemNAMEInv))
         {
-            Debug.LogError("The Right-Click failed. The item DATA is either invalid or empty");
+            Debug.LogWarning("The Right-Click failed. The item DATA is either invalid or empty");
             return;
         }
         ItemUseManagerScript itemUseManager = FindObjectOfType<ItemUseManagerScript>();
@@ -169,13 +170,25 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         //töm slotten alltså rutans infromation
         itemNAMEInv = string.Empty;
         quantityInv = 0;
-        itemImageINV = null;
+        
         descriptionInINV = string.Empty;
 
         //visar att rutan är tom  genom bool
         isfull = false;
         quantityText.text = string.Empty;
-        itemImageINV.sprite = itemSpriteInv;
+        itemImageINV.sprite = null;
+        //Använder en PLACEHOLDER SPRITE ISTÄLLET FÖR NULL
+        if (itemImageINV.sprite == null)
+        {
+            itemImageINV.sprite = placeholderImage;
+        }
+
+        itemDescriptionImage.sprite = null;
+        if(itemDescriptionImage == null)
+        {
+            itemDescriptionImage.sprite = placeholderImage;
+        }
+
         quantityText.enabled = false;
 
     }
