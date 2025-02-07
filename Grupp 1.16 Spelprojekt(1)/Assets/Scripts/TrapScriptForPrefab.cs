@@ -152,6 +152,10 @@ public class TrapScriptForPrefab : MonoBehaviour
             
 
         }
+        if (disarmInstructionText != null)
+        {
+            disarmInstructionText.gameObject.SetActive(false); // stänger av "Disarm" texten när fällan aktiveras
+        }
         StartCoroutine(Traptimer());
 
     }
@@ -192,11 +196,21 @@ public class TrapScriptForPrefab : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Nedan sätts alltid på när något åker colliderar
+        UnityEngine.Debug.Log($"Something has entered the collider {collision.gameObject.name} with tag: {collision.CompareTag("Player")}");
+
+
+
         //Undersöker först, och bestämer vilket utav de två det 'r 'Circle  
-        if (collision == disarmCollider && collision.CompareTag("Player") && !playerIsTrapped)
+        // tog bort (collision == disarmCollider &&
+        if (collision.CompareTag("Player") && !playerIsTrapped)
         {
+            UnityEngine.Debug.Log("The player is near the trap!");
+
+
             isNearAtrap = true; // visa att spelaren är nära
-            if (disarmInstructionText != null && trapIsActive)
+
+            if (disarmInstructionText != null && trapIsActive && isNearAtrap == true && !playerIsTrapped)
             {
                 disarmInstructionText.text = "Press 'E' to disarm trap";
                 disarmInstructionText.gameObject.SetActive(true);
@@ -207,9 +221,8 @@ public class TrapScriptForPrefab : MonoBehaviour
     }
    
     private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision == disarmCollider)
-        {
+    {// tog bort collison == blablalba 
+       
             if (collision.gameObject.CompareTag("Player"))
             {
                 isNearAtrap = false; //mspelaren är int elängre nära fällan
@@ -223,13 +236,13 @@ public class TrapScriptForPrefab : MonoBehaviour
           //  if (playerIsTrapped) {
 
                
-                camera.BeginShake(0.2f, 3f); // Activerar skakningen
+               // Activerar skakningen
               //  ReleasePlayer(collision.gameObject);
               //  UnityEngine.Debug.Log("Player escaped the trap");
            // }
 
            
-        }
+        
        
 
     }
