@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CamFollowPlayer : MonoBehaviour
 {
+    private CameraSShake cameraSShake;
     public GameObject player; 
     public float maxOffset = 6f;
 
@@ -12,10 +13,11 @@ public class CamFollowPlayer : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    void Update()
+    void LateUpdate() //
     {
-        if (player == null || transform.parent == null)
+        if (player == null || transform.parent == null || (cameraSShake != null && cameraSShake.isshaking))
             return;
+        
 
         float playerY = player.transform.position.y;
 
@@ -27,4 +29,5 @@ public class CamFollowPlayer : MonoBehaviour
         cameraPosition.y = clampedY; 
         transform.position = cameraPosition;
     }
+   
 }
