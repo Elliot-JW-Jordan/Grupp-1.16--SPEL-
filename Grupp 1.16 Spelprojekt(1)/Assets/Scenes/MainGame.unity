@@ -4988,6 +4988,8 @@ MonoBehaviour:
   chestplateSPRITE: {fileID: 21300000, guid: 63d4247f823518041805dd19f32366cb, type: 3}
   leggingsSPRITE: {fileID: 21300000, guid: 3da4f2470b430c44bba4db8815bfe554, type: 3}
   bootSprite: {fileID: 21300000, guid: 1ef5a13d0b154f444a85e767f67eb9a9, type: 3}
+  powerUp: {fileID: 21300000, guid: c2a6858ec67ba0a4d82b3d45838a2a15, type: 3}
+  healingP: {fileID: 21300000, guid: bc70a8ee8fe3c5247b544e7b063bed4f, type: 3}
 --- !u!4 &1580615519
 Transform:
   m_ObjectHideFlags: 0
