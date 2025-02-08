@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class CameraBehavior : MonoBehaviour
@@ -35,10 +36,17 @@ public class CameraBehavior : MonoBehaviour
         if (other.CompareTag("Player") && mainCamera != null)
         {
             isPlayerInTrigger = false;
-            playerCollider = null; 
+            playerCollider = null;
 
-            mainCamera.transform.SetParent(null);
+            Invoke(nameof(DetachCamera), 0.1f);
+
+           // mainCamera.transform.SetParent(null);
         }
+    }
+    private void DetachCamera()
+    {
+        
+        mainCamera.transform.SetParent(null);
     }
 
     private void Update()
@@ -50,11 +58,20 @@ public class CameraBehavior : MonoBehaviour
                 isPlayerInTrigger = false;
                 playerCollider = null;
 
+
+              
+                
                 if (mainCamera != null)
+
                 {
+                    
                     mainCamera.transform.SetParent(null);
                 }
+
+
+
             }
         }
+       
     }
 }
