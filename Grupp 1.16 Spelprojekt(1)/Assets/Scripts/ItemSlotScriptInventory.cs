@@ -42,6 +42,21 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
     private ManagerOfInventory inventoryM;  //refferrar till Manager of Inventory
 
 
+
+    private void Awake()
+    {
+        // finn alla instancer ut av ManagerOfInventory, både aktiva och inactiva., väljer den första.
+        ManagerOfInventory[] managerOfInventories =  Resources.FindObjectsOfTypeAll<ManagerOfInventory>();
+        inventoryM = managerOfInventories.FirstOrDefault();
+
+        if (inventoryM == null)
+        {
+            Debug.LogError("There is no ManagerOfInventoy found, make sure there is one the the scene");
+        }
+    }
+
+
+
     private void Start()
     {
         inventoryM = GameObject.Find("InventoryCANVAS").GetComponent<ManagerOfInventory>();
