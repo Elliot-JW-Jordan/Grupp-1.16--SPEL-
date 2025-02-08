@@ -59,7 +59,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        inventoryM = GameObject.Find("InventoryCANVAS").GetComponent<ManagerOfInventory>();
+        
     }
 
     public void AddItem(string itemName, int quantity, Sprite itemSprite, string descriptionPlus)
