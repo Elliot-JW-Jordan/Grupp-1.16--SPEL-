@@ -219,14 +219,15 @@ public class ManagerOfInventory : MonoBehaviour
                         itemSlot[i].quantityInv = itemSlot[j].quantityInv;
                         itemSlot[i].itemSpriteInv = itemSlot[j].itemSpriteInv;
                         itemSlot[i].descriptionInINV = itemSlot[j].descriptionInINV;
-                        itemSlot[i].itemImageINV = itemSlot[j].itemImageINV;
+                       
+                        itemSlot[i].itemImageINV.sprite = itemSlot[j].itemImageINV.sprite;
                         itemSlot[i].isfull = true;
 
                         // Nu uppdaterar jag UI element av det förflyttade 
                         itemSlot[i].quantityText.text = itemSlot[j].quantityText.text;
                         
                         itemSlot[i].itemDescriptionImage.sprite = itemSlot[j].itemSpriteInv;
-                        itemSlot[i].itemImageINV.sprite = itemSlot[j].itemImageINV.sprite;
+                        itemSlot[i].itemImageINV.sprite = itemSlot[j].itemSpriteInv;
                         itemSlot[i].quantityText.enabled = true;
 
                         // överför selektion

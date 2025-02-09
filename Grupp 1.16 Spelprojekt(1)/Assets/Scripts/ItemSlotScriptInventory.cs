@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using JetBrains.Annotations;
 using System.Linq;
+using System;
 
 public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 {
@@ -155,6 +156,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         quantityInv--;
         //Uppdaterar UI
         quantityText.text = quantityInv.ToString();
+        inventoryM.HelperUpdate(Array.IndexOf(inventoryM.itemSlot, this));
 
         //Om quantity når noll 0, så ska föremålet försvinna från itemslotten MEN INTE FRÅN ALLA  och spelarens Inventory
         if (quantityInv<= 0)
@@ -219,35 +221,29 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         return null;
     }
     public void ClearSlot()
-    {
+    { // all null to placeholder
         //töm slotten alltså rutans infromation
+
+        // återsäller data
+
         itemNAMEInv = string.Empty;
         quantityInv = 0;
         
         descriptionInINV = string.Empty;
-
-        //visar att rutan är tom  genom bool
+  //visar att rutan är tom  genom bool
         isfull = false;
+        invItemSelected = false;
         quantityText.text = string.Empty;
-        itemDescriptionImage.sprite = placeholderImage;
-        itemImageINV.sprite = null;
-        //Använder en PLACEHOLDER SPRITE ISTÄLLET FÖR NULL
-        if (itemImageINV.sprite == null)
-        {
-            itemImageINV.sprite = placeholderImage;
-        }
-
-        itemDescriptionImage.sprite = null;
-        if(itemDescriptionImage == null)
-        {
-            itemDescriptionImage.sprite = placeholderImage;
-        }
-
         quantityText.enabled = false;
+        //Använder en PLACEHOLDER SPRITE ISTÄLLET FÖR NULL
+            itemImageINV.sprite = placeholderImage;
+         itemDescriptionImage.sprite = placeholderImage;
+       // så att outlinen stäng av
+       selectedOutline.SetActive(false);
 
         //Kallar en metod för att ordna om inventory när  
         inventoryM.RearangeInventory();
-
+        Debug.Log("The slot was cleared successfully");
     }
 }
 
