@@ -160,8 +160,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         if (quantityInv<= 0)
         {
 
-            //Töm rutan alltså Slot
-            ClearSlot();
+       //old clear
 
             // BOOLEN kollar iffal det fins itemslorts kvar med samma item
             bool theItemStillExists = false;
@@ -198,6 +197,8 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
                 }
                 
             }
+            //Töm rutan alltså Slot
+            ClearSlot();
 
         }
 

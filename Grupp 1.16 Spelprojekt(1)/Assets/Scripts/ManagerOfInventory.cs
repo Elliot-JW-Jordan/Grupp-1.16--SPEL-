@@ -232,13 +232,23 @@ public class ManagerOfInventory : MonoBehaviour
                         // överför selektion
                         itemSlot[i].invItemSelected = itemSlot[j].invItemSelected;
                         itemSlot[i].selectedOutline.SetActive(itemSlot[j].invItemSelected);
-                        
 
+                        // Updatera UI 
+                        HelperUpdate(i);
 
                         //Tommer den originälla 'slot':en
 
                         itemSlot[j].ClearSlot();
+
+                        // uppdatera den nu tomma 
+                        HelperUpdate(j);
+
+
                         break; // förflytta till nästa tomma 'slot'
+
+
+
+
 
 
                     }
@@ -248,4 +258,24 @@ public class ManagerOfInventory : MonoBehaviour
         }
     }
 }
+
+
+    public void HelperUpdate(int slotindex)
+    {
+        ItemSlotScriptInventory slot = itemSlot[slotindex];
+        if (slot != null)
+        {
+            //uppdaterae en slots ui
+            slot.quantityText.text = slot.quantityInv.ToString();
+            slot.itemImageINV.sprite = slot.itemSpriteInv;
+            slot.itemDescriptionImage.sprite = slot.itemSpriteInv;
+            slot.quantityText.enabled = slot.isfull;
+            slot.selectedOutline.SetActive(slot.invItemSelected);
+
+
+            Debug.Log($"UI updated for slot{slotindex} ({slot.itemNAMEInv}): quantity :{slot.quantityInv}");
+        }
+        
+    }
+
     }

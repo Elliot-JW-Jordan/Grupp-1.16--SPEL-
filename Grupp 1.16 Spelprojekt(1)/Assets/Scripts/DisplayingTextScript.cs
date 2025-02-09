@@ -36,11 +36,11 @@ public class DisplayingTextScript : MonoBehaviour
         {
             infoText.text = "";
         }
-        DontDestroyOnLoad(gameObject);
+       // DontDestroyOnLoad(gameObject);
     }
     private void OnDestroy()
     {
-        Debug.LogError("DisplayingTextScript was destroyed   on" + gameObject.name + "s");
+        Debug.Log("DisplayingTextScript was destroyed   on" + gameObject.name + "s");
     }
 
     //kKall på denna meTOd från externa klasser eller metodesr
