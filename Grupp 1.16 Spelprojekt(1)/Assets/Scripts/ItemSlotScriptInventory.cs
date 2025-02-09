@@ -6,9 +6,11 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using JetBrains.Annotations;
+using System.Linq;
 
 public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 {
+    DisplayingTextScript displaying;
     [Header("Slot and item data")]
     public int maxNumberOfItems = 4;
     public string itemNAMEInv;
@@ -24,7 +26,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
     public TMP_Text quantityText;
 
     [SerializeField]
-    private Image itemImageINV;
+    public Image itemImageINV;
 
     [Header("Selection")]
     [SerializeField]
@@ -37,12 +39,29 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
     public TMP_Text itemDescriptionNameText;
     public TMP_Text itemDescriptionText;
 
+    public ItemSystem itemData; // lagrar det tikiga data som , armour 
     private ManagerOfInventory inventoryM;  //refferrar till Manager of Inventory
+
+
+
+    private void Awake()
+    {
+        // finn alla instancer ut av ManagerOfInventory, både aktiva och inactiva., väljer den första.
+        ManagerOfInventory[] managerOfInventories =  Resources.FindObjectsOfTypeAll<ManagerOfInventory>();
+        inventoryM = managerOfInventories.FirstOrDefault();
+
+        if (inventoryM == null)
+        {
+            Debug.LogError("There is no ManagerOfInventoy found, make sure there is one the the scene");
+        }
+    }
+
 
 
     private void Start()
     {
-        inventoryM = GameObject.Find("InventoryCANVAS").GetComponent<ManagerOfInventory>();
+        displaying = FindObjectOfType<DisplayingTextScript>();
+
     }
 
     public void AddItem(string itemName, int quantity, Sprite itemSprite, string descriptionPlus)
@@ -131,23 +150,57 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 
         //Använd det untvalda förmålet genom att kalla på UseItem
         itemUseManager.UseItem(itemtoUSE);
+        displaying.DisplayMessage($"Used item : {itemtoUSE}", 3f);
         //Item quantaty minskar med 1 efter användning 
         quantityInv--;
         //Uppdaterar UI
         quantityText.text = quantityInv.ToString();
 
-        //Om quantity når noll 0, så ska föremålet försvinna från itemslotten och spelarens Inventory
+        //Om quantity når noll 0, så ska föremålet försvinna från itemslotten MEN INTE FRÅN ALLA  och spelarens Inventory
         if (quantityInv<= 0)
         {
 
+       //old clear
+
+            // BOOLEN kollar iffal det fins itemslorts kvar med samma item
+            bool theItemStillExists = false;
+            ItemSystem itemSlotToRemove = null; // Variablen som lagrar föremålet som måste tas bort
+            if (inventoryM.itemSlot != null && inventoryM.itemSlot.Length > 0)
+            {
+
+                foreach (var slot in inventoryM.itemSlot)
+                {
+                    if (slot.itemNAMEInv == itemNAMEInv && slot.quantityInv > 0)
+                    {
+                        theItemStillExists = true;
+                        break;
+                    }
+                    // om slotten har 0 antall, markera att den ska tas bort senare
+                    if (slot.itemNAMEInv == itemNAMEInv && slot.quantityInv == 0)
+                    {
+                        itemSlotToRemove = FindItemByName(itemNAMEInv); // lagrar alla slots som ska tas bort
+
+                    }
+
+                }
+
+            }
+              
+            if (!theItemStillExists)
+            {
+
+                if(itemSlotToRemove != null)
+                {
+                    //ta bort föremålet ifrån inventorylist
+                    inventoryM.RemoveItemFromInventory(itemSlotToRemove);
+
+                }
+                
+            }
             //Töm rutan alltså Slot
             ClearSlot();
 
-            //ta bort föremålet ifrån inventorylist
-            inventoryM.RemoveItemFromInventory(itemtoUSE);
         }
-
-       
 
     }
 
@@ -176,6 +229,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         //visar att rutan är tom  genom bool
         isfull = false;
         quantityText.text = string.Empty;
+        itemDescriptionImage.sprite = placeholderImage;
         itemImageINV.sprite = null;
         //Använder en PLACEHOLDER SPRITE ISTÄLLET FÖR NULL
         if (itemImageINV.sprite == null)
@@ -190,6 +244,9 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         }
 
         quantityText.enabled = false;
+
+        //Kallar en metod för att ordna om inventory när  
+        inventoryM.RearangeInventory();
 
     }
 }

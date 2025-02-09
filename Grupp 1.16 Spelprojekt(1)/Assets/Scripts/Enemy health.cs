@@ -15,7 +15,7 @@ public class Enemyhealth : MonoBehaviour
     public float buffTime = 0;
     public bool buffActive = false;
     public int dmgBerForeApplyBuff = 5;
-    private int appliedincrease = 0;
+    public int appliedincrease = 0;
 
     public bool EnemyTyp2 = false;
     public GameObject BloodStains;

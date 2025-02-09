@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -91,7 +90,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     void Update()
     {
         // jag hämtar rörelse riktningen
-       inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        inputOfMoving = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         if (inputOfMoving != Vector2.zero)
         {
@@ -101,8 +100,8 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         isRunning = (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("Fire3")) && canRun;
 
         if ((Input.GetKeyDown(KeyCode.Space) && canDodge))
-            {
-       StartCoroutine(Dodge());
+        {
+            StartCoroutine(Dodge());
         }
 
         HandleStamina();
@@ -116,7 +115,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         if (!isDoging)
         {
             ApplyMovement();
-             ApplyDynamicTurning();
+            ApplyDynamicTurning();
         }
     }
 
@@ -144,10 +143,10 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         if (inputOfMoving.x != 0 && !isFlipping) //Om spelaren inte FLIPPAR och input of moving x inte är lika med noll
 
         {
-            float targetScaleX = inputOfMoving.x > 0 ? 1f : -1f; 
+            float targetScaleX = inputOfMoving.x > 0 ? 1f : -1f;
 
             // karantäner börjar bARA OM rörelse riktningen förrändras 
-            if (Mathf.Sign(transform.localScale.x) !=Mathf.Sign(targetScaleX))
+            if (Mathf.Sign(transform.localScale.x) != Mathf.Sign(targetScaleX))
             {
 
                 // Påbörjer en corountine baserat på inputen
@@ -155,20 +154,20 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
 
             }
 
-            
+
         }
 
     }
 
     IEnumerator ForASmoothHorizontalFlip(float targetScaleX, float smoothness)
     {
-       // if fall flip funtionen inte behövs 
-       if (Mathf.Sign(transform.localScale.x) == Mathf.Sign(targetScaleX))
+        // if fall flip funtionen inte behövs 
+        if (Mathf.Sign(transform.localScale.x) == Mathf.Sign(targetScaleX))
         {
             yield break;
         }
-       // spelar "turningDust" 
-       if (turningDust !=  null)
+        // spelar "turningDust" 
+        if (turningDust != null)
         {
             turningDust.Play(); // partiklar vid vändning
         }
@@ -187,7 +186,7 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
             yield return null; // Den väntar på nästa frame
         }
         //snappar till målet, Exakt
-      
+
         transform.localScale = new Vector3(currentScaleX, transform.localScale.y, transform.localScale.z); //Snappar spelaren till targetscale.x
         isFlipping = false; //spelaren har lyckats med att flippa
     }
@@ -370,6 +369,5 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
     }
 
 }
-    
 
 

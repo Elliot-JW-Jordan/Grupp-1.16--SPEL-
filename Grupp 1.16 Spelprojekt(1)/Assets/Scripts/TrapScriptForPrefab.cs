@@ -13,8 +13,8 @@ public class TrapScriptForPrefab : MonoBehaviour
     public CameraSShake camera; //reffererar till CameraSShake scriptet
     public bool playerIsTrapped = false; //indikerar om spelaren har fastnat i en fälla eller inte 
     PlayerPhysicsWalking thePlayersMovemenWhileTrapped;
-    private int requiredPressesOFtHEButtonSPACE = 30; // hur många gånger spelaren måsta spamma MELLANSLAG för att fly ifrån fällan.
-    private int traptimmerBeforeInstantDeath = 8; // tid som spelaren får på sig att rymma ifrån fällan i sekunder
+    private int requiredPressesOFtHEButtonSPACE = 40; // hur många gånger spelaren måsta spamma MELLANSLAG för att fly ifrån fällan.
+    private int traptimmerBeforeInstantDeath = 6; // tid som spelaren får på sig att rymma ifrån fällan i sekunder
     private int currentPresses = 0;//hur många gågner spelaren har tryckt
     private bool isNearAtrap = false; // kollar ifall spelaren är nära fällan
     private Image theFillOfSlider;
@@ -179,7 +179,7 @@ public class TrapScriptForPrefab : MonoBehaviour
 
                 if (playerHP != null)
                 {
-                    playerHP.TakeDamage(3); // Skadar spelaren när spelarn är fångad i fällan för länge
+                    playerHP.TakeDamage(10); // Skadar spelaren när spelarn är fångad i fällan för länge
                 } 
                 else
                 {

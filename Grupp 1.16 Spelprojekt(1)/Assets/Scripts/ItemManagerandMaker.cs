@@ -9,6 +9,11 @@ public class ItemManagerandMaker : MonoBehaviour
     public Sprite chestplateSPRITE;
     public Sprite leggingsSPRITE;
     public Sprite bootSprite;
+
+    [Header("Consumable")]
+    public Sprite powerUp;
+    public Sprite healingP;
+
     public  List<ItemSystem> listOfitems { get; private set; } = new List<ItemSystem>();
 
     // Start is called before the first frame update
@@ -21,7 +26,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Consumable ssmallHealingPotion = ItemMaker.Create<Consumable>(
            name: "Smaller Healing Potion",
            description: "Common: Heals 2 HP",
-           icon: null,
+           icon: healingP,
           itemRarity: Rarity.Common,
           price: 10,
           stats: new Dictionary<string, float> { { "HealingPower", 2f } },
@@ -34,7 +39,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Consumable tinyHealingPotion = ItemMaker.Create<Consumable>(
           name: "Tiny Healing Potion",
           description: "Common: Heals 1 HP",
-          icon: null,
+          icon: healingP,
          itemRarity: Rarity.Common,
          price: 5,
          stats: new Dictionary<string, float> { { "HealingPower", 1f } },
@@ -47,7 +52,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Consumable HealingPotion = ItemMaker.Create<Consumable>(
            name: "Regular Healing Potion",
            description: "Uncommon: Heals 4 HP",
-           icon: null,
+           icon: healingP,
           itemRarity: Rarity.Uncommon,
           price: 30,
           stats: new Dictionary<string, float> { { "HealingPower", 4f } },
@@ -59,7 +64,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Consumable GreaterHealingPotion = ItemMaker.Create<Consumable>(
            name: "Greater Healing Potion",
            description: "Epic: Heals 8 HP",
-           icon: null,
+           icon: healingP,
           itemRarity: Rarity.Epic,
           price: 50,
           stats: new Dictionary<string, float> { { "HealingPower", 8f } },
@@ -71,7 +76,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Consumable DMGBuff = ItemMaker.Create<Consumable>(
         name: "Damange Enhancing Potion",
         description: "Common: Increases Damage With 1.1",
-        icon: null,
+        icon: powerUp,
        itemRarity: Rarity.Common,
        price: 30,
        stats: new Dictionary<string, float> { { "Damage Enhacing", 1.1f } },
@@ -83,7 +88,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Consumable DMGBuffNumber2 = ItemMaker.Create<Consumable>(
        name: "Greater Damange Enhancing Potion",
        description: "Epic: Increases Damage With 1.18",
-       icon: null,
+       icon: powerUp,
       itemRarity: Rarity.Epic,
       price: 50,
       stats: new Dictionary<string, float> { { "Damage Enhacing", 1.18f } },
@@ -95,7 +100,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Consumable DMGBuffNumber3 = ItemMaker.Create<Consumable>(
       name: "Greater Damange Enhancing Potion",
       description: "Legendary: Increases Damage With 1.2",
-      icon: null,
+      icon: powerUp,
      itemRarity: Rarity.Legendary,
      price: 70,
      stats: new Dictionary<string, float> { { "Damage Enhacing", 1.2f } },
@@ -107,7 +112,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Consumable DMGBuffNumber4 = ItemMaker.Create<Consumable>(
    name: "Tiny Damange Enhancing Potion",
    description: "Common: Increases Damage With 1.2",
-   icon: null,
+   icon: powerUp,
   itemRarity: Rarity.Common,
   price: 70,
   stats: new Dictionary<string, float> { { "Damage Enhacing", 1.2f } },
@@ -120,7 +125,7 @@ public class ItemManagerandMaker : MonoBehaviour
         Armour LeatherHelmet = ItemMaker.Create<Armour>(
             name: "Weathered Leather Cap",
             description: "Weak and cheap, none the less, it is still protection ",
-            icon: null,
+            icon: helmetSPRITE,
             itemRarity: Rarity.Common,
             price: 70,
             stats: new Dictionary<string, float> { { "Armour Rating", 10f } },

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class playerHealth : MonoBehaviour
 {
-    
+    DisplayingTextScript displaying;
     public int health;
     public int maxHealth = 40;
     public int healAmountQ = 0;
@@ -24,7 +24,8 @@ public class playerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        displaying = FindObjectOfType<DisplayingTextScript>();
+
         health = maxHealth;
         UpdateHealthBar();
 
@@ -45,7 +46,7 @@ public class playerHealth : MonoBehaviour
 
         int finalDamage = Mathf.RoundToInt(reducedDamage);
         Debug.Log($"Original DMG to payer : {amount}, Reduced DMG : {finalDamage}, Reduction Percentage : {damageRadeuctionperventage * 100}%");
-
+      //  displaying.DisplayMessage($"Original DMG {amount}, Reduced DMG{finalDamage}:{damageRadeuctionperventage * 100}", 1);
         
             health -= finalDamage;
             if (health < 0)
@@ -81,7 +82,7 @@ public class playerHealth : MonoBehaviour
         //damagereductionPercentage based on total defencevalue
         damageRadeuctionperventage = CalculateDamageReduction(totalDefensiveValue);
         Debug.Log($"tTotalDefensive value from armour player is wearing {totalDefensiveValue}, damage reduction percentage : {damageRadeuctionperventage * 100}%");
-
+        displaying.DisplayMessage($"Defence value {totalDefensiveValue}", 2);
 
     }
     private float CalculateDamageReduction(float defense)
@@ -98,6 +99,7 @@ public class playerHealth : MonoBehaviour
   public void HealPlayer(float healAmount)
     {
         Debug.Log($"ItemUseManagerScript called HealPlayer healAmount : {healAmount}");
+        displaying.DisplayMessage($"Healing {healAmount}", 1f);
         health += Mathf.RoundToInt(healAmount); // Detta konverterar healthAmount till en Integer
         Debug.Log($"Health after healing {healAmount}, health : {health}");
         if (health > maxHealth)

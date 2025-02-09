@@ -55,6 +55,8 @@ public class Boss1BulletSummening : MonoBehaviour
     public float DamageToTake;
 
 
+    private Enemyhealth enemyhealth; // d
+
     private void Start()
     {
         //sets rigidbody
@@ -81,6 +83,15 @@ public class Boss1BulletSummening : MonoBehaviour
         {
             float healthPercentage = (float)BossHealt / MaxBossHealth;
             bossgreen.fillAmount = healthPercentage; // Update the fill amount of the green health bar
+        }
+        enemyhealth = FindObjectOfType<Enemyhealth>(); //hämtar s
+        if( enemyhealth != null)
+        {
+            Debug.Log("enemyhealth found on another gameobject");
+        }
+        else
+        {
+            Debug.LogWarning("enemyhealth is not found anywhere in the scene");
         }
 
 
@@ -274,7 +285,14 @@ public class Boss1BulletSummening : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-            BossHealt -= DamageToTake;
+        float finalDMG = DamageToTake;
+         
+        if (enemyhealth != null && enemyhealth.buffActive)
+        {
+            finalDMG += enemyhealth.appliedincrease;
+            Debug.Log($"DMG buff applied base : {DamageToTake} buffed: {finalDMG}");
+        }
+           BossHealt -= DamageToTake;
             BossHealt = Mathf.Max(0, BossHealt);
             animator.Play("Damage_Boss");
             StartCoroutine(HurtCooldown());
