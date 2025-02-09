@@ -1384,6 +1384,7 @@ MonoBehaviour:
   playerBulletCooldown: 1
   Player: {fileID: 0}
   DamageToTake: 0
+  enemyhealth: {fileID: 695384629}
 --- !u!95 &1351415510
 Animator:
   serializedVersion: 5

@@ -55,10 +55,15 @@ public class Boss1BulletSummening : MonoBehaviour
     public float DamageToTake;
 
 
-    private Enemyhealth enemyhealth; // d
+    public Enemyhealth enemyhealth; // d
 
     private void Start()
     {
+        enemyhealth = FindObjectOfType<Enemyhealth>();
+        if(enemyhealth == null)
+        {
+            Debug.LogError("EnemyHealth not found");
+        }
         //sets rigidbody
         rb = GetComponent<Rigidbody2D>();
 
