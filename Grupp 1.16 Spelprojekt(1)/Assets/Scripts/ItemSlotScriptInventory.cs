@@ -10,6 +10,7 @@ using System.Linq;
 
 public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 {
+    DisplayingTextScript displaying;
     [Header("Slot and item data")]
     public int maxNumberOfItems = 4;
     public string itemNAMEInv;
@@ -25,7 +26,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
     public TMP_Text quantityText;
 
     [SerializeField]
-    private Image itemImageINV;
+    public Image itemImageINV;
 
     [Header("Selection")]
     [SerializeField]
@@ -59,7 +60,8 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        
+        displaying = FindObjectOfType<DisplayingTextScript>();
+
     }
 
     public void AddItem(string itemName, int quantity, Sprite itemSprite, string descriptionPlus)
@@ -148,6 +150,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 
         //Använd det untvalda förmålet genom att kalla på UseItem
         itemUseManager.UseItem(itemtoUSE);
+        displaying.DisplayMessage($"Used item : {itemtoUSE}", 3f);
         //Item quantaty minskar med 1 efter användning 
         quantityInv--;
         //Uppdaterar UI
@@ -225,6 +228,7 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         //visar att rutan är tom  genom bool
         isfull = false;
         quantityText.text = string.Empty;
+        itemDescriptionImage.sprite = placeholderImage;
         itemImageINV.sprite = null;
         //Använder en PLACEHOLDER SPRITE ISTÄLLET FÖR NULL
         if (itemImageINV.sprite == null)

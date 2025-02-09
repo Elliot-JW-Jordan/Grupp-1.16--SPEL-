@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class ManagerOfInventory : MonoBehaviour
 {
+    DisplayingTextScript displaying;
     public List<ItemSystem> inventoryList = new List<ItemSystem>();
     public GameObject InventoryMenuUI;
     private bool activatedMenu = false;
@@ -21,6 +22,8 @@ public class ManagerOfInventory : MonoBehaviour
 
     void Start()
     {
+        displaying = FindObjectOfType<DisplayingTextScript>();
+
         //För att säkerställa att Inventory UI börjar som avstängd
         InventoryMenuUI.SetActive(false); //Skymmer Inventory
         activatedMenu = false; // sätter menyns tillstond till inactivt
@@ -41,7 +44,7 @@ public class ManagerOfInventory : MonoBehaviour
         inventoryList.Add(invAddedItem);
 
         Debug.Log($"Added {invAddedItem.itemName} to players inventory list. The InventoryList now has the size {inventoryList.Count}");
-
+        displaying.DisplayMessage($"{invAddedItem.itemName} added to inventory", 2f);
         // hanterar datat i listan invAddedItem);
         // HandleItemData(invAddedItem);
 
@@ -187,7 +190,7 @@ public class ManagerOfInventory : MonoBehaviour
         //Ta bort föremållet ifrån listan
         inventoryList.Remove(item);
         Debug.Log($"Removed {item.itemName} from the inentory list");
-
+        displaying.DisplayMessage($"{item.itemName} Removed form inventory", 3f);
 
         //tar ochså bort föremmålet från UI inventory slots
         foreach(var slot in itemSlot)
@@ -207,8 +210,8 @@ public class ManagerOfInventory : MonoBehaviour
             if (!itemSlot[i].isfull) //finner tomma 'slot'
             {
                 for (int j = i +1; j < itemSlot.Length; j++){     // LETAR EFTER nästa FYLLda 'Slot'
-                 
-                    if (itemSlot[j].isfull) 
+
+                    if (itemSlot[j].isfull)
                     {
 
                         //överförning av datta från J till I
@@ -216,12 +219,14 @@ public class ManagerOfInventory : MonoBehaviour
                         itemSlot[i].quantityInv = itemSlot[j].quantityInv;
                         itemSlot[i].itemSpriteInv = itemSlot[j].itemSpriteInv;
                         itemSlot[i].descriptionInINV = itemSlot[j].descriptionInINV;
+                        itemSlot[i].itemImageINV = itemSlot[j].itemImageINV;
                         itemSlot[i].isfull = true;
 
                         // Nu uppdaterar jag UI element av det förflyttade 
                         itemSlot[i].quantityText.text = itemSlot[j].quantityText.text;
                         
                         itemSlot[i].itemDescriptionImage.sprite = itemSlot[j].itemSpriteInv;
+                        itemSlot[i].itemImageINV.sprite = itemSlot[j].itemImageINV.sprite;
                         itemSlot[i].quantityText.enabled = true;
 
                         // överför selektion

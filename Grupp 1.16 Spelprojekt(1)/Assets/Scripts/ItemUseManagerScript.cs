@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ItemUseManagerScript : MonoBehaviour
 {
+    DisplayingTextScript displaying;
     private playerHealth playerHealth;
     private Enemyhealth enemyhealth;
     private PlayerPhysicsWalking physicsWalking;
@@ -14,6 +15,7 @@ public class ItemUseManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        displaying = FindObjectOfType<DisplayingTextScript>();
         playerHealth = FindObjectOfType<playerHealth>();
         enemyhealth = FindObjectOfType<Enemyhealth>();
         physicsWalking = FindObjectOfType<PlayerPhysicsWalking>();

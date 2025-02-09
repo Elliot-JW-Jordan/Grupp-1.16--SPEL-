@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
+    DisplayingTextScript displaying;
  
     public static CurrencyManager Instance { get; private set; }
     public int CurrentCurrency { get; private set; }
@@ -15,6 +16,7 @@ public class CurrencyManager : MonoBehaviour
 
 private void Awake()
     {
+        displaying = FindObjectOfType<DisplayingTextScript>();
         //fr att säkerställa att det bara kna finnas en instans i taget.
         if (Instance != null && Instance != this)
         {
@@ -40,6 +42,8 @@ private void Awake()
         Debug.Log($" currency after ; {CurrentCurrency}"); //debugg
         OnCurrencyChanged?.Invoke(CurrentCurrency);
         Debug.Log($"Added {amount} currency. New Total: {CurrentCurrency}");
+        displaying.DisplayMessage($"+{amount}", 1f);
+        
     }
 
     public bool TrySpendCurrency(int amount)

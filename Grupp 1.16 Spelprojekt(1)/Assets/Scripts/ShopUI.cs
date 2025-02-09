@@ -7,9 +7,11 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using System.Linq;
+using System.Text;
 
 public class ShopUI : MonoBehaviour
 {
+    DisplayingTextScript displaying;
 
     [Header("UI references")]
     public Transform shopContent; // "Content" inom scrolable field
@@ -46,6 +48,11 @@ public class ShopUI : MonoBehaviour
 
     void Start()
     {
+        displaying = FindObjectOfType<DisplayingTextScript>();
+        if(displaying == null)
+        {
+            Debug.LogWarning("Displaying text not working in ShoUI");
+        }
         // SUB till peng-updaterings eventet
         if (CurrencyManager.Instance != null)
         {
@@ -225,12 +232,14 @@ public class ShopUI : MonoBehaviour
             //borde kanske byta til . AddItem istället.
              //Nu ska metoden för att updatera UI kallas
         
+
             Debug.Log($"Player payed for {item1.itemName} for {item1.price}. Players remainig currency : {CurrencyManager.Instance.CurrentCurrency}");
+            displaying.DisplayMessage($"Paid {item1.price} for {item1.itemName}", 2);
            // return; // ta bort ifall spell inte funkar
         } else
         {
             Debug.LogWarning($"The player does NOT have enough currency to buy {item1.itemName}. Required currency for purchase {item1.price}, Available : {CurrencyManager.Instance.CurrentCurrency}");
-
+            displaying.DisplayMessage($"Insufficient funds, {item1.itemName}", 2);
         }
     }
 

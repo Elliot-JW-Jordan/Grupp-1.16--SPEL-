@@ -30,16 +30,26 @@ public class DisplayingTextScript : MonoBehaviour
     }
     private void Awake()
     {
+        Debug.Log("DisplayingTextScript was initialized  on" + gameObject.name + "s");
         // säkerställer att texten börjar som tomm
         if(infoText != null)
         {
             infoText.text = "";
         }
+        DontDestroyOnLoad(gameObject);
+    }
+    private void OnDestroy()
+    {
+        Debug.LogError("DisplayingTextScript was destroyed   on" + gameObject.name + "s");
     }
 
     //kKall på denna meTOd från externa klasser eller metodesr
     public void DisplayMessage(string message, float displayDurationn = -1f)
     {
+        if (this == null)
+        {
+            return;
+        }
         // ifall den extärna metod/klassen inte angede någon tid, använd 'default'
         if (displayDurationn <= 0)
         {
