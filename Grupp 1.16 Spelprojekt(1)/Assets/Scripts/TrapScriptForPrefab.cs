@@ -39,6 +39,7 @@ public class TrapScriptForPrefab : MonoBehaviour
     public CircleCollider2D disarmCollider; 
     void Start()
     {
+        camera = FindObjectOfType<CameraSShake>();
         trapRenderer = GetComponent<Renderer>();
         trapRenderer.enabled = false; //gömmer fällan i början
 
