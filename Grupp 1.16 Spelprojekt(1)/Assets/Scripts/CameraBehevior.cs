@@ -70,10 +70,18 @@ public class CameraBehavior : MonoBehaviour
 
     private void DetachCamera()
     {
-        if (mainCamera != null)
+
+        if (mainCamera != null && mainCamera.transform.parent != null)
         {
-            Debug.Log("Detaching camera...");
-            mainCamera.transform.SetParent(null);
+            if (mainCamera.transform.parent.gameObject.activeInHierarchy) // SER TILL SÅ ATT PARENTEN ÄR AKTIVERAD
+            {
+                Debug.Log("Detaching camera...");
+                mainCamera.transform.SetParent(null);
+            } else
+            {
+                Debug.Log("Can not detach camera, the parent is being deactevated");
+            }
+           
         }
     }
 
