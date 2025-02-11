@@ -221,6 +221,7 @@ public class ManagerOfInventory : MonoBehaviour
                         itemSlot[i].descriptionInINV = itemSlot[j].descriptionInINV;
                        
                         itemSlot[i].itemImageINV.sprite = itemSlot[j].itemImageINV.sprite;
+                        itemSlot[j].itemImageINV.enabled = false; //kanske fungerar
                         itemSlot[i].isfull = true;
 
                         // Nu uppdaterar jag UI element av det förflyttade 
@@ -240,9 +241,10 @@ public class ManagerOfInventory : MonoBehaviour
                         //Tommer den originälla 'slot':en
 
                         itemSlot[j].ClearSlot();
-
+                        itemSlot[i].itemImageINV.enabled = true; // kanske
                         // uppdatera den nu tomma 
                         HelperUpdate(j);
+                        HelperUpdate(i);
 
 
                         break; // förflytta till nästa tomma 'slot'

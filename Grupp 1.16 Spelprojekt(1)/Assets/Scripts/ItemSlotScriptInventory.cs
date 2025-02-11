@@ -236,8 +236,8 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         quantityText.text = string.Empty;
         quantityText.enabled = false;
         //Använder en PLACEHOLDER SPRITE ISTÄLLET FÖR NULL
-            itemImageINV.sprite = placeholderImage;
-         itemDescriptionImage.sprite = placeholderImage;
+        itemImageINV.enabled = false;
+         itemDescriptionImage.enabled = false;
        // så att outlinen stäng av
        selectedOutline.SetActive(false);
 
