@@ -19,7 +19,7 @@ public class ManagerOfInventory : MonoBehaviour
     public ItemSlotScriptInventory[] itemSlot;
 
     // Start is called before the first frame update
-
+    public Sprite placeholder2;
     void Start()
     {
         displaying = FindObjectOfType<DisplayingTextScript>();
