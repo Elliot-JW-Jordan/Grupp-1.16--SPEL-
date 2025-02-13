@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 public class ManagerOfInventory : MonoBehaviour
@@ -203,8 +204,11 @@ public class ManagerOfInventory : MonoBehaviour
         }
     }
 
+    
+
     public void RearangeInventory()
     {
+        Debug.Log("Rearanging");
         for (int i = 0; i < itemSlot.Length - 1; i++) // Koden ska stanna innan den sista 'slot' in 'Iteminventory'
         {
             if (!itemSlot[i].isfull) //finner tomma 'slot'
@@ -213,55 +217,80 @@ public class ManagerOfInventory : MonoBehaviour
 
                     if (itemSlot[j].isfull)
                     {
-
-                        //överförning av datta från J till I
-                        itemSlot[i].itemNAMEInv = itemSlot[j].itemNAMEInv;
-                        itemSlot[i].quantityInv = itemSlot[j].quantityInv;
-                        itemSlot[i].itemSpriteInv = itemSlot[j].itemSpriteInv;
-                        itemSlot[i].descriptionInINV = itemSlot[j].descriptionInINV;
-                       
-                        itemSlot[i].itemImageINV.sprite = itemSlot[j].itemImageINV.sprite;
-                        itemSlot[j].itemImageINV.enabled = false; //kanske fungerar
-                        itemSlot[i].isfull = true;
-
-                        // Nu uppdaterar jag UI element av det förflyttade 
-                        itemSlot[i].quantityText.text = itemSlot[j].quantityText.text;
-                        
-                        itemSlot[i].itemDescriptionImage.sprite = itemSlot[j].itemSpriteInv;
-                        itemSlot[i].itemImageINV.sprite = itemSlot[j].itemSpriteInv;
-                        itemSlot[i].quantityText.enabled = true;
-
-                        // överför selektion
-                        itemSlot[i].invItemSelected = itemSlot[j].invItemSelected;
-                        itemSlot[i].selectedOutline.SetActive(itemSlot[j].invItemSelected);
-
+                        // Flyttar data från J till I,
+                        MoveItemsToEmptySlot(itemSlot[i], itemSlot[j]);
+                        itemSlot[j].ClearSlot(); // säkerställer att slottn töms korrekt
                         // Updatera UI 
                         HelperUpdate(i);
-
-                        //Tommer den originälla 'slot':en
-
-                        itemSlot[j].ClearSlot();
-                        itemSlot[i].itemImageINV.enabled = true; // kanske
-                        // uppdatera den nu tomma 
                         HelperUpdate(j);
-                        HelperUpdate(i);
+                        itemSlot[j].itemImageINV.enabled = false; //kanske fungerar
+                        itemSlot[j].itemDescriptionImage.enabled = false; //kanske fungerar
 
+                        // säkerställer så att J förblir avstängd
+                        if (i != j)
+                        {
+                            if (itemSlot[i].itemImageINV != null)
+                            {
+                                itemSlot[i].itemImageINV.enabled = true;
+                            }
+                            if (itemSlot[i].itemDescriptionImage != null)
+                            {
+                                itemSlot[i].itemDescriptionImage.enabled = true;
+                            }
+                            if (itemSlot[i].quantityText != null)
+                            {
+                                itemSlot[i].quantityText.enabled = true;
+                            }
+                        }
 
-                        break; // förflytta till nästa tomma 'slot'
-
-
-
-
-
+                      //  SwapItems(itemSlot[i], itemSlot[j]); // switch tp i,
+                        break; // förflytta till nästa tomma 'slot' 
+                   
 
                     }
-
             }
 
         }
     }
 }
 
+    public void MoveItemsToEmptySlot(ItemSlotScriptInventory emptyslot, ItemSlotScriptInventory filledslot) // för att förflytta koden mellan den fýlda och tomma
+    {
+       if (filledslot == null || emptyslot == null)
+        {
+            Debug.LogWarning("Game attemped to move items between two null slots.");
+            return;
+        }
+        // förflytar föremålen mellan de två rutorna
+        //kopierar data
+        emptyslot.itemNAMEInv = filledslot.itemNAMEInv;
+        emptyslot.quantityInv = filledslot.quantityInv;
+        emptyslot.itemSpriteInv = filledslot.itemSpriteInv;
+        emptyslot.descriptionInINV = filledslot.descriptionInINV;
+        emptyslot.itemData = filledslot.itemData;
+        emptyslot.invItemSelected = filledslot.invItemSelected;
+        emptyslot.isfull = true;
+        // upfatera Ui för den tomma.
+       
+        emptyslot.quantityText.text = filledslot.quantityText.text;
+        emptyslot.itemImageINV.sprite = filledslot.itemImageINV.sprite;
+        emptyslot.itemDescriptionText.text = filledslot.itemDescriptionText.text;
+        emptyslot.itemDescriptionNameText.text = filledslot.itemDescriptionNameText.text;
+        emptyslot.itemDescriptionImage.sprite = filledslot.itemDescriptionImage.sprite;
+        emptyslot.itemDescriptionImage.sprite = filledslot.itemImageINV.sprite;
+        emptyslot.quantityText.enabled = true;
+        emptyslot.itemImageINV.color = Color.white;
+        emptyslot.itemDescriptionImage.color = Color.white;
+        emptyslot.itemDescriptionImage.enabled = true;
+
+        emptyslot.itemDescriptionImage.color = new Color(1f, 1f, 1f, 1f); // synlig
+        emptyslot.selectedOutline.SetActive(filledslot.invItemSelected);
+        Debug.Log("Items moved");
+        // töm 'filled'slot
+        filledslot.ClearSlot();
+        Debug.Log("Items moved SUCCESSFULLY FROM, original slot clreared");
+    }
+  
 
     public void HelperUpdate(int slotindex)
     {
@@ -271,9 +300,15 @@ public class ManagerOfInventory : MonoBehaviour
             //uppdaterae en slots ui
             slot.quantityText.text = slot.quantityInv.ToString();
             slot.itemImageINV.sprite = slot.itemSpriteInv;
-            slot.itemDescriptionImage.sprite = slot.itemSpriteInv;
             slot.quantityText.enabled = slot.isfull;
             slot.selectedOutline.SetActive(slot.invItemSelected);
+
+            // berskrivning 
+            slot.itemDescriptionText.text = slot.descriptionInINV;
+            slot.itemDescriptionNameText.text = slot.itemNAMEInv;
+            slot.itemDescriptionImage.sprite = slot.itemSpriteInv;
+
+          
 
 
             Debug.Log($"UI updated for slot{slotindex} ({slot.itemNAMEInv}): quantity :{slot.quantityInv}");

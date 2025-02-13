@@ -84,7 +84,16 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 
         quantityText.text = quantity.ToString(); // ifall det inte funkar, byt tillv ariable och inte parimeter
         itemImageINV.sprite = itemSprite;
+        itemImageINV.color = Color.white;
+        itemDescriptionImage.color = Color.white;
         quantityText.enabled = true;
+
+        if (itemImageINV != null)
+        {
+            itemImageINV.enabled = true;
+            itemDescriptionImage.enabled = true;
+        }
+        
 
 
         Debug.Log($"Slot Updated : {itemName} Quantriry : {quantity}");
@@ -108,7 +117,18 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
     }
     public void OnLeftClick()
     {
-
+     if (isfull) // ifall slotten inte är tömd
+        {
+            if (itemImageINV != null) // ifalld en fins
+            {
+                itemImageINV.enabled = true; //
+            }
+            if (itemDescriptionImage != null) //ifall den fins
+            {
+                itemDescriptionImage.enabled = true;
+            }
+            
+        }
         inventoryM.DeselectionOfItemSlots();
         selectedOutline.SetActive(true);
         invItemSelected = true;
@@ -122,6 +142,16 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
 
     public void OnRightClick()
     {
+        // hindrar problem
+        if (itemImageINV != null)
+        {
+            itemImageINV.enabled = true;
+        }
+        if (itemDescriptionImage != null)
+        {
+            itemDescriptionImage.enabled = true;
+        }
+
         // Först kollar jag ifall slotten är seleckad
         if (!invItemSelected)
         {
@@ -199,8 +229,10 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
                 }
                 
             }
-            //Töm rutan alltså Slot
+            isfull = false;
+          
             ClearSlot();
+            inventoryM.RearangeInventory(); // flytta föremål
 
         }
 
@@ -221,31 +253,70 @@ public class ItemSlotScriptInventory : MonoBehaviour, IPointerClickHandler
         return null;
     }
     public void ClearSlot()
-    { // all null to placeholder
+
+    { 
+        
+
+            
+            
+            
+            // all null to placeholder
+      
         //töm slotten alltså rutans infromation
 
         // återsäller data
 
         itemNAMEInv = string.Empty;
         quantityInv = 0;
-        
-        descriptionInINV = string.Empty;
-  //visar att rutan är tom  genom bool
+       descriptionInINV = string.Empty;
         isfull = false;
+
+        
+  //visar att rutan är tom  genom bool
+       
         invItemSelected = false;
         quantityText.text = string.Empty;
         quantityText.enabled = false;
         //Använder en PLACEHOLDER SPRITE ISTÄLLET FÖR NULL
-        itemImageINV.enabled = false;
-         itemDescriptionImage.enabled = false;
-       // så att outlinen stäng av
-       selectedOutline.SetActive(false);
-
+        //stänger barra av ifall helt tom
+       
+            if (itemImageINV != null)
+            {
+                itemImageINV.sprite = placeholderImage; // använder en placeholder
+            itemImageINV.color = new Color(1f, 1f, 1f, 0f); // gör placeholdern genomskinlig
+                itemImageINV.enabled = true;
+            }
+           if ( itemDescriptionImage != null)
+            {
+                itemDescriptionImage.sprite = placeholderImage;
+            itemDescriptionImage.color = new Color(1f, 1f, 1f, 0f);
+            itemDescriptionImage.enabled = true;
+            }
+           if(selectedOutline != null)
+        {
+            selectedOutline.SetActive(false);
+        }
+          
         //Kallar en metod för att ordna om inventory när  
-        inventoryM.RearangeInventory();
+      // /inventoryM.RearangeInventory();
         Debug.Log("The slot was cleared successfully");
     }
+    private void Update()
+   
+        {
+            if (itemImageINV != null)
+            {
+                itemImageINV.enabled = true;
+            }
+            if (itemDescriptionImage != null)
+            {
+                itemDescriptionImage.enabled = true;
+            }
+
+    }
 }
+        
+      
 
 
 

@@ -206,8 +206,22 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         {
             cameraSShake.BeginShake(shakeLe, shakeMagnitude);
         }
+        // stänger av kollitioner mellan spelaren och fiendert
+        Collider2D playerColider = GetComponent<Collider2D>(); // SPLEARENS 'COLLIDER'
+        Collider2D[] enemyColliders = FindObjectsOfType<Collider2D>(); //'COLLIDERN' AV FIENDEN
 
-        Vector2 directionOfDodge = inputOfMoving != Vector2.zero ? inputOfMoving : lastMoveDirection;
+        foreach (Collider2D enemyCollider in enemyColliders)
+        {
+           
+            if (enemyCollider != null && enemyCollider.CompareTag("Enemy"))
+            { //se till så att de tnedan endast gäller fiender
+                Physics2D.IgnoreCollision(playerColider, enemyCollider, true);
+
+            }
+
+        }
+
+            Vector2 directionOfDodge = inputOfMoving != Vector2.zero ? inputOfMoving : lastMoveDirection;
         Vector2 velocityOfDodge = directionOfDodge * dodgeSpeed;
 
         float endOfDodge = Time.time + dogeTimer;
@@ -219,7 +233,17 @@ public class PlayerPhysicsWalking : MonoBehaviour//AI "RENAD"
         }
 
         rigid2d.velocity = Vector2.zero;
+        // sätt på krockar igen
 
+        foreach (Collider2D enemyCollider in enemyColliders)
+        {
+            if (enemyCollider != null && enemyCollider.CompareTag("Enemy"))
+            { //se till så att de tnedan endast gäller fiender
+                Physics2D.IgnoreCollision(playerColider, enemyCollider, false);
+
+            }
+
+        }
         isDoging = false;
         yield return new WaitForSeconds(dodgeDownTime);
         canDodge = true;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraSShake : MonoBehaviour
 {
     [Header("Camera Shake Values")]
-    public float magnitude = 0.3f;
+    public float magnitude = 0.5f; // innan 0.3
     public float timeofShake = 0.2f;
 
 

@@ -303,9 +303,18 @@ public class TrapScriptForPrefab : MonoBehaviour
 
         while (playerIsTrapped)
         {
-            playerspriteRenderer.color = colorOfFlash;
+            if (playerspriteRenderer != null)
+            {
+                playerspriteRenderer.color = colorOfFlash;
+            }
+        
             yield return new WaitForSeconds(durationOfFLash);
-            playerspriteRenderer.color = orginColor;
+
+            if (playerspriteRenderer != null)
+            {
+                playerspriteRenderer.color = orginColor;
+            }
+           
             yield return new WaitForSeconds(durationOfFLash);
         }
 
